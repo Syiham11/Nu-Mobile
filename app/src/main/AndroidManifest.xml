@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.adfin.numobile">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
+    <application
+        android:name=".activity.GlobalClass"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:hardwareAccelerated="false"
+        android:largeHeap="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".activity.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.LoginActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.SplashScreen"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+
+        <!-- MENU PENGURUS -->
+        <activity
+            android:name=".activity.pengurus.PengurusMenuActivity"
+            android:label="MENU PENGURUS"
+            android:parentActivityName=".activity.MainActivity" />
+        <activity
+            android:name=".activity.pengurus.PengurusOrganisasi"
+            android:label="PENGURUS ORGANISASI"
+            android:parentActivityName=".activity.pengurus.PengurusMenuActivity" />
+        <activity
+            android:name=".activity.pengurus.PengurusBesarActivity"
+            android:label="PENGURUS BESAR"
+            android:parentActivityName=".activity.pengurus.PengurusMenuActivity" />
+
+        <!-- MENU ANGGOTA -->
+        <activity
+            android:name=".activity.warga.AnggotaMenuActivity"
+            android:label="MENU WARGA"
+            android:parentActivityName=".activity.MainActivity" />
+        <activity
+            android:name=".activity.warga.FormAnggota1Activity"
+            android:label="INPUT WARGA"
+            android:parentActivityName=".activity.warga.AnggotaMenuActivity" />
+        <activity
+            android:name=".activity.warga.AnggotaLihatActivity"
+            android:label="LIHAT WARGA"
+            android:parentActivityName=".activity.warga.AnggotaMenuActivity" />
+
+        <!-- SUB MENU ANGGOTA -->
+        <activity
+            android:name=".activity.warga.FormAnggota2Activity"
+            android:label="INPUT WARGA"
+            android:parentActivityName=".activity.warga.FormAnggota1Activity" />
+        <activity
+            android:name=".activity.warga.FormAnggota3Activity"
+            android:label="INPUT WARGA"
+            android:parentActivityName=".activity.warga.FormAnggota2Activity" />
+
+        <!-- MENU ARSIP -->
+        <activity
+            android:name=".activity.kearsipan.KearsipanMenuActivity"
+            android:label="MENU KEARSIPAN"
+            android:parentActivityName=".activity.MainActivity" />
+        <activity
+            android:name=".activity.kearsipan.KearsipanSuratMasuk"
+            android:label="SURAT MASUK"
+            android:parentActivityName=".activity.kearsipan.KearsipanMenuActivity" />
+        <activity
+            android:name=".activity.kearsipan.KearsipanSuratKeluar"
+            android:label="SURAT KELUAR"
+            android:parentActivityName=".activity.kearsipan.KearsipanMenuActivity" />
+        <activity
+            android:name=".activity.kearsipan.KearsipanSuratDisposisi"
+            android:label="SURAT DISPOSISI"
+            android:parentActivityName=".activity.kearsipan.KearsipanMenuActivity" />
+        <activity
+            android:name=".activity.kearsipan.KearsipanChatting"
+            android:label="CHATTING"
+            android:parentActivityName=".activity.kearsipan.KearsipanMenuActivity" />
+
+        <!-- MENU KEGIATAN -->
+        <activity
+            android:name=".activity.kegiatan.KegiatanMenuActivity"
+            android:label="MENU KEARSIPAN"
+            android:parentActivityName=".activity.MainActivity" />
+        <activity
+            android:name=".activity.kegiatan.PeristiwaGallery"
+            android:label="GALLERY PERISTIWA"
+            android:parentActivityName=".activity.kegiatan.KegiatanMenuActivity" />
+        <activity
+            android:name=".activity.kegiatan.PeristiwaMenuLaporan"
+            android:label="MENU LAPORAN"
+            android:parentActivityName=".activity.kegiatan.KegiatanMenuActivity" />
+        <activity
+            android:name=".activity.kegiatan.PeristiwaBoardcast"
+            android:label="BROADCAST PERISTIWA"
+            android:parentActivityName=".activity.kegiatan.KegiatanMenuActivity" />
+        />
+        <activity
+            android:name=".activity.kegiatan.PeristiwaLaporan"
+            android:label="LAPORAN PERISTIWA"
+            android:parentActivityName=".activity.kegiatan.PeristiwaLaporan" />
+        />
+
+        <!-- MENU PELAYANAN -->
+        <activity
+            android:name=".activity.pelayanan.PelayananMenuActivity"
+            android:label="MENU PELAYANAN"
+            android:parentActivityName=".activity.MainActivity" />
+        <activity
+            android:name=".activity.pelayanan.PelayananLibrary"
+            android:label="E-LIBRARAY"
+            android:parentActivityName=".activity.pelayanan.PelayananMenuActivity" />
+        <activity
+            android:name=".activity.pelayanan.PelayananChannel"
+            android:label="NU CHANNEL"
+            android:parentActivityName=".activity.pelayanan.PelayananMenuActivity" />
+        <activity
+            android:name=".activity.pelayanan.PelayananNetwork"
+            android:label="NU NETWORK"
+            android:parentActivityName=".activity.pelayanan.PelayananMenuActivity" />
+        <activity
+            android:name=".activity.UploadActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.KosongActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <!-- MENU PROMOSI -->
+        <activity
+            android:name=".activity.promosi.PromosiMenuActivity"
+            android:label="MENU PROMOSI"
+            android:parentActivityName=".activity.MainActivity" />
+        <activity
+            android:name=".activity.promosi.PromosiPenawaran"
+            android:label="PENAWARAN PRODUK"
+            android:parentActivityName=".activity.promosi.PromosiMenuActivity" />
+        <activity
+            android:name=".activity.promosi.PromosiPermintaan"
+            android:label="PERMINTAAN PRODUK"
+            android:parentActivityName=".activity.promosi.PromosiMenuActivity" />
+        <activity
+            android:name=".activity.promosi.PromosiPerusahaan"
+            android:label="PERUSAHAAN"
+            android:parentActivityName=".activity.promosi.PromosiMenuActivity" />
+
+        <!-- MENU E-WARUNG -->
+        <activity
+            android:name=".activity.warung.WarungMenuActivity"
+            android:label="E-WARUNG"
+            android:parentActivityName=".activity.MainActivity" />
+
+        <!-- MENU PASAR NU -->
+        <activity
+            android:name=".activity.pasar.PasarMenuActivity"
+            android:label="PASAR NU"
+            android:parentActivityName=".activity.MainActivity" />
+
+        <!-- MENU DOMPET NU -->
+        <activity
+            android:name=".activity.dompet.DompetMenuActivity"
+            android:label="DOMPET NU"
+            android:parentActivityName=".activity.MainActivity" />
+
+        <!-- MENU KONSULTASI -->
+        <activity
+            android:name=".activity.konsultasi.KonsultasiMenuActivity"
+            android:label="KONSULTASI"
+            android:parentActivityName=".activity.MainActivity" />
+
+        <!-- MENU DO'A -->
+        <activity
+            android:name=".activity.doa.DoaMenuActivity"
+            android:label="DO&apos;A"
+            android:parentActivityName=".activity.MainActivity" />
+
+        <!-- MENU DESA NU -->
+        <activity
+            android:name=".activity.desa.DesaMenuActivity"
+            android:label="DESA NU"
+            android:parentActivityName=".activity.MainActivity" />
+
+        <!-- MENU KESEHATAN -->
+        <activity
+            android:name=".activity.kesehatan.KesehatanMenuActivity"
+            android:label="KESEHATAN"
+            android:parentActivityName=".activity.MainActivity" />
+
+        <!-- MENU PENDIDIKAN -->
+        <activity
+            android:name=".activity.pendidikan.PendidikanMenuActivity"
+            android:label="PENDIDIKAN"
+            android:parentActivityName=".activity.MainActivity" />
+
+        <!-- MENU PERTANIAN -->
+        <activity
+            android:name=".activity.pertanian.PertanianMenuActivity"
+            android:label="PERTANIAN"
+            android:parentActivityName=".activity.MainActivity" />
+
+        <!-- MENU KELAUTAN -->
+        <activity
+            android:name=".activity.kelautan.KelautanMenuActivity"
+            android:label="KELAUTAN"
+            android:parentActivityName=".activity.MainActivity" />
+        <activity android:name=".activity.warga.FormAnggota4Activity" />
+        <activity android:name=".activity.warga.SimpanForm1"></activity>
+    </application>
+
+</manifest>

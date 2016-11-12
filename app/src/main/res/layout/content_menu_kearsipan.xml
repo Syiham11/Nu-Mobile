@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/background"
+    tools:showIn="@layout/content_menu_kearsipan"
+    tools:context=".activity.kearsipan.KearsipanMenuActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <!-- baris 1-->
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@drawable/sura_masuk"
+        android:id="@+id/btn_surat_masuk"
+        android:layout_marginTop="100dp"
+        />
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@drawable/surat_keluar"
+        android:id="@+id/btn_surat_keluar"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="180dp"
+        />
+
+
+    <!-- baris 2-->
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@drawable/surat_disposisi"
+        android:id="@+id/btn_surat_disposisi"
+        android:layout_marginTop="270dp"
+        />
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@drawable/chatting"
+        android:id="@+id/btn_chatting"
+        android:layout_marginTop="270dp"
+        android:layout_marginLeft="180dp"
+        />
+
+
+    </RelativeLayout>
+
+</LinearLayout>

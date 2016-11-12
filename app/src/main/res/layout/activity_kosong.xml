@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@drawable/background"
+    tools:context="com.adfin.numobile.activity.KosongActivity">
+
+    <!--<android.support.design.widget.AppBarLayout-->
+        <!--android:id="@+id/bar"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_width="match_parent"-->
+        <!--app:elevation="@null">-->
+
+        <!--<android.support.v7.widget.Toolbar-->
+            <!--android:id="@+id/toolbar"-->
+            <!--app:contentInsetStart="0dp"-->
+            <!--android:background="#b4f5c4"-->
+            <!--style="@style/Toolbar">-->
+
+            <!--<ImageButton-->
+                <!--android:id="@+id/action_back"-->
+                <!--style="@style/ImageView.Hamburger"-->
+                <!--android:src="@drawable/ic_action_back" />-->
+
+            <!--<com.adfin.numobile.widget.CanaroTextViewBold-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:text="CONTOH"-->
+                <!--android:textColor="#fff"-->
+                <!--android:textAllCaps="true"-->
+                <!--android:textSize="@dimen/item_text_size" />-->
+        <!--</android.support.v7.widget.Toolbar>-->
+
+    <!--</android.support.design.widget.AppBarLayout>-->
+
+    <include layout="@layout/content_kosong" />
+
+    <!--<com.melnykov.fab.FloatingActionButton-->
+        <!--android:id="@+id/fab"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="bottom|right"-->
+        <!--android:layout_margin="@dimen/fab_margin"-->
+        <!--android:src="@drawable/ic_action_add"-->
+        <!--app:fab_colorNormal="@color/colorAccent"-->
+        <!--app:fab_colorPressed="@color/colorAccentHint"-->
+        <!--app:fab_colorRipple="@color/colorAccent" />-->
+
+</android.support.design.widget.CoordinatorLayout>

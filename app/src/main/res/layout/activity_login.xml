@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="270dp"
+                android:background="@drawable/numobile"
+                android:layout_height="170dp"
+                android:id="@+id/imageView2"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentTop="true" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/component_margin">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="4dp"
+                android:padding="2dp"
+                android:src="@drawable/id_icon"/>
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/editUsername"
+                android:singleLine="true"
+                android:textSize="@dimen/component_text"
+                android:hint="@string/hint_username"
+                android:background="@drawable/shape_oval"
+                android:textColorHint="@color/colorEditTextSecondary"
+                android:textColor="@color/text_normal"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/component_margin">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="4dp"
+                android:padding="2dp"
+                android:src="@drawable/lock_icon"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editPassword"
+                android:textSize="@dimen/component_text"
+                android:inputType="textPassword"
+                android:hint="@string/hint_password"
+                android:background="@drawable/shape_oval"
+                android:textColorHint="@color/colorEditTextSecondary"
+                android:textColor="@color/colorEditTextPrimary"
+                android:textAlignment="center" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ProgressBar
+                android:id="@+id/progressBarSpinner"
+                android:layout_height="25dp"
+                android:layout_width="25dp"
+                android:layout_gravity="center"
+                android:indeterminateTint="@color/colorAccent"
+                android:indeterminateTintMode="multiply"/>
+
+            <com.adfin.numobile.widget.CanaroTextViewLight
+                android:id="@+id/errorinfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@android:color/holo_red_light"
+                android:textAllCaps="true"
+                android:textSize="@dimen/item_text_size_subtitle" />
+        </LinearLayout>
+
+
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="105dp"
+            android:background="@drawable/signbutton"
+            android:id="@+id/buttonLogin"
+            android:textSize="@dimen/component_button"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/colorTextPrimary"
+            android:layout_marginBottom="15dp" />
+
+    </LinearLayout>
+</ScrollView>

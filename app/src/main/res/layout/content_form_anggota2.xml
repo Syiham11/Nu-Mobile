@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="1dp"
+    android:background="@drawable/background"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/content_form_anggota2"
+    tools:context=".activity.warga.FormAnggota2Activity">
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/component_margin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="top"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/component_margin">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="PEKERJAAN"
+                android:textColor="#0e0f0e"
+                android:textSize="20dp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/component_margin">
+
+            <Spinner
+                android:id="@+id/spPekerjaan"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/shape_oval"
+                android:dropDownSelector="@drawable/selector_menu"
+                android:prompt="@string/hint_kategori">
+            <requestFocus />
+            </Spinner>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/component_margin">
+
+            <Spinner
+                android:id="@+id/spInstansi"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/shape_oval"
+                android:dropDownSelector="@drawable/selector_menu"
+                android:prompt="@string/hint_kategori">
+                <requestFocus />
+            </Spinner>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/component_margin">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/etJabatan"
+                android:singleLine="true"
+                android:textSize="@dimen/component_text"
+                android:hint="@string/jabatan"
+                android:background="@drawable/shape_oval"
+                android:textColorHint="@color/colorEditTextSecondary"
+                android:textColor="@color/colorEditTextPrimary"
+                android:textAlignment="center" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/component_margin">
+
+            <Spinner
+                android:id="@+id/spPendapatan"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/shape_oval"
+                android:dropDownSelector="@drawable/selector_menu"
+                android:prompt="@string/hint_kategori">
+                <requestFocus />
+            </Spinner>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/component_margin">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:id="@+id/etKemampuan"
+                android:singleLine="false"
+                android:textSize="@dimen/component_text"
+                android:hint="@string/skill"
+                android:background="@drawable/shape_oval"
+                android:textColorHint="@color/colorEditTextSecondary"
+                android:textColor="@color/colorEditTextPrimary"
+                android:textAlignment="center" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/component_margin">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="INDUK ORGANISASI"
+                android:textColor="#0e0f0e"
+                android:textSize="20dp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/component_margin">
+
+            <Spinner
+                android:id="@+id/spOrganisasi"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/shape_oval"
+                android:dropDownSelector="@drawable/selector_menu"
+                android:prompt="@string/hint_kategori" />
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/component_margin">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="PENDIDIKAN TERAKHIR"
+                android:textColor="#0e0f0e"
+                android:textSize="20dp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/component_margin">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/etSD"
+                android:singleLine="true"
+                android:textSize="@dimen/component_text"
+                android:hint="@string/sd"
+                android:background="@drawable/shape_oval"
+                android:textColorHint="@color/colorEditTextSecondary"
+                android:textColor="@color/colorEditTextPrimary"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/component_margin">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/etSMP"
+                android:singleLine="true"
+                android:textSize="@dimen/component_text"
+                android:hint="@string/smp"
+                android:background="@drawable/shape_oval"
+                android:textColorHint="@color/colorEditTextSecondary"
+                android:textColor="@color/colorEditTextPrimary"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+        <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/component_margin">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etSMA"
+            android:singleLine="true"
+            android:textSize="@dimen/component_text"
+            android:hint="@string/sma"
+            android:background="@drawable/shape_oval"
+            android:textColorHint="@color/colorEditTextSecondary"
+            android:textColor="@color/colorEditTextPrimary"
+            android:textAlignment="center" />
+    </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/component_margin">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/etD1"
+                android:singleLine="true"
+                android:textSize="@dimen/component_text"
+                android:hint="D1"
+                android:background="@drawable/shape_oval"
+                android:textColorHint="@color/colorEditTextSecondary"
+                android:textColor="@color/colorEditTextPrimary"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/component_margin">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/etD3"
+                android:singleLine="true"
+                android:textSize="@dimen/component_text"
+                android:hint="D3"
+                android:background="@drawable/shape_oval"
+                android:textColorHint="@color/colorEditTextSecondary"
+                android:textColor="@color/colorEditTextPrimary"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/component_margin">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/etS1"
+                android:singleLine="true"
+                android:textSize="@dimen/component_text"
+                android:hint="@string/s1"
+                android:background="@drawable/shape_oval"
+                android:textColorHint="@color/colorEditTextSecondary"
+                android:textColor="@color/colorEditTextPrimary"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/component_margin">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/etS2"
+                android:singleLine="true"
+                android:textSize="@dimen/component_text"
+                android:hint="@string/s2"
+                android:background="@drawable/shape_oval"
+                android:textColorHint="@color/colorEditTextSecondary"
+                android:textColor="@color/colorEditTextPrimary"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/component_margin">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/etS3"
+                android:singleLine="true"
+                android:textSize="@dimen/component_text"
+                android:hint="@string/s3"
+                android:background="@drawable/shape_oval"
+                android:textColorHint="@color/colorEditTextSecondary"
+                android:textColor="@color/colorEditTextPrimary"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/component_margin"
+            android:layout_marginTop="15dp">
+
+            <Button
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".3"
+                android:background="#329049"
+                android:id="@+id/btnBack1"
+                android:text="BACK"
+                android:layout_gravity="center_horizontal"
+                android:textSize="18sp"
+                android:textColor="#ffff"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp" />
+
+            <Button
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".3"
+                android:background="#329049"
+                android:id="@+id/btnNext2"
+                android:text="@string/btn_next2"
+                android:layout_gravity="center_horizontal"
+                android:textSize="18sp"
+                android:textColor="#ffff"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp" />
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+</ScrollView>

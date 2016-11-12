@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- System Color -->
+    <color name="colorPrimary">#444153</color>
+    <color name="colorPrimaryDark">#444153</color>
+    <color name="colorAccent">#30d1d5</color>
+    <color name="colorAccentHint">#a730d1d5</color>
+    <color name="colorAccentTwo">#30D59B</color>
+    <color name="colorAccentTwoHint">#a730D59B</color>
+
+    <!-- Layout Color -->
+    <color name="colorBackground">#329049</color>
+    <color name="colorBackgroundDark">#094818</color>
+
+    <!-- Text Color -->
+    <color name="colorTextPrimary">#caf8d6</color>
+    <color name="colorTextSecondary">#F2F2F2</color>
+    <color name="colorEditTextSecondary">#9c101010</color>
+    <color name="colorEditTextPrimary">#101010</color>
+    <color name="colorTextSecondaryThirdy">#f2f2f2</color>
+
+</resources>

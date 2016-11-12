@@ -1,0 +1,175 @@
+<resources>
+    <string name="app_name">NU MOBILE</string>
+    <string name="anggota">INPUT ANGGOTA BARU</string>
+    <string name="action_settings">Settings</string>
+    <string name="menu_pengurus">Pengurus</string>
+    <string name="menu_anggota">Anggota</string>
+    <string name="menu_report">Laporan</string>
+    <string name="menu_photo">Foto</string>
+    <string name="username">Username</string>
+    <string name="kkn_tematik">NU</string>
+    <string name="anggota_new">Anggota Baru</string>
+    <string name="login">NU MOBILE</string>
+    <string name="hint_username">Nama Pengguna</string>
+    <string name="hint_password">Kata Sandi</string>
+    <string name="hint_jk">Jenis Kelamin</string>
+    <string name="button_login">Masuk</string>
+    <string name="hint_description">Deskripsi Peristiwa</string>
+    <string name="action_logout">Keluar</string>
+    <string name="app_pengurus">Pengurus</string>
+    <string name="action_new">Tambah</string>
+    <string name="action_select_all">Pilih Semua</string>
+    <string name="title_activity_camera">Kamera</string>
+    <string name="app_photo_add">New Photo</string>
+    <string name="app_anggota_add">New Anggota</string>
+    <string name="button_save">Save</string>
+    <string name="btn_next">Next</string>
+    <string name="btn_next2">Next</string>
+    <string name="btn_back">Back</string>
+    <string name="btnlihat">Lihat Anggota</string>
+    <string name="btninput">Input Anggota</string>
+    <string name="menu_struktur">Struktur Organisasi</string>
+    <string name="menu_lembaga">Lembaga</string>
+    <string name="button_browse">Browse</string>
+    <string name="button_capture">Capture</string>
+    <string name="action_dialog_photo">Choose a Photo</string>
+    <string name="action_dialog_photo_description">Anda dapat memilih dari photo yang ada pada perangkat atau capture sendiri</string>
+    <string name="hint_lokasi">Lokasi anda :</string>
+    <string name="action_dialog_video_description">Anda dapat memilih dari video yang ada pada perangkat atau record sendiri</string>
+    <string name="action_dialog_video">Choose a Video</string>
+    <string name="action_browse">Pilih</string>
+    <string name="hint_kerja">Pekerjaan</string>
+    <string name="hint_status">Status Perkawinan</string>
+    <string name="hint_kategori">Jenis Kelamin</string>
+    <string name="kkn_tematik_login_title">NU</string>
+    <string name="action_dialog_loading">Load Data</string>
+    <string name="action_dialog_loading_description">Harap tunggu, sistem sedang mengambil data ..</string>
+    <string name="action_dialog_about">Tentang</string>
+    <string name="action_dialog_about_description">Tim Pengembang Adfinbureau Indonesia 2016</string>
+    <!--<string name="action_dialog_about_description_second">www.kkntematik-ciptakarya.com</string>-->
+    <string name="action_checkall">Check All</string>
+    <string name="action_uncheckall">Uncheck All</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_upload">Upload</string>
+    <string name="action_download">Download</string>
+    <string name="nama">Nama Lengkap</string>
+    <string name="ktp">Nomor KTP</string>
+    <string name="tempat">Tempat</string>
+    <string name="ttl">Tanggal Lahir</string>
+    <string name="gender">Jenis Kelamin</string>
+    <string name="alamat">Alamat Rumah RT/RW</string>
+    <string name="skill">Kemampuan</string>
+    <string name="pos">Kode Pos</string>
+    <string name="tlpn">Telepon</string>
+    <string name="hp">Handphone</string>
+    <string name="email">contoh@gmail.com</string>
+    <string name="fb">Facebook</string>
+    <string name="tw">Twitter</string>
+    <string name="ig">Instagram</string>
+    <string name="app_anggota">ANGGOTA</string>
+    <string name="path">Path</string>
+    <string name="status">Status Perkawinan</string>
+    <string name="jabatan">Jabatan</string>
+    <string name="pendapatan">Pendapatan /bulan</string>
+    <string name="sd">SD/MI</string>
+    <string name="smp">SMP/MTs</string>
+    <string name="sma">SMA/SMK/MA</string>
+    <string name="s1">S1</string>
+    <string name="s2">S2</string>
+    <string name="s3">S3</string>
+    <string name="lama">Lama Pendidikan</string>
+    <string name="namapesantren1">Nama Pesantren</string>
+    <string name="alamatpesantren1">Alamat Pesantren</string>
+    <string name="namapesantren2">Nama Pesantren</string>
+    <string name="alamatpesantren2">Alamat Pesantren</string>
+    <string name="btnsave">SAVE</string>
+    <string name="provinsi">Pilih Provinsi</string>
+
+    <string-array name="kategori_array">
+        <item>---Jenis Kelamin---</item>
+        <item>Pria</item>
+        <item>Wanita</item>
+    </string-array>
+
+
+    <string-array name="status_array">
+        <item>---Status Perkawinan---</item>
+        <item>Kawin</item>
+        <item>Belum Kawin</item>
+    </string-array>
+
+    <string-array name="kategori_infaq">
+        <item>Ya</item>
+        <item>Tidak</item>
+    </string-array>
+
+    <string-array name="status_member">
+        <item>---Status Keanggotaan---</item>
+        <item>Anggota</item>
+        <item>Pengurus</item>
+    </string-array>
+
+    <string-array name="kategori_infaq_warga">
+        <item>Ya</item>
+        <item>Tidak</item>
+    </string-array>
+
+    <string-array name="kategori_jalur">
+        <item>---Melalui---</item>
+        <item>PULSA</item>
+        <item>BANK</item>
+        <item>T-CAST</item>
+    </string-array>
+
+    <string-array name="kategori_jalur_warga">
+        <item>---Melalui---</item>
+        <item>PULSA</item>
+        <item>BANK</item>
+        <item>T-CAST</item>
+    </string-array>
+
+
+    <string-array name="pekerjaan_array">
+        <item>---PILIH PEKERJAAN---</item>
+        <item>PERTANIAN</item>
+        <item>PETERNAKAN</item>
+        <item>KEHUTANAN</item>
+        <item>PERIKANAN</item>
+        <item>INDUSTRI PENGOLAHAN</item>
+        <item>LISTRIK</item>
+        <item>AIR</item>
+        <item>GAS</item>
+        <item>BANGUNAN</item>
+        <item>PERDAGANGAN</item>
+        <item>HOTEL</item>
+        <item>RESTORAN</item>
+        <item>PENGANGKUTAN</item>
+        <item>TELEKOMUNIKASI</item>
+        <item>PENDIDIKAN</item>
+        <item>JASA</item>
+        <item>LAIN-LAIN</item>
+    </string-array>
+
+    <string-array name="organisasi_array">
+        <item>---Pilih Organisasi---</item>
+        <item>CABANG</item>
+        <item>WILAYAH</item>
+        <item>RANTING</item>
+        <item>MWC</item>
+        <item>ANGGOTA BIASA</item>
+        <item>MUSLIMAT NU</item>
+        <item>FATAYAT NU</item>
+        <item>GP ANSOR</item>
+        <item>PMII</item>
+        <item>IPNU</item>
+        <item>IPPNU</item>
+    </string-array>
+
+    <string-array name="pesantren_array">
+        <item>---Pernah Mengenyam Pesantren---</item>
+        <item>YA</item>
+        <item>TIDAK</item>
+    </string-array>
+    <string name="title_activity_form_anggota5">FormAnggota5Activity</string>
+
+</resources>

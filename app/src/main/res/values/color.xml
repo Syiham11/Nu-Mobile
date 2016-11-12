@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="actionbar_color">#00000000</color>
+    <color name="drawer_arrow_second_color">#303f9f</color>
+    <color name="line_color">#DDDDDD</color>
+    <color name="white">#ffffffff</color>
+    <color name="background_window">#FFE5E5E5</color>
+    <color name="white_transparent">#20FFFFFF</color>
+    <color name="white_transparent_1">#70FFFFFF</color>
+    <color name="white_transparent_90">#90FFFFFF</color>
+    <color name="black">#ff000000</color>
+    <color name="black_light">#3A3737</color>
+    <color name="black_transparent">#902b2b2b</color>
+    <color name="gray">#767676</color>
+    <color name="gray_transparent">#60767676</color>
+    <color name="gray_light">#CCCCCC</color>
+    <color name="aqua">#ff007bff</color>
+    <color name="aquatransparant">#80007bff</color>
+    <color name="red">#ff0000</color>
+    <color name="red_dark">#901830</color>
+    <color name="red_transparent">#80ff0000</color>
+    <color name="yellow">#FFE900</color>
+    <color name="orange">#FBB829</color>
+    <color name="orange_dark">#fba31e</color>
+    <color name="blue_dark">#083769</color>
+    <color name="blue_dark_mt_1">#2D3E50</color>
+    <color name="blue_light_mt">#b1d4fa</color>
+    <color name="blue_light_2_mt">#E5ECF9</color>
+    <color name="green">#83c127</color>
+    <color name="green_light">#b1f054</color>
+    <color name="green_dark">#63a402</color>
+    <color name="green_light_transparent">#60b1f054</color>
+    <color name="purple_dark">#790F5B</color>
+    <color name="purple_light">#9061c2</color>
+    <color name="purple">#9D007A</color>
+    <color name="greenStart">#ff33dd44</color>
+    <color name="greenMid">#ff0A8815</color>
+    <color name="greenEnd">#ff1da130</color>
+    <color name="violet">#6F81C3</color>
+
+    <color name="legend_product1">#99CC00</color>
+    <color name="legend_product2">#FFBB33</color>
+    <color name="legend_product3">#AA66CC</color>
+    <color name="legend_product4">#FF0000</color>
+    <color name="legend_product5">#358DD3</color>
+
+    <!-- A light Holo shade of blue -->
+    <color name="holo_blue_light">#ff33b5e5</color>
+    <!-- A light Holo shade of green -->
+    <color name="holo_green_light">#ff99cc00</color>
+    <!-- A light Holo shade of red -->
+    <color name="holo_red_light">#ffff4444</color>
+    <!-- A dark Holo shade of blue -->
+    <color name="holo_blue_dark">#ff0099cc</color>
+    <!-- A dark Holo shade of green -->
+    <color name="holo_green_dark">#ff669900</color>
+    <!-- A dark Holo shade of red -->
+    <color name="holo_red_dark">#ffcc0000</color>
+    <!-- A Holo shade of purple -->
+    <color name="holo_purple">#ffaa66cc</color>
+    <!-- A light Holo shade of orange -->
+    <color name="holo_orange_light">#ffffbb33</color>
+    <!-- A dark Holo shade of orange -->
+    <color name="holo_orange_dark">#ffff8800</color>
+    <!-- A really bright Holo shade of blue -->
+    <color name="holo_blue_bright">#ff00ddff</color>
+    <item name="transparent" type="color">#00FFFFFF</item>
+    <item name="grey" type="color">#555555</item>
+    <item name="darkgreen" type="color">#FF669900</item>
+
+    <color name="ColorPrimary">#00897B</color>
+    <color name="ColorPrimaryDark">#00695C</color>
+    <color name="tabsScrollColor">#004D40</color>
+
+    //background
+    <color name="background">#ffffffff</color>
+    <color name="blue_logo">#2194dc</color>
+    <color name="blue_logoss">#0093dd</color>
+    <color name="text_hint">#a5a5a5</color>
+    <color name="text_normal">#ff000000</color>
+    <color name="gray_logo">#838280</color>
+    <color name="header">#0093dd</color>
+    <color name="text_header">#ffffffff</color>
+    <color name="background_white">#d6d8d9</color>
+    <color name="gray_lightner">#d9d9d9</color>
+    <color name="blue_light_logo">#00aae3</color>
+
+</resources>

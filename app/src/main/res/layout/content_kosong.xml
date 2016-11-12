@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="1dp"
+    android:background="@drawable/background"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/content_kosong"
+    tools:context=".activity.warga.AnggotaForm">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/component_margin"
+            android:layout_marginBottom="@dimen/component_margin"
+            android:background="#2a2735">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="top"
+                android:scaleType="centerInside"
+                android:src="@drawable/p_test"
+                android:adjustViewBounds="true"
+                android:id="@+id/gambar"
+                android:clickable="true"
+                android:background="#2a2735"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/component_margin">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Bersediakah anda berinfak untuk organisasi?"
+                android:textColor="#0e0f0e"
+                android:textSize="20dp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/component_margin">
+
+            <Spinner
+                android:id="@+id/spInfaq"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:entries="@array/kategori_infaq"
+                android:background="@drawable/shape_oval"
+                android:dropDownSelector="@drawable/selector_menu"
+                android:prompt="@string/hint_kategori" />
+
+        </LinearLayout>
+
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#329049"
+            android:id="@+id/btnNext1"
+            android:text="@string/btn_next"
+            android:layout_gravity="center_horizontal"
+            android:textSize="@dimen/component_button"
+            android:textColor="#fff"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp" />
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="1dp"
+    android:background="@drawable/gradient"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/formcontoh"
+    tools:context=".activity.warga.FormAnggota1Activity">
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/component_margin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="top"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/component_margin">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="DATA PRIBADI"
+                android:textSize="20dp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/component_margin">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/etNamaLengkap"
+                android:singleLine="true"
+                android:textSize="@dimen/component_text"
+                android:hint="@string/nama"
+                android:background="@drawable/shape_oval"
+                android:textColorHint="@color/colorEditTextSecondary"
+                android:textColor="@color/colorEditTextPrimary"
+                android:textAlignment="center" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/component_margin">
+
+            <Spinner
+                android:id="@+id/spJenisKelamin"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:entries="@array/kategori_array"
+                android:background="@drawable/shape_oval"
+                android:dropDownSelector="@drawable/selector_menu"
+                android:prompt="@string/hint_kategori" />
+
+        </LinearLayout>
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#b4f5c4"
+            android:id="@+id/btnNext1"
+            android:text="@string/btn_next"
+            android:layout_gravity="center_horizontal"
+            android:textSize="@dimen/component_button"
+            android:textColor="#030303"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp" />
+
+    </LinearLayout>
+</ScrollView>

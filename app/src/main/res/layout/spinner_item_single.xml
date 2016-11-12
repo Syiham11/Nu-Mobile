@@ -1,0 +1,11 @@
+<com.adfin.numobile.widget.CanaroTextViewBold
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/text1"
+    android:singleLine="true"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:ellipsize="marquee"
+    android:textSize="@dimen/component_text"
+    android:textColorHint="@color/colorEditTextSecondary"
+    android:textColor="@color/colorEditTextPrimary"
+    android:textAlignment="center" />

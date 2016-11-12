@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="1dp"
+    android:background="@drawable/background"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/content_form_anggota4"
+    tools:context=".activity.warga.FormAnggota4Activity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/component_margin"
+            android:layout_marginBottom="@dimen/component_margin"
+            android:background="#2a2735">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="top"
+                android:scaleType="centerInside"
+                android:src="@drawable/p_test"
+                android:adjustViewBounds="true"
+                android:id="@+id/gambar"
+                android:clickable="true"
+                android:background="#2a2735"/>
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#329049"
+            android:id="@+id/buttonSave"
+            android:text="@string/button_save"
+            android:layout_gravity="center_horizontal"
+            android:textSize="@dimen/component_button"
+            android:textColor="#fff"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"/>
+
+    </LinearLayout>
+</ScrollView>
