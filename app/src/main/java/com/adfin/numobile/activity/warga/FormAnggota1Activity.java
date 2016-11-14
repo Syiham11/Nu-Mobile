@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -29,6 +30,9 @@ import com.adfin.numobile.model.DataKecamatan;
 import com.adfin.numobile.model.DataProvinsi;
 import com.adfin.numobile.model.DataWarga;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -41,7 +45,7 @@ import retrofit.client.Response;
 
 public class FormAnggota1Activity extends AppCompatActivity {
 
- public static final String ROOT_URL = "http://ciptakarya.pu.go.id/setditjen/kkntematik/";
+    public static final String ROOT_URL = "http://numobile.id";
     EditText etUsername,
             etNamaLengkap,
             etNoKtp,
@@ -103,13 +107,7 @@ public class FormAnggota1Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_anggota1);
 
-        Intent i = getIntent();
-//      username = i.getStringExtra("id_user");
-
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//
-
-
+        final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
 
         etUsername = (EditText) findViewById(R.id.etUsername);
         etNamaLengkap = (EditText) findViewById(R.id.etNamaLengkap);
@@ -235,74 +233,169 @@ public class FormAnggota1Activity extends AppCompatActivity {
                 }
 
                 strusercek = etUsername.getText().toString();
-                cekusername();
+                //cekusername();
 
+                globalVariable.setUsername(etUsername.getText().toString());
+                globalVariable.setNamaLengkap(etNamaLengkap.getText().toString());
+                globalVariable.setNoKtp(etNoKtp.getText().toString());
+                globalVariable.setTempatLahir(etTempatLahir.getText().toString());
+                globalVariable.setTanggalLahir(etDate.getText().toString());
+                globalVariable.setJenisKelamin(spJenisKelamin.getSelectedItem().toString());
+                globalVariable.setStatusPerkawinan(spStatusPerkawinan.getSelectedItem().toString());
+                globalVariable.setAlamat(etAlamat.getText().toString());
+
+                if (spProvinsi.getCount() == 0) {
+                    globalVariable.setProvinsi("");
+                } else {
+                    globalVariable.setProvinsi(spProvinsi.getSelectedItem().toString());
+                }
+
+
+                if (spKabupaten.getCount() == 0) {
+                    globalVariable.setKabupaten("");
+                } else {
+                    globalVariable.setKabupaten(spKabupaten.getSelectedItem().toString());
+                }
+
+
+                if (spKecamatan.getCount() == 0) {
+                    globalVariable.setKecamatan("");
+                } else {
+                    globalVariable.setKecamatan(spKecamatan.getSelectedItem().toString());
+                }
+
+                if (spDesa.getCount() == 0) {
+                    globalVariable.setDesa("");
+                } else {
+                    globalVariable.setDesa(spDesa.getSelectedItem().toString());
+                }
+
+                globalVariable.setKodePos(etKodePos.getText().toString());
+                globalVariable.setTelepon(etTelepon.getText().toString());
+                globalVariable.setHandphone(etHandphone.getText().toString());
+                globalVariable.setEmail(etEmail.getText().toString());
+                globalVariable.setFacebook(etFacebook.getText().toString());
+                globalVariable.setTwitter(etTwitter.getText().toString());
+                globalVariable.setInstagram(etInstagram.getText().toString());
+                globalVariable.setPathh(etPathh.getText().toString());
+
+                //kalau berhasil nnti ganti ke form 2
+                //Intent intent = new Intent(getApplicationContext(), SimpanForm1.class);
+                //startActivity(intent);
+                //finish();
+
+                strusername = globalVariable.getUsername();
+                strnama = globalVariable.getNamaLengkap();
+                strnoktp = globalVariable.getNoKtp();
+                strtempat_lahir = globalVariable.getTempatLahir();
+                strtanggal_lahir = globalVariable.getTanggalLahir();
+                strjenis_kelamin = globalVariable.getJenisKelamin();
+                strstatus_perkawinan = globalVariable.getStatusPerkawinan();
+                stralamat = globalVariable.getAlamat();
+                strprovinsi = globalVariable.getProvinsi();
+                strkabkot = globalVariable.getKabupaten();
+                strkecamatan = globalVariable.getKecamatan();
+                strdesa = globalVariable.getDesa();
+                strkode_pos = globalVariable.getKodePos();
+                strtlp = globalVariable.getTelepon();
+                strhp = globalVariable.getHandphone();
+                stremail = globalVariable.getEmail();
+                strfb = globalVariable.getFacebook();
+                strtwitter = globalVariable.getTwitter();
+                strinstagram = globalVariable.getInstagram();
+                strpathh = globalVariable.getPathh();
+
+                saveDataInput();
             }
         });
-        //untuk menyimpan data yang sudah diinput ditampung di variabel
-        final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
-        //biar ketika di form 2 di back tetep nyimpen data yang sudah diinput
-//        strusername = globalVariable.getUsername();
-//        etUsername.setText(strusername.toString());
-//
-//        strnama = globalVariable.getNamaLengkap();
-//        etNamaLengkap.setText(strnama.toString());
-//
-//        strnoktp = globalVariable.getNoKtp();
-//        etNoKtp.setText(strnoktp.toString());
-//
-//        strtempat_lahir = globalVariable.getTempatLahir();
-//        etTempatLahir.setText(strtempat_lahir.toString());
-//
-//        strtanggal_lahir = globalVariable.getTanggalLahir();
-//        etDate.setText(strtanggal_lahir.toString());
-//
-//        strjenis_kelamin = globalVariable.getJenisKelamin();
-//        spJenisKelamin.getSelectedItem().toString();
-//
-//        strstatus_perkawinan = globalVariable.getStatusPerkawinan();
-//        spStatusPerkawinan.getSelectedItem().toString();
-//
-//        stralamat = globalVariable.getAlamat();
-//        etAlamat.setText(stralamat.toString());
-//
-//        strprovinsi = globalVariable.getProvinsi();
-//        spProvinsi.getSelectedItem().toString();
-//
-//        strkabkot = globalVariable.getKabupaten();
-//        spKabupaten.getSelectedItem().toString();
-//
-//        strkecamatan = globalVariable.getKecamatan();
-//        spKecamatan.getSelectedItem().toString();
-//
-//        strdesa = globalVariable.getDesa();
-//        spDesa.getSelectedItem().toString();
-//
-//        strkode_pos = globalVariable.getKodePos();
-//        etKodePos.setText(strkode_pos.toString());
-//
-//        strtlp = globalVariable.getTelepon();
-//        etTelepon.setText(strtlp.toString());
-//
-//        strhp = globalVariable.getHandphone();
-//        etHandphone.setText(strhp.toString());
-//
-//        stremail = globalVariable.getEmail();
-//        etEmail.setText(stremail.toString());
-//
-//        strfb = globalVariable.getFacebook();
-//        etFacebook.setText(strfb.toString());
-//
-//        strtwitter = globalVariable.getTwitter();
-//        etTwitter.setText(strtwitter.toString());
-//
-//        strinstagram = globalVariable.getInstagram();
-//        etInstagram.setText(strinstagram.toString());
-//
-//        strpathh = globalVariable.getPathh();
-//        etPathh.setText(strpathh.toString());
+    }
 
+    private void saveDataInput(){
+        RestAdapter adapter = new RestAdapter.Builder()
+                .setEndpoint("http://www.terpusat.com") //Setting the Root URL
+                .build(); //Finally building the adapter
 
+        //Creating object for our interface
+        ModulAPI api = adapter.create(ModulAPI.class);
+
+        //insertdataanggota ada di ModulAPI
+        //urutan dan jumlah harus sama dengan yang di Model API
+        api.insertdataanggota(
+                "form1",
+                strusername.toString(),
+                strnama.toString(),
+                strnoktp.toString(),
+                strtempat_lahir.toString(),
+                strtanggal_lahir.toString(),
+                strjenis_kelamin.toString(),
+                strstatus_perkawinan.toString(),
+                stralamat.toString(),
+                strprovinsi.toString(),
+                strkabkot.toString(),
+                strkecamatan.toString(),
+                strdesa.toString(),
+                strkode_pos.toString(),
+                strtlp.toString(),
+                strhp.toString(),
+                stremail.toString(),
+                strfb.toString(),
+                strtwitter.toString(),
+                strinstagram.toString(),
+                strpathh.toString(),
+
+                //Creating an anonymous callback
+                new Callback<Response>() {
+                    @Override
+                    public void success(Response result, Response response) {
+                        //On success we will read the server's output using bufferedreader
+                        //Creating a bufferedreader object
+                        BufferedReader reader = null;
+                        StringBuilder sb = new StringBuilder();
+
+                        final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
+
+                        try {
+                            //Initializing buffered reader
+                            reader = new BufferedReader(new InputStreamReader(result.getBody().in()));
+
+                            //An string to store output from the server
+                            String output;
+                            try {
+                                while ((output = reader.readLine()) != null) {
+                                    sb.append(output);
+                                }
+
+                                String returns = sb.toString();
+
+                                Log.e("Bangkeeeee", returns);
+
+                                globalVariable.setId(returns);
+
+                                Toast.makeText(FormAnggota1Activity.this, "Data Berhasil Di Simpan", Toast.LENGTH_LONG).show();
+
+                                Intent intent = new Intent(getApplicationContext(), FormAnggota2Activity.class);
+
+                                startActivity(intent);
+
+                                finish();
+
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        } catch (IOException e) {
+                            //Log.e("Gagal ", result.toString());
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        //If any error occured displaying the error as toast
+                        Toast.makeText(FormAnggota1Activity.this, "Kesalahan Koneksi Data" +error.getMessage(), Toast.LENGTH_LONG).show();
+                        //btnsetting.setEnabled(true);
+                    }
+                }
+        );
     }
 
     private void cekusername(){
@@ -388,7 +481,6 @@ public class FormAnggota1Activity extends AppCompatActivity {
                             finish();
 
                         } else {
-
                             Toast.makeText(FormAnggota1Activity.this, "Username sudah ada" + toString(), Toast.LENGTH_LONG).show();
                         }
 

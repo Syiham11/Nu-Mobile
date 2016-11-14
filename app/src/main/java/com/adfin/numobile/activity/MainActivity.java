@@ -40,29 +40,29 @@ public class MainActivity extends AppCompatActivity {
         //username = i.getStringExtra("id_user");
 
         //baris 1
-        /*Button btnPengurus = (Button) findViewById(R.id.btn_pengurus);
+        Button btnPengurus = (Button) findViewById(R.id.btn_pengurus);
         Button btnAnggota = (Button) findViewById(R.id.btn_anggota);
         Button btnArsip = (Button) findViewById(R.id.btn_arsip);
-        Button btnKegiatan = (Button) findViewById(R.id.btn_kegiatan);*/
+        Button btnKegiatan = (Button) findViewById(R.id.btn_kegiatan);
         //baris 2
-        /*Button btnPelayanan = (Button) findViewById(R.id.btn_pelayanan);
+        Button btnPelayanan = (Button) findViewById(R.id.btn_pelayanan);
         Button btnPromosi = (Button) findViewById(R.id.btn_promosi);
         Button btnWarung = (Button) findViewById(R.id.btn_warung);
-        Button btnPasar = (Button) findViewById(R.id.btn_pasar);*/
+        Button btnPasar = (Button) findViewById(R.id.btn_pasar);
         //baris 3
-        /*Button btnDompet = (Button) findViewById(R.id.btn_dompet);
+        Button btnDompet = (Button) findViewById(R.id.btn_dompet);
         Button btnKonsultasi = (Button) findViewById(R.id.btn_konsultasi);
         Button btnDoa = (Button) findViewById(R.id.btn_doa);
-        Button btnDesa = (Button) findViewById(R.id.btn_desa);*/
+        Button btnDesa = (Button) findViewById(R.id.btn_desa);
         //baris 4
-        /*Button btnKesehatan = (Button) findViewById(R.id.btn_kesehatan);
+        Button btnKesehatan = (Button) findViewById(R.id.btn_kesehatan);
         Button btnPendidikan = (Button) findViewById(R.id.btn_pendidikan);
         Button btnPertanian = (Button) findViewById(R.id.btn_pertanian);
-        Button btnKelautan = (Button) findViewById(R.id.btn_kelautan);*/
+        Button btnKelautan = (Button) findViewById(R.id.btn_kelautan);
 
 
         //baris 1
-        /*btnPengurus.setOnClickListener(new View.OnClickListener() {
+        btnPengurus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, PengurusMenuActivity.class);
@@ -96,11 +96,11 @@ public class MainActivity extends AppCompatActivity {
 
                 startActivity(intent);
             }
-        });*/
+        });
 
 
         //BARIS 2
-        /*btnPelayanan.setOnClickListener(new View.OnClickListener() {
+        btnPelayanan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, PelayananMenuActivity.class);
@@ -134,10 +134,10 @@ public class MainActivity extends AppCompatActivity {
 
                 startActivity(intent);
             }
-        });*/
+        });
 
         //BARIS 3
-        /*btnDompet.setOnClickListener(new View.OnClickListener() {
+        btnDompet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, DompetMenuActivity.class);
@@ -171,11 +171,11 @@ public class MainActivity extends AppCompatActivity {
 
                 startActivity(intent);
             }
-        });*/
+        });
 
 
         //BARIS 4
-        /*btnKesehatan.setOnClickListener(new View.OnClickListener() {
+        btnKesehatan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, KesehatanMenuActivity.class);
@@ -209,7 +209,6 @@ public class MainActivity extends AppCompatActivity {
 
                 startActivity(intent);
             }
-        });*/
+        });
     }
-
 }

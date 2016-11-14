@@ -7,6 +7,7 @@ import android.app.Application;
  */
 public class GlobalClass extends Application {
 
+    private String vid_warga;
     //FORM 1
     private String vUsername;
     private String vNamaLengkap;
@@ -64,6 +65,9 @@ public class GlobalClass extends Application {
 
     //-----------------------------
     //FORM 1
+    public String getId() {
+        return vid_warga;
+    }
     public String getUsername() {
         return vUsername;
     }
@@ -213,6 +217,9 @@ public class GlobalClass extends Application {
 
     //-----------------------------
     //FORM 1
+    public void setId(String str)  {
+        vid_warga= str;
+    }
     public void setUsername(String str)  {
         vUsername= str;
     }

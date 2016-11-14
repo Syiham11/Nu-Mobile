@@ -320,8 +320,7 @@ public class FormAnggota4Activity extends AppCompatActivity {
 
         //insertdataanggota ada di ModulAPI
         //urutan dan jumlah harus sama dengan yang di Model API
-        api.insertdataanggota(
-                strid_warga.toString(),
+        /*api.insertdataanggotal(
                 strusername.toString(),
                 strnama.toString(),
                 strnoktp.toString(),
@@ -424,7 +423,7 @@ public class FormAnggota4Activity extends AppCompatActivity {
                         //btnsetting.setEnabled(true);
                     }
                 }
-        );
+        );*/
     }
 
     @Override

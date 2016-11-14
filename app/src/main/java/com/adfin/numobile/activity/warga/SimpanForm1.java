@@ -93,8 +93,8 @@ public class SimpanForm1 extends AppCompatActivity {
         btnsave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ambildataidwarga();
-
+                //ambildataidwarga();
+                //saveDataInput();
             }
         });
     }
@@ -147,8 +147,8 @@ public class SimpanForm1 extends AppCompatActivity {
 
         //insertdataanggota ada di ModulAPI
         //urutan dan jumlah harus sama dengan yang di Model API
-        api.insertform1(
-                strid_warga.toString(),
+        api.insertdataanggota(
+                "form1",
                 strusername.toString(),
                 strnama.toString(),
                 strnoktp.toString(),

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -28,6 +29,9 @@ import com.adfin.numobile.model.DataPekerjaan;
 import com.adfin.numobile.model.DataPendapatan;
 import com.adfin.numobile.model.DataProvinsi;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,8 +42,9 @@ import retrofit.client.Response;
 
 public class FormAnggota2Activity extends AppCompatActivity {
 
-    public static final String ROOT_URL = "http://numobile.id/";
+    public static final String ROOT_URL = "http://numobile.id";
 
+    EditText etIdWarga;
     Spinner spPekerjaan;
     Spinner spInstansi;
     EditText etJabatan;
@@ -55,6 +60,7 @@ public class FormAnggota2Activity extends AppCompatActivity {
     EditText etS2;
     EditText etS3;
 
+    String  strIdWarga;
     String  strpekerjaan;
     String  strinstansi;
     String  strjabatan;
@@ -69,6 +75,7 @@ public class FormAnggota2Activity extends AppCompatActivity {
     String  strs1;
     String  strs2;
     String  strs3;
+    String  allSchool;
 
     private List<DataJenisPekerjaan> lstdatajenispekerjaan;
     private List<DataInstansi> lstdatainstansi;
@@ -78,20 +85,17 @@ public class FormAnggota2Activity extends AppCompatActivity {
     Button  btnBack1,
             btnNext2;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
                 super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_anggota2);
 
-        //        Intent i = getIntent();
-//        username = i.getStringExtra("id_user");
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
-
-
         final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
 
+        etIdWarga = (EditText) findViewById(R.id.idWarga);
+        strIdWarga = globalVariable.getId();
+        //Log.e("ID Yang Nyampe", globalVariable.getId());
+        etIdWarga.setText(strIdWarga);
 
         spPekerjaan = (Spinner) findViewById(R.id.spPekerjaan);
         spInstansi= (Spinner) findViewById(R.id.spInstansi);
@@ -120,21 +124,21 @@ public class FormAnggota2Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-//                if (spPekerjaan.getSelectedItem().toString().length() ==0){
-//                    Toast.makeText(getApplicationContext(), "Pekerjaan Belum Dipilih" , Toast.LENGTH_LONG).show();
-//                    spPekerjaan.requestFocus();
-//                    return;
-//                }
-//                if (spOrganisasi.getSelectedItem().toString().length() ==0){
-//                    Toast.makeText(getApplicationContext(), "Organisasi Belum Dipilih" , Toast.LENGTH_LONG).show();
-//                    spOrganisasi.requestFocus();
-//                    return;
-//                }
-//                if (etSD.getText().toString().length() ==0){
-//                    Toast.makeText(getApplicationContext(), "SD Belum Diisi" , Toast.LENGTH_LONG).show();
-//                    spPekerjaan.requestFocus();
-//                    return;
-//                }
+                if (spPekerjaan.getSelectedItem().toString().length() ==0){
+                    Toast.makeText(getApplicationContext(), "Pekerjaan Belum Dipilih" , Toast.LENGTH_LONG).show();
+                    spPekerjaan.requestFocus();
+                    return;
+                }
+                if (spOrganisasi.getSelectedItem().toString().length() ==0){
+                    Toast.makeText(getApplicationContext(), "Organisasi Belum Dipilih" , Toast.LENGTH_LONG).show();
+                    spOrganisasi.requestFocus();
+                    return;
+                }
+                if (etSD.getText().toString().length() ==0){
+                    Toast.makeText(getApplicationContext(), "SD Belum Diisi" , Toast.LENGTH_LONG).show();
+                    spPekerjaan.requestFocus();
+                    return;
+                }
 
                 globalVariable.setPekerjaan(spPekerjaan.getSelectedItem().toString());
                 globalVariable.setInstansi(spInstansi.getSelectedItem().toString());
@@ -151,56 +155,31 @@ public class FormAnggota2Activity extends AppCompatActivity {
                 globalVariable.setS2(etS2.getText().toString());
                 globalVariable.setS3(etS3.getText().toString());
 
-                Intent intent = new Intent(getApplicationContext(), FormAnggota3Activity.class);
+                /*Intent intent = new Intent(getApplicationContext(), FormAnggota3Activity.class);
                 startActivity(intent);
-                finish();
+                finish();*/
+                strpekerjaan = globalVariable.getPekerjaan();
+                strinstansi = globalVariable.getInstansi();
+                strjabatan = globalVariable.getJabatan();
+                strpendapatan = globalVariable.getPendapatan();
+                strkemampuan = globalVariable.getKemampuan();
+                strorganisasi = globalVariable.getIndukOrganisasi();
+                strsd = globalVariable.getSD();
+                strsmp = globalVariable.getSMP();
+                strsma = globalVariable.getSMA();
+                strd1 = globalVariable.getD1();
+                strd3 = globalVariable.getD3();
+                strs1 = globalVariable.getS1();
+                strs2 = globalVariable.getS2();
+                strs3 = globalVariable.getS3();
+                allSchool = strd1 + "~~" + strsmp + "~~" + strsma + "~~" + strd1 + "~~" + strd3 + "~~" + strs1 + "~~" + strs2 + "~~" + strs3;
+
+                saveDataInput();
 
             }
         });
 
-//        strpekerjaan = globalVariable.getPekerjaan();
-//        spPekerjaan.getSelectedItem().toString();
-//
-//        strinstansi = globalVariable.getInstansi();
-//        spInstansi.getSelectedItem().toString();
-//
-//        strjabatan = globalVariable.getJabatan();
-//        etJabatan.setText(strjabatan.toString());
-//
-//        strpendapatan = globalVariable.getPendapatan();
-//        spPendapatan.getSelectedItem().toString();
-//
-//        strkemampuan = globalVariable.getKemampuan();
-//        etKemampuan.setText(strkemampuan.toString());
-//
-//        strorganisasi = globalVariable.getIndukOrganisasi();
-//        spOrganisasi.getSelectedItem().toString();
-//
-//        strsd = globalVariable.getSD();
-//        etSD.setText(strsd.toString());;
-//
-//        strsmp = globalVariable.getSMP();
-//        etSMP.setText(strsmp.toString());
-//
-//        strsma = globalVariable.getSMA();
-//        etSMA.setText(strsma.toString());
-//
-//        strd1 = globalVariable.getD1();
-//        etD1.setText(strd1.toString());
-//
-//        strd3 = globalVariable.getD3();
-//        etD3.setText(strd3.toString());
-//
-//        strs1 = globalVariable.getS1();
-//        etS1.setText(strs1.toString());
-//
-//        strs2 = globalVariable.getS2();
-//        etS2.setText(strs2.toString());
-//
-//        strs3 = globalVariable.getS3();
-//        etS3.setText(strs3.toString());
-
-        btnBack1.setOnClickListener(new View.OnClickListener() {
+        /*btnBack1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(FormAnggota2Activity.this, FormAnggota3Activity.class);
@@ -208,7 +187,78 @@ public class FormAnggota2Activity extends AppCompatActivity {
                 finish();
 
             }
-        });
+        });*/
+    }
+
+    private void saveDataInput(){
+        RestAdapter adapter = new RestAdapter.Builder()
+                .setEndpoint("http://www.terpusat.com") //Setting the Root URL
+                .build(); //Finally building the adapter
+
+        //Creating object for our interface
+        ModulAPI api = adapter.create(ModulAPI.class);
+
+        //insertdataanggota ada di ModulAPI
+        //urutan dan jumlah harus sama dengan yang di Model API
+        api.insertdataanggotal(
+                "form2",
+                strIdWarga,
+                strpekerjaan,
+                "suka-suka gw",
+                strjabatan,
+                strpendapatan,
+                strkemampuan,
+                strorganisasi,
+                allSchool,
+                //Creating an anonymous callback
+                new Callback<Response>() {
+                    @Override
+                    public void success(Response result, Response response) {
+                        //On success we will read the server's output using bufferedreader
+                        //Creating a bufferedreader object
+                        BufferedReader reader = null;
+
+
+
+                        //An string to store output from the server
+                        String output = "";
+
+                        try {
+                            //Initializing buffered reader
+                            reader = new BufferedReader(new InputStreamReader(result.getBody().in()));
+                            //Log.e("Sukses ", result.toString());
+                            //Reading the output in the string
+                            output = reader.readLine();
+                            //Log.e("Sukses IDnya ", output);
+                        } catch (IOException e) {
+                            //Log.e("Gagal ", result.toString());
+                            e.printStackTrace();
+                        }
+
+                        //Log.e("Habis gagal dan berhasil", output);
+
+                        final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
+
+                        globalVariable.setId(strIdWarga);
+
+                        /*Intent intent = new Intent(getApplicationContext(), FormAnggota2Activity.class);
+
+                        startActivity(intent);
+
+                        finish();*/
+
+                        Toast.makeText(FormAnggota2Activity.this, "Data Berhasil Di Simpan", Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        //If any error occured displaying the error as toast
+                        Toast.makeText(FormAnggota2Activity.this, "Kesalahan Koneksi Data" +error.getMessage(), Toast.LENGTH_LONG).show();
+                        Log.e("Apa Yang Salah" , error.getMessage());
+                        //btnsetting.setEnabled(true);
+                    }
+                }
+        );
     }
 
 
