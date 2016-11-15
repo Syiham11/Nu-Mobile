@@ -28,6 +28,14 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="@dimen/component_margin">
 
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/idWarga"
+                android:singleLine="true"
+                android:textSize="@dimen/component_text"
+                android:visibility="gone" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

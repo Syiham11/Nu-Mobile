@@ -367,8 +367,6 @@ public class FormAnggota1Activity extends AppCompatActivity {
 
                                 String returns = sb.toString();
 
-                                Log.e("Bangkeeeee", returns);
-
                                 globalVariable.setId(returns);
 
                                 Toast.makeText(FormAnggota1Activity.this, "Data Berhasil Di Simpan", Toast.LENGTH_LONG).show();

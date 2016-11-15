@@ -94,7 +94,6 @@ public class FormAnggota2Activity extends AppCompatActivity {
 
         etIdWarga = (EditText) findViewById(R.id.idWarga);
         strIdWarga = globalVariable.getId();
-        //Log.e("ID Yang Nyampe", globalVariable.getId());
         etIdWarga.setText(strIdWarga);
 
         spPekerjaan = (Spinner) findViewById(R.id.spPekerjaan);
@@ -155,9 +154,6 @@ public class FormAnggota2Activity extends AppCompatActivity {
                 globalVariable.setS2(etS2.getText().toString());
                 globalVariable.setS3(etS3.getText().toString());
 
-                /*Intent intent = new Intent(getApplicationContext(), FormAnggota3Activity.class);
-                startActivity(intent);
-                finish();*/
                 strpekerjaan = globalVariable.getPekerjaan();
                 strinstansi = globalVariable.getInstansi();
                 strjabatan = globalVariable.getJabatan();
@@ -172,22 +168,23 @@ public class FormAnggota2Activity extends AppCompatActivity {
                 strs1 = globalVariable.getS1();
                 strs2 = globalVariable.getS2();
                 strs3 = globalVariable.getS3();
-                allSchool = strd1 + "~~" + strsmp + "~~" + strsma + "~~" + strd1 + "~~" + strd3 + "~~" + strs1 + "~~" + strs2 + "~~" + strs3;
+                allSchool = strsd + "~~" + strsmp + "~~" + strsma + "~~" + strd1 + "~~" + strd3 + "~~" + strs1 + "~~" + strs2 + "~~" + strs3;
 
                 saveDataInput();
 
             }
         });
 
-        /*btnBack1.setOnClickListener(new View.OnClickListener() {
+        btnBack1 = (Button) findViewById(R.id.btnBack1);
+        btnBack1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(FormAnggota2Activity.this, FormAnggota3Activity.class);
+                Intent intent = new Intent(FormAnggota2Activity.this, FormAnggota1Activity.class);
                 startActivity(intent);
                 finish();
 
             }
-        });*/
+        });
     }
 
     private void saveDataInput(){
@@ -226,26 +223,21 @@ public class FormAnggota2Activity extends AppCompatActivity {
                         try {
                             //Initializing buffered reader
                             reader = new BufferedReader(new InputStreamReader(result.getBody().in()));
-                            //Log.e("Sukses ", result.toString());
                             //Reading the output in the string
                             output = reader.readLine();
-                            //Log.e("Sukses IDnya ", output);
                         } catch (IOException e) {
-                            //Log.e("Gagal ", result.toString());
                             e.printStackTrace();
                         }
-
-                        //Log.e("Habis gagal dan berhasil", output);
 
                         final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
 
                         globalVariable.setId(strIdWarga);
 
-                        /*Intent intent = new Intent(getApplicationContext(), FormAnggota2Activity.class);
+                        Intent intent = new Intent(getApplicationContext(), FormAnggota3Activity.class);
 
                         startActivity(intent);
 
-                        finish();*/
+                        finish();
 
                         Toast.makeText(FormAnggota2Activity.this, "Data Berhasil Di Simpan", Toast.LENGTH_LONG).show();
                     }
@@ -253,8 +245,7 @@ public class FormAnggota2Activity extends AppCompatActivity {
                     @Override
                     public void failure(RetrofitError error) {
                         //If any error occured displaying the error as toast
-                        Toast.makeText(FormAnggota2Activity.this, "Kesalahan Koneksi Data" +error.getMessage(), Toast.LENGTH_LONG).show();
-                        Log.e("Apa Yang Salah" , error.getMessage());
+                        Toast.makeText(FormAnggota2Activity.this, "Kesalahan Koneksi Data" + error.getMessage(), Toast.LENGTH_LONG).show();
                         //btnsetting.setEnabled(true);
                     }
                 }

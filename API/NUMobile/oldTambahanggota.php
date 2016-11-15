@@ -25,15 +25,13 @@ if(isset($_POST['token'])){
                 $fullQuery = $query . $keys . ')' . $values . ')';
                 // END OF tbl_warga
 
-                /*if( $result = mysqli_query($con, $fullQuery) ){
+                if( $result = mysqli_query($con, $fullQuery) ){
                         $last_id = mysqli_insert_id($con);
                         echo $last_id;
                 }else{
                         echo 0;
-                }*/
+                }
 
-                echo 0;
-                
                 // Close My Connection
                 mysqli_close($con);
                 
@@ -65,57 +63,30 @@ if(isset($_POST['token'])){
                 $fullQuery = $query . $keys . ' WHERE id_warga=' . $_POST['id_warga']; 
                 // END OF tbl_warga
 
-                /*if( $result = mysqli_query($con, $fullQuery) ){
-                        $last_id = mysqli_insert_id($con);
+                if( $result = mysqli_query($con, $fullQuery) ){
+                        $last_id = $_POST['id_warga'];
                         echo $last_id;
                 }else{
                         echo 0;
-                }*/
+                }
 
                 $mySchool = explode("~~", $_POST['xssekolah']);
                 $n = 1; $return = "";
                 foreach ($mySchool as $key => $value) {
                         $pendquery = 'INSERT INTO tbl_warga_pendidikan (id_warga, id_pendidikan, nama_sekolah) VALUES (' . $_POST['id_warga'] . ',' . $n++ . ',"' . $value . '")';
-                        file_put_contents($_POST['token'] . '_pendidikan.json', $pendquery . PHP_EOL, FILE_APPEND);
-                        /*if( mysqli_query($con, $pendquery) ){
+                        if( mysqli_query($con, $pendquery) ){
                                 $last_id = mysqli_insert_id($con);
                                 $return .= $last_id . '~~';
-                        }*/
+                        }
                 }
 
-                echo $_POST['id_warga'];
+                //echo $return;
 
                 // Close My Connection
                 mysqli_close($con);
 
         }else if($_POST['token'] == 'form3'){
-                // Query Data tbl_warga, please insert valid field for the best return
-                $keys = '';
-                $query = 'UPDATE tbl_warga SET ';
-                foreach($_POST as $key => $value){
-                        if( $value && strpos($key, 'vs') !== false ){
-                                if( $key == 'vsid_pesantren1' || $key == 'vsid_pesantren2' ){
-                                        $qF2 = mysqli_query($con, 'SELECT id_pesantren FROM master_pesantren WHERE nama_pesantren ="' . $value . '"');
-                                        $row = mysqli_fetch_assoc($qF2);
-                                        $value = $row['id_pesantren'];
-                                }
-                                $keys .= str_replace('vs', '', $key) . '="' . $value . '",';
-                        }
-                }
-                $keys = rtrim($keys, ',');
 
-                $fullQuery = $query . $keys . ' WHERE id_warga=' . $_POST['id_warga']; 
-                // END OF tbl_warga
-
-                /*if( $result = mysqli_query($con, $fullQuery) ){
-                        $last_id = mysqli_insert_id($con);
-                        echo $last_id;
-                }else{
-                        echo 0;
-                }*/
-
-                // Close My Connection
-                mysqli_close($con);
         }
         
         file_put_contents($_POST['token'] . '.json', $fullQuery);
