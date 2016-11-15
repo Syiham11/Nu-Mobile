@@ -29,7 +29,6 @@ if(isset($_POST['token'])){
                         $last_id = mysqli_insert_id($con);
                         echo $last_id;
                 }else{
-                        var_dump(mysqli_error($con));
                         echo 0;
                 }
 
@@ -64,6 +63,13 @@ if(isset($_POST['token'])){
                 $fullQuery = $query . $keys . ' WHERE id_warga=' . $_POST['id_warga']; 
                 // END OF tbl_warga
 
+                if( $result = mysqli_query($con, $fullQuery) ){
+                        $last_id = $_POST['id_warga'];
+                        echo $last_id;
+                }else{
+                        echo 0;
+                }
+
                 $mySchool = explode("~~", $_POST['xssekolah']);
                 $n = 1; $return = "";
                 foreach ($mySchool as $key => $value) {
@@ -74,7 +80,7 @@ if(isset($_POST['token'])){
                         }
                 }
 
-                echo $return;
+                //echo $return;
 
                 // Close My Connection
                 mysqli_close($con);
