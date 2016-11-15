@@ -1,0 +1,1 @@
+UPDATE tbl_warga SET id_jenis_pekerjaan="1",jabatan="CTO",id_pendapatan="5",kemampuan="Nothing",id_induk_organisasi="1" WHERE id_warga=1

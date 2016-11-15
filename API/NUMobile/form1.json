@@ -1,0 +1,1 @@
+INSERT INTO tbl_warga (username,nama,noktp,tempat_lahir,tanggal_lahir,jenis_kelamin,status_perkawinan,alamat,provinsi,kabkot,kecamatan,desa,kode_pos,tlp,hp,email,fb,twitter,instagram,path) VALUES ('rhh','hjvn','ghjj','jj','Nov 10, 2016','Wanita','Belum Kawin','hjjh','Aceh','Kabupaten Simeulue','Alafan','SUKA KARYA','guh','hjj','hhh','thj@jj.com','hjh','yiug','hkbv','fhk')
