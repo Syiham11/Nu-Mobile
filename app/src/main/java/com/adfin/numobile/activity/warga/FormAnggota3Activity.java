@@ -208,11 +208,11 @@ public class FormAnggota3Activity extends AppCompatActivity {
 
                         globalVariable.setId(strIdWarga);
 
-                        /*Intent intent = new Intent(getApplicationContext(), FormAnggota4Activity.class);
+                        Intent intent = new Intent(getApplicationContext(), FormAnggota4Activity.class);
 
                         startActivity(intent);
 
-                        finish();*/
+                        finish();
 
                         Toast.makeText(FormAnggota3Activity.this, "Data Berhasil Di Simpan", Toast.LENGTH_LONG).show();
                     }

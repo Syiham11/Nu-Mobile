@@ -142,6 +142,8 @@ public class FormAnggota4Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_anggota4);
 
+        final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
+
         photo = (ImageView)findViewById(R.id.gambar);
 
         strnama = "";
@@ -153,8 +155,6 @@ public class FormAnggota4Activity extends AppCompatActivity {
 
         strphoto = "";
         strphoto = strnama.toString()+strdesa.toString()+"'.png'";
-
-        final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
 
 
         //FORM 1
@@ -208,6 +208,7 @@ public class FormAnggota4Activity extends AppCompatActivity {
         strnominal_donasi_warga = globalVariable.getNominalDonasiWarga();
         strStatusMember = globalVariable.getIdStatusMember();
 
+        btnsave = (Button) findViewById(R.id.buttonSave);
         btnsave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -259,11 +260,6 @@ public class FormAnggota4Activity extends AppCompatActivity {
 //                strStatusMember = "status member";
 
                 ambildataidwarga();
-
-
-
-
-
 
             }
         });
@@ -554,8 +550,8 @@ public class FormAnggota4Activity extends AppCompatActivity {
     }
 
     private void browseImage() {
-        Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        intent.setType("image/jpg");
+        Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        intent.setType("image/*");
         startActivityForResult(
                 Intent.createChooser(intent, "Select File"),
                 CAMERA_PICK_IMAGE_REQUEST_CODE);

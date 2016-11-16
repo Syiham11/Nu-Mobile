@@ -16,8 +16,5 @@ public class AnggotaLihatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_anggota_lihat);
 
         listView = (ListView) findViewById(R.id.list);
-
-
-
     }
 }

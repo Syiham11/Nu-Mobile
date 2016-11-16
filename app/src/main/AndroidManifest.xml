@@ -3,11 +3,11 @@
     package="com.adfin.numobile">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -235,7 +235,6 @@
             android:label="KELAUTAN"
             android:parentActivityName=".activity.MainActivity" />
         <activity android:name=".activity.warga.FormAnggota4Activity" />
-        <activity android:name=".activity.warga.SimpanForm1"></activity>
     </application>
 
 </manifest>
