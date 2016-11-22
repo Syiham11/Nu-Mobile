@@ -10,6 +10,7 @@ import com.adfin.numobile.model.CDataPekerjaan;
 import com.adfin.numobile.model.CDataPendapatan;
 import com.adfin.numobile.model.CDataPesantren;
 import com.adfin.numobile.model.CDataProvinsi;
+import com.adfin.numobile.model.CDataWarga;
 import com.adfin.numobile.model.DataNoTerkahir;
 import com.adfin.numobile.model.DataWarga;
 
@@ -40,6 +41,9 @@ public interface ModulAPI {
 
     @GET("/NUMobile/ambilid_warga.php") // belum
     public void  getDataIdWarga(Callback<DataNoTerkahir> callback);
+
+    @GET("/NUMobile/getusers.php") // Sudah
+    public void  getDataWarga(Callback<CDataWarga> callback);
 
     @GET("/NUMobile/ambildataprovinsi.php") // udah
     public void  getDataProvinsi(Callback<CDataProvinsi> callback);

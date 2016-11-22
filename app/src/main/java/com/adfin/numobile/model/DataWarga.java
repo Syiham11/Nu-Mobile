@@ -325,5 +325,6 @@ public class DataWarga {
     public String getflag() {
         return flag;
     }
-    
+
+    /* Generate View For List */
 }

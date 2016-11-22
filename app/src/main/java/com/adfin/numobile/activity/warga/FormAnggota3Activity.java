@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.adfin.numobile.ModulAPI;
 import com.adfin.numobile.R;
 import com.adfin.numobile.activity.GlobalClass;
+import com.adfin.numobile.activity.MainActivity;
 import com.adfin.numobile.model.CDataDesa;
 import com.adfin.numobile.model.CDataKabupten;
 import com.adfin.numobile.model.CDataKecamatan;
@@ -208,7 +209,7 @@ public class FormAnggota3Activity extends AppCompatActivity {
 
                         globalVariable.setId(strIdWarga);
 
-                        Intent intent = new Intent(getApplicationContext(), FormAnggota4Activity.class);
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
 
                         startActivity(intent);
 
