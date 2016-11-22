@@ -49,17 +49,6 @@ public class AnggotaLihatActivity extends AppCompatActivity {
 
         //final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
 
-        //listView = (ListView) findViewById(R.id.list);
-        /*recyclerView= (RecyclerView) findViewById(R.id.recycler_view);
-
-        ListAdapterWarga adapter=new ListAdapterWarga(this);
-        //membuat adapter baru untuk reyclerview
-        recyclerView.setAdapter(adapter);
-        //menset nilai dari adapter
-        recyclerView.setHasFixedSize(true);
-        //menset setukuran
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));*/
-
         getDataWarga();
     }
 
