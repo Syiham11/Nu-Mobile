@@ -168,20 +168,8 @@ public class FormAnggota4Activity extends AppCompatActivity {
         photo = (ImageView)findViewById(R.id.gambar);
 
         etIdWarga = (EditText) findViewById(R.id.idWarga);
-        //strIdWarga = globalVariable.getId();
-        strIdWarga = "1";
+        strIdWarga = globalVariable.getId();
         etIdWarga.setText(strIdWarga);
-
-        strnama = "";
-        strdesa = "";
-        strLat = "0";
-        strLong = "0";
-        strFlag = "0";
-
-
-        strphoto = "";
-        strphoto = strnama.toString()+strdesa.toString()+"'.png'";
-
 
         //FORM 1
         strusername = globalVariable.getUsername();

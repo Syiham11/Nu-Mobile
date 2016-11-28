@@ -116,11 +116,14 @@ if(isset($_POST['token'])){
                 if($check !== false) {
                         if (move_uploaded_file($_FILES["UploadFile"]["tmp_name"], $target_file)) {
                                 // Query Data tbl_warga, please insert valid field for the best return
-                                $fullQuery = 'UPDATE tbl_warga SET photo = "' . $target_file . '"' . ' WHERE id_warga=' . $_POST['id_warga'];
+                                $fullQuery = 'UPDATE tbl_warga SET photo = "' . $target_file . '"' . ' WHERE id_warga =' . $_POST['id_warga'];
                                 mysqli_query($con, $fullQuery);
                                 // END OF tbl_warga
 
                                 echo $_POST['id_warga'];
+
+                                // Close My Connection
+                                mysqli_close($con);
                         }else{
                                 echo 0;
                         }
