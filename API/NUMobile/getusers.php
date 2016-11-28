@@ -6,7 +6,7 @@
 
 	$con = mysqli_connect(HOST,USER,PASS,DB) or die('Unable to Connect');
 
-	$result = mysqli_query($con, 'SELECT * FROM tbl_warga LIMIT 0, 10');
+	$result = mysqli_query($con, 'SELECT * FROM tbl_warga ORDER BY id_warga DESC LIMIT 0, 10');
 
 	$emparray = array();
 	while($row =mysqli_fetch_assoc($result))

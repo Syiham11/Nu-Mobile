@@ -1,5 +1,6 @@
 package com.adfin.numobile.activity.warga;
 
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -31,12 +32,8 @@ import retrofit.client.Response;
 
 public class AnggotaLihatActivity extends AppCompatActivity {
 
-    //ListView listView;
     RecyclerView recyclerView;
-
-    String  strid_warga;
-    String  strnama;
-    String  strtlp;
+    SwipeRefreshLayout mSwipeRefreshLayout;
 
     private List<DataWarga> lstdatawarga;
 
@@ -45,11 +42,16 @@ public class AnggotaLihatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anggota_lihat);
 
-        recyclerView= (RecyclerView) findViewById(R.id.recycler_view);
-
-        //final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
+        mSwipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipeContainer);
 
         getDataWarga();
+
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getDataWarga();
+            }
+        });
     }
 
     private void getDataWarga() {
@@ -80,18 +82,22 @@ public class AnggotaLihatActivity extends AppCompatActivity {
                         final String[] imageWarga = new String[lstdatawarga.size()];
 
                         for (int i = 0; i < lstdatawarga.size(); i++) {
+                            Log.e("Nama", lstdatawarga.get(i).getnama());
                             namaWarga[i] = lstdatawarga.get(i).getnama();
                             alamatWarga[i] = lstdatawarga.get(i).getalamat();
                             imageWarga[i] = lstdatawarga.get(i).getusername();
                         }
 
+                        recyclerView= (RecyclerView) findViewById(R.id.recycler_view);
                         ListAdapterWarga adapter=new ListAdapterWarga(AnggotaLihatActivity.this, imageWarga, namaWarga, alamatWarga);
                         //membuat adapter baru untuk reyclerview
                         recyclerView.setAdapter(adapter);
                         //menset nilai dari adapter
-                        recyclerView.setHasFixedSize(true);
+                        //recyclerView.setHasFixedSize(true);
                         //menset setukuran
                         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
+                        mSwipeRefreshLayout.setRefreshing(false);
                     }
 
                     @Override
