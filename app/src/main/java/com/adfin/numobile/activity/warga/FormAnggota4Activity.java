@@ -565,11 +565,6 @@ public class FormAnggota4Activity extends AppCompatActivity {
                     public void run() {
                         Toast.makeText(FormAnggota4Activity.this, "File sukses diupload.",
                                 Toast.LENGTH_SHORT).show();
-
-                        Context context = FormAnggota4Activity.this;
-                        Intent intent = null;
-                        intent = new Intent(context, AnggotaLihatActivity.class);
-                        (context).startActivity(intent);
                     }
                 });
             }
@@ -610,6 +605,18 @@ public class FormAnggota4Activity extends AppCompatActivity {
             Log.e("Ini Lhoh Error ", ex.getMessage());
         }
         progressDialog.dismiss();
+
+        if( response.equals("true") ) {
+            runOnUiThread(new Runnable() {
+                public void run() {
+                    Context context = FormAnggota4Activity.this;
+                    Intent intent = null;
+                    intent = new Intent(context, AnggotaLihatActivity.class);
+                    (context).startActivity(intent);
+                }
+            });
+        }
+
         return response;
     }
 }
