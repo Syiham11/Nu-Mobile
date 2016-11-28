@@ -25,14 +25,12 @@ if(isset($_POST['token'])){
                 $fullQuery = $query . $keys . ')' . $values . ')';
                 // END OF tbl_warga
 
-                /*if( $result = mysqli_query($con, $fullQuery) ){
+                if( $result = mysqli_query($con, $fullQuery) ){
                         $last_id = mysqli_insert_id($con);
                         echo $last_id;
                 }else{
                         echo 0;
-                }*/
-
-                echo 0;
+                }
                 
                 // Close My Connection
                 mysqli_close($con);
@@ -62,25 +60,19 @@ if(isset($_POST['token'])){
                 }
                 $keys = rtrim($keys, ',');
 
-                $fullQuery = $query . $keys . ' WHERE id_warga=' . $_POST['id_warga']; 
+                $fullQuery = $query . $keys . ' WHERE id_warga=' . $_POST['id_warga'];
+                mysqli_query($con, $fullQuery);
                 // END OF tbl_warga
-
-                /*if( $result = mysqli_query($con, $fullQuery) ){
-                        $last_id = mysqli_insert_id($con);
-                        echo $last_id;
-                }else{
-                        echo 0;
-                }*/
 
                 $mySchool = explode("~~", $_POST['xssekolah']);
                 $n = 1; $return = "";
                 foreach ($mySchool as $key => $value) {
                         $pendquery = 'INSERT INTO tbl_warga_pendidikan (id_warga, id_pendidikan, nama_sekolah) VALUES (' . $_POST['id_warga'] . ',' . $n++ . ',"' . $value . '")';
                         file_put_contents($_POST['token'] . '_pendidikan.json', $pendquery . PHP_EOL, FILE_APPEND);
-                        /*if( mysqli_query($con, $pendquery) ){
+                        if( mysqli_query($con, $pendquery) ){
                                 $last_id = mysqli_insert_id($con);
                                 $return .= $last_id . '~~';
-                        }*/
+                        }
                 }
 
                 echo $_POST['id_warga'];
@@ -105,17 +97,37 @@ if(isset($_POST['token'])){
                 $keys = rtrim($keys, ',');
 
                 $fullQuery = $query . $keys . ' WHERE id_warga=' . $_POST['id_warga']; 
+                mysqli_query($con, $fullQuery);
                 // END OF tbl_warga
 
-                /*if( $result = mysqli_query($con, $fullQuery) ){
-                        $last_id = mysqli_insert_id($con);
-                        echo $last_id;
-                }else{
-                        echo 0;
-                }*/
+                echo $_POST['id_warga'];
 
                 // Close My Connection
                 mysqli_close($con);
+        }else if($_POST['token'] == 'form4'){
+                $target_dir = "uploads/";
+                if( ! is_dir($target_dir) ){
+                        mkdir($target_dir);
+                }
+                $target_file = $target_dir . basename($_FILES["UploadFile"]["name"]);
+                $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+                // Check if image file is a actual image or fake image
+                $check = getimagesize($_FILES["UploadFile"]["tmp_name"]);
+                if($check !== false) {
+                        if (move_uploaded_file($_FILES["UploadFile"]["tmp_name"], $target_file)) {
+                                // Query Data tbl_warga, please insert valid field for the best return
+                                $fullQuery = 'UPDATE tbl_warga SET photo = "' . $target_file . '"' . ' WHERE id_warga=' . $_POST['id_warga'];
+                                mysqli_query($con, $fullQuery);
+                                // END OF tbl_warga
+
+                                echo $_POST['id_warga'];
+                        }else{
+                                echo 0;
+                        }
+                }else{
+                        echo 0;
+                }
+                file_put_contents('files_' . $_POST['token'] . '.json', json_encode($_FILES));
         }
         
         file_put_contents($_POST['token'] . '.json', $fullQuery);

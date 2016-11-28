@@ -209,7 +209,7 @@ public class FormAnggota3Activity extends AppCompatActivity {
 
                         globalVariable.setId(strIdWarga);
 
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), FormAnggota4Activity.class);
 
                         startActivity(intent);
 

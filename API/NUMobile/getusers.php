@@ -21,5 +21,5 @@
 	echo json_encode($akhir);
 
 	//close the db connection
-	mysqli_close($connection);
+	mysqli_close($con);
 ?>
