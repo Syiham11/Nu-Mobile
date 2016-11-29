@@ -82,10 +82,9 @@ public class AnggotaLihatActivity extends AppCompatActivity {
                         final String[] imageWarga = new String[lstdatawarga.size()];
 
                         for (int i = 0; i < lstdatawarga.size(); i++) {
-                            Log.e("Nama", lstdatawarga.get(i).getnama());
                             namaWarga[i] = lstdatawarga.get(i).getnama();
                             alamatWarga[i] = lstdatawarga.get(i).getalamat();
-                            imageWarga[i] = lstdatawarga.get(i).getusername();
+                            imageWarga[i] = lstdatawarga.get(i).getphoto();
                         }
 
                         recyclerView= (RecyclerView) findViewById(R.id.recycler_view);

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.adfin.numobile.R;
+import com.squareup.picasso.Picasso;
 
 /**
  * Created by prakasa on 22/11/16.
@@ -50,6 +51,11 @@ public class ListAdapterWarga extends  RecyclerView.Adapter<WargaViewHolder> {
         holder.tv2.setText(this.lain[position]);
         holder.imageView.setOnClickListener(clickListener);
         holder.imageView.setTag(holder);
+        if(this.imag[position].length() > 8 )
+            Picasso.with(this.context)
+                    .load("http://www.terpusat.com/NUMobile/" + this.imag[position])
+                    .resize(70, 70)
+                    .into(holder.imageView);
     }
 
     View.OnClickListener clickListener=new View.OnClickListener() {
