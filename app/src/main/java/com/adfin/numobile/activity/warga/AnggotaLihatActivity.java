@@ -1,5 +1,7 @@
 package com.adfin.numobile.activity.warga;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -102,9 +104,13 @@ public class AnggotaLihatActivity extends AppCompatActivity {
                     @Override
                     public void failure(RetrofitError error) {
 
-                        String merror = error.getMessage();
+                        final String merror = error.getMessage();
 
-                        Toast.makeText(AnggotaLihatActivity.this, merror.toString() + " Terjadi Kesalahan Kooneksi ", Toast.LENGTH_LONG).show();
+                        runOnUiThread(new Runnable() {
+                            public void run() {
+                                Toast.makeText(AnggotaLihatActivity.this, merror.toString() + " Terjadi Kesalahan Kooneksi ", Toast.LENGTH_LONG).show();
+                            }
+                        });
                     }
                 }
         );

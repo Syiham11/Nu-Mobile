@@ -132,7 +132,6 @@ public class FormAnggota1Activity extends AppCompatActivity {
         etPathh = (EditText) findViewById(R.id.etPathh);
 
         subDataProvinsi();
-        //subDataKabupaten();
 
         ///// set Calender ////
         final Calendar c = Calendar.getInstance();
@@ -141,9 +140,7 @@ public class FormAnggota1Activity extends AppCompatActivity {
         mDay = c.get(Calendar.DAY_OF_MONTH);
 
         etDate.setOnTouchListener(new OnTouchListener() {
-
             @Override
-
             public boolean onTouch(View arg0, MotionEvent arg1) {
 
                 // TODO Auto-generated method stub
@@ -156,7 +153,11 @@ public class FormAnggota1Activity extends AppCompatActivity {
 
         });
 
-
+        /* Set Data If Global Variable Already Filled */
+        if( globalVariable.getId() != null && !globalVariable.getId().isEmpty() && !globalVariable.getId().equals("null") ){
+            setDataForm(globalVariable);
+        }
+        /* U Sure Is Filled ? Im Not */
         btnNext1 = (Button) findViewById(R.id.btnNext1);
         btnNext1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -217,6 +218,7 @@ public class FormAnggota1Activity extends AppCompatActivity {
                     spKecamatan.requestFocus();
                     return;
                 }
+
                 if (spDesa.getSelectedItem().toString().length() ==0){
                     Toast.makeText(getApplicationContext(), "Desa Belum Dipilih" , Toast.LENGTH_LONG).show();
                     spDesa.requestFocus();
@@ -280,11 +282,6 @@ public class FormAnggota1Activity extends AppCompatActivity {
                 globalVariable.setInstagram(etInstagram.getText().toString());
                 globalVariable.setPathh(etPathh.getText().toString());
 
-                //kalau berhasil nnti ganti ke form 2
-                //Intent intent = new Intent(getApplicationContext(), SimpanForm1.class);
-                //startActivity(intent);
-                //finish();
-
                 strusername = globalVariable.getUsername();
                 strnama = globalVariable.getNamaLengkap();
                 strnoktp = globalVariable.getNoKtp();
@@ -309,6 +306,28 @@ public class FormAnggota1Activity extends AppCompatActivity {
                 saveDataInput();
             }
         });
+    }
+
+    private void setDataForm(GlobalClass globalVariable) {
+        etUsername.setText( globalVariable.getUsername() );
+        etNamaLengkap.setText( globalVariable.getNamaLengkap() );
+        etNoKtp.setText( globalVariable.getNoKtp() );
+        etTempatLahir.setText( globalVariable.getTempatLahir() );
+        etDate.setText( globalVariable.getTanggalLahir() );
+
+        String[] JenisKelamin = getResources().getStringArray(R.array.kategori_array);
+        for(int i=0; i < JenisKelamin.length; i++){
+            if( globalVariable.getJenisKelamin().contains( JenisKelamin[i] ) ) {
+                spJenisKelamin.setSelection(i); break;
+            }
+        }
+
+        String[] kawinBelom = getResources().getStringArray(R.array.status_array);
+        for(int i=0; i < JenisKelamin.length; i++){
+            if( globalVariable.getStatusPerkawinan().contains(kawinBelom[i]) ) {
+                spStatusPerkawinan.setSelection(i); break;
+            }
+        }
     }
 
     private void saveDataInput(){
@@ -380,10 +399,21 @@ public class FormAnggota1Activity extends AppCompatActivity {
 
                             } catch (IOException e) {
                                 e.printStackTrace();
+
+                                runOnUiThread(new Runnable() {
+                                    public void run() {
+                                        Toast.makeText(FormAnggota1Activity.this, "Terjadi Kesalahan Kooneksi", Toast.LENGTH_LONG).show();
+                                    }
+                                });
                             }
                         } catch (IOException e) {
-                            //Log.e("Gagal ", result.toString());
                             e.printStackTrace();
+
+                            runOnUiThread(new Runnable() {
+                                public void run() {
+                                    Toast.makeText(FormAnggota1Activity.this, "Terjadi Kesalahan Kooneksi", Toast.LENGTH_LONG).show();
+                                }
+                            });
                         }
                     }
 
@@ -395,11 +425,6 @@ public class FormAnggota1Activity extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             public void run() {
                                 Toast.makeText(FormAnggota1Activity.this, merror.toString() + " Terjadi Kesalahan Kooneksi ", Toast.LENGTH_LONG).show();
-
-                                Context context = FormAnggota1Activity.this;
-                                Intent intent = null;
-                                intent = new Intent(context, FormAnggota1Activity.class);
-                                (context).startActivity(intent);
                             }
                         });
                     }

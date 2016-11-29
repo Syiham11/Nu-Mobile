@@ -366,5 +366,4 @@ public class GlobalClass extends Application {
     public void setNamaPhoto(String str)  {
         vNamaPhoto= str;
     }
-
 }
