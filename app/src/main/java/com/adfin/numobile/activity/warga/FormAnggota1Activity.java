@@ -2,6 +2,7 @@ package com.adfin.numobile.activity.warga;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -387,10 +388,20 @@ public class FormAnggota1Activity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void failure(RetrofitError error) {
-                        //If any error occured displaying the error as toast
-                        Toast.makeText(FormAnggota1Activity.this, "Kesalahan Koneksi Data" +error.getMessage(), Toast.LENGTH_LONG).show();
-                        //btnsetting.setEnabled(true);
+                    public void failure(final RetrofitError merror) {
+
+                        merror.getMessage();
+
+                        runOnUiThread(new Runnable() {
+                            public void run() {
+                                Toast.makeText(FormAnggota1Activity.this, merror.toString() + " Terjadi Kesalahan Kooneksi ", Toast.LENGTH_LONG).show();
+
+                                Context context = FormAnggota1Activity.this;
+                                Intent intent = null;
+                                intent = new Intent(context, FormAnggota1Activity.class);
+                                (context).startActivity(intent);
+                            }
+                        });
                     }
                 }
         );
@@ -489,10 +500,18 @@ public class FormAnggota1Activity extends AppCompatActivity {
                     @Override
                     public void failure(RetrofitError error) {
 
-                        String merror = error.getMessage();
+                        final String merror = error.getMessage();
 
-                        Toast.makeText(FormAnggota1Activity.this, "Kesalahan Koneksi Data" + toString(), Toast.LENGTH_LONG).show();
+                        runOnUiThread(new Runnable() {
+                            public void run() {
+                                Toast.makeText(FormAnggota1Activity.this, merror.toString() + " Terjadi Kesalahan Kooneksi ", Toast.LENGTH_LONG).show();
 
+                                Context context = FormAnggota1Activity.this;
+                                Intent intent = null;
+                                intent = new Intent(context, FormAnggota1Activity.class);
+                                (context).startActivity(intent);
+                            }
+                        });
                     }
                 }
 
@@ -569,9 +588,18 @@ public class FormAnggota1Activity extends AppCompatActivity {
                     @Override
                     public void failure(RetrofitError error) {
 
-                        String merror = error.getMessage();
+                        final String merror = error.getMessage();
 
-                        Toast.makeText(FormAnggota1Activity.this, merror.toString() + " Terjadi Kesalahan Kooneksi ", Toast.LENGTH_LONG).show();
+                        runOnUiThread(new Runnable() {
+                            public void run() {
+                                Toast.makeText(FormAnggota1Activity.this, merror.toString() + " Terjadi Kesalahan Kooneksi ", Toast.LENGTH_LONG).show();
+
+                                Context context = FormAnggota1Activity.this;
+                                Intent intent = null;
+                                intent = new Intent(context, FormAnggota1Activity.class);
+                                (context).startActivity(intent);
+                            }
+                        });
                     }
                 }
 
@@ -605,14 +633,11 @@ public class FormAnggota1Activity extends AppCompatActivity {
 
 
                         lstdatakabupaten = new ArrayList<DataKabupaten>();
-//
                         lstdatakabupaten = cdatakabupaten.getDataKabupaten();
                         final String[] vsidkabkot = new String[lstdatakabupaten.size()];
                         String[] vskodeprovinsi = new String[lstdatakabupaten.size()];
                         final String[] vskodekabkot = new String[lstdatakabupaten.size()];
                         String[] vsnamakabkot = new String[lstdatakabupaten.size()];
-//
-                        //Toast.makeText(getApplicationContext(), " banyak user" + Integer.toString(lstdataprovinsi.size()), Toast.LENGTH_LONG).show();
 
                         for (int i = 0; i < lstdatakabupaten.size(); i++) {
                             //Storing names to string array
@@ -620,7 +645,6 @@ public class FormAnggota1Activity extends AppCompatActivity {
                             vskodeprovinsi[i] = lstdatakabupaten.get(i).getkode_provinsi().toString();
                             vskodekabkot[i] = lstdatakabupaten.get(i).getkode_kabkot().toString();
                             vsnamakabkot[i] = lstdatakabupaten.get(i).getnama_kabkot().toString();
-                            //Toast.makeText(FormAnggota1Activity.this,"Berhasil" , Toast.LENGTH_LONG).show();
 
                         }
                         ArrayAdapter adapter = new ArrayAdapter<String>(FormAnggota1Activity.this, R.layout.support_simple_spinner_dropdown_item, vsnamakabkot);
@@ -636,8 +660,6 @@ public class FormAnggota1Activity extends AppCompatActivity {
                             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                 strkodekabkot = vskodekabkot[position].toString();
                                 strnamakabupaten = parent.getItemAtPosition(position).toString();
-                                //Toast.makeText(FormAnggota1Activity.this, strkodekabkot.toString() , Toast.LENGTH_LONG).show();
-                                //Toast.makeText(FormAnggota1Activity.this, stridprovinsi.toString() , Toast.LENGTH_LONG).show();
                                 subDataKecamatan();
 
                             }
@@ -653,9 +675,18 @@ public class FormAnggota1Activity extends AppCompatActivity {
                     @Override
                     public void failure(RetrofitError error) {
 
-                        String merror = error.getMessage();
+                        final String merror = error.getMessage();
 
-                        Toast.makeText(FormAnggota1Activity.this, merror.toString() + " Terjadi Kesalahan Kooneksi ", Toast.LENGTH_LONG).show();
+                        runOnUiThread(new Runnable() {
+                            public void run() {
+                                Toast.makeText(FormAnggota1Activity.this, merror.toString() + " Terjadi Kesalahan Kooneksi ", Toast.LENGTH_LONG).show();
+
+                                Context context = FormAnggota1Activity.this;
+                                Intent intent = null;
+                                intent = new Intent(context, FormAnggota1Activity.class);
+                                (context).startActivity(intent);
+                            }
+                        });
                     }
                 }
 
@@ -710,9 +741,8 @@ public class FormAnggota1Activity extends AppCompatActivity {
                             mkodekabkot[i] = lstdatakecamatan.get(i).getkode_kabkot().toString();
                             mkodekecamatan[i] = lstdatakecamatan.get(i).getkode_kecamatan().toString();
                             mnamakecamatan[i] = lstdatakecamatan.get(i).getnama_kecamatan().toString();
-                            //Toast.makeText(FormAnggota1Activity.this,"Berhasil" , Toast.LENGTH_LONG).show();
-
                         }
+
                         ArrayAdapter adapter = new ArrayAdapter<String>(FormAnggota1Activity.this, R.layout.support_simple_spinner_dropdown_item, mnamakecamatan);
                         spKecamatan.setAdapter(adapter);
 
@@ -742,9 +772,18 @@ public class FormAnggota1Activity extends AppCompatActivity {
                     @Override
                     public void failure(RetrofitError error) {
 
-                        String merror = error.getMessage();
+                        final String merror = error.getMessage();
 
-                        Toast.makeText(FormAnggota1Activity.this, merror.toString() + " Terjadi Kesalahan Kooneksi ", Toast.LENGTH_LONG).show();
+                        runOnUiThread(new Runnable() {
+                            public void run() {
+                                Toast.makeText(FormAnggota1Activity.this, merror.toString() + " Terjadi Kesalahan Kooneksi ", Toast.LENGTH_LONG).show();
+
+                                Context context = FormAnggota1Activity.this;
+                                Intent intent = null;
+                                intent = new Intent(context, FormAnggota1Activity.class);
+                                (context).startActivity(intent);
+                            }
+                        });
                     }
                 }
 
@@ -754,12 +793,6 @@ public class FormAnggota1Activity extends AppCompatActivity {
     }
 
     private void subDataDesa() {
-            //Here we will handle the http request to insert user to mysql db
-            //Creating a RestAdapter
-
-            //Toast.makeText(FormAnggota1Activity.this, "kode provinsi "+ stridprovinsi.toString() , Toast.LENGTH_LONG).show();
-    //Toast.makeText(FormAnggota1Activity.this, "kode kabkot "+ strkodekabkot.toString() , Toast.LENGTH_LONG).show();
-    //Toast.makeText(FormAnggota1Activity.this, "kode kecamatan "+ strkodekecamatan.toString() , Toast.LENGTH_LONG).show();
 
             RestAdapter adapter = new RestAdapter.Builder()
                     .setEndpoint(ROOT_URL) //Setting the Root URL
@@ -839,9 +872,18 @@ public class FormAnggota1Activity extends AppCompatActivity {
                         @Override
                         public void failure(RetrofitError error) {
 
-                            String merror = error.getMessage();
+                            final String merror = error.getMessage();
 
-                            Toast.makeText(FormAnggota1Activity.this, merror.toString() + " Terjadi Kesalahan Kooneksi ", Toast.LENGTH_LONG).show();
+                            runOnUiThread(new Runnable() {
+                                public void run() {
+                                    Toast.makeText(FormAnggota1Activity.this, merror.toString() + " Terjadi Kesalahan Kooneksi ", Toast.LENGTH_LONG).show();
+
+                                    Context context = FormAnggota1Activity.this;
+                                    Intent intent = null;
+                                    intent = new Intent(context, FormAnggota1Activity.class);
+                                    (context).startActivity(intent);
+                                }
+                            });
                         }
                     }
 

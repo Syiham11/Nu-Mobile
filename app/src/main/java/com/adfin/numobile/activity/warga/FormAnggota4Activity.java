@@ -66,15 +66,13 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Locale;
-import java.util.concurrent.CountDownLatch;
+import java.util.List;
 
-import retrofit.Callback;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.AppSettingsDialog;
+import pub.devrel.easypermissions.EasyPermissions;
 
-public class FormAnggota4Activity extends AppCompatActivity {
+public class FormAnggota4Activity extends AppCompatActivity implements EasyPermissions.PermissionCallbacks {
 
     public static final String ROOT_URL = "http://numobile.id/";
     EditText etIdWarga;
@@ -144,22 +142,13 @@ public class FormAnggota4Activity extends AppCompatActivity {
 
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
     private static final int CAMERA_PICK_IMAGE_REQUEST_CODE = 200;
+    private static final int RC_SETTINGS_SCREEN = 125;
     private static boolean IS_GRANTED = false;
     private static final String IMAGE_DIRECTORY_NAME = "NU";
-    public static final int MEDIA_TYPE_IMAGE = 1;
-    public static final int MEDIA_TYPE_PICK = 2;
-    private Uri fileUri;
-    private ProgressBar progressBar;
-    private String filePath = null;
-    long totalSize = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        ActivityCompat.requestPermissions(FormAnggota4Activity.this,
-                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                CAMERA_PICK_IMAGE_REQUEST_CODE);
 
         final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
 
@@ -233,11 +222,6 @@ public class FormAnggota4Activity extends AppCompatActivity {
                     progressDialog = ProgressDialog.show(FormAnggota4Activity.this, "", "Please wait...", true);
                     new Thread(new Runnable() {
                         public void run() {
-                            runOnUiThread(new Runnable() {
-                                public void run() {
-                                    Toast.makeText(FormAnggota4Activity.this, "Memulai Upload", Toast.LENGTH_LONG).show();
-                                }
-                            });
                             uploadFileToServer(pathImage, "http://www.terpusat.com/NUMobile/tambahanggota.php", strIdWarga);
                         }
                     }).start();
@@ -268,10 +252,8 @@ public class FormAnggota4Activity extends AppCompatActivity {
             browseButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if( IS_GRANTED )
-                        browseImage();
-                    else
-                        showAlert("Tidak diizinkan memilih dari galeri");
+                    if( IS_GRANTED ) browseImage();
+                    else permissionExternal();
                     dialog.dismiss();
                 }
             });
@@ -281,7 +263,8 @@ public class FormAnggota4Activity extends AppCompatActivity {
             captureButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    captureImage();
+                    if( IS_GRANTED ) captureImage();
+                    else permissionExternal();
                     dialog.dismiss();
                 }
             });
@@ -293,47 +276,10 @@ public class FormAnggota4Activity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
-
     private void captureImage() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
-    }
-
-    public Uri getOutputMediaFileUri(int type) {
-        return Uri.fromFile(getOutputMediaFile(type));
-    }
-
-    private static File getOutputMediaFile(int type) {
-
-        // External sdcard location
-        File mediaStorageDir = new File(
-                Environment
-                        .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
-                Config.IMAGE_DIRECTORY_NAME);
-
-        // Create the storage directory if it does not exist
-        if (!mediaStorageDir.exists()) {
-            if (!mediaStorageDir.mkdirs()) {
-//                Log.d(TAG, "Oops! Failed create "
-//                        + Config.IMAGE_DIRECTORY_NAME + " directory");
-                return null;
-            }
-        }
-
-        // Create a media file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
-                Locale.getDefault()).format(new Date());
-        File mediaFile;
-        if (type == MEDIA_TYPE_IMAGE) {
-            mediaFile = new File(mediaStorageDir.getPath() + File.separator
-                    + "IMG_" + timeStamp + ".jpg");
-        } else {
-            return null;
-        }
-
-        return mediaFile;
     }
 
     private void browseImage() {
@@ -377,7 +323,7 @@ public class FormAnggota4Activity extends AppCompatActivity {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
 
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        File imgFolder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "NUMobile");
+        File imgFolder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), IMAGE_DIRECTORY_NAME);
         imgFolder.mkdirs();
 
         File image = new File(imgFolder, "img_nu_" + timeStamp + ".jpg");
@@ -386,7 +332,7 @@ public class FormAnggota4Activity extends AppCompatActivity {
         try {
             image.createNewFile();
             fo = new FileOutputStream(image);
-            thumbnail.compress(Bitmap.CompressFormat.JPEG, 100, fo);
+            //thumbnail.compress(Bitmap.CompressFormat.JPEG, 100, fo);
             fo.write(bytes.toByteArray());
             fo.close();
             pathImage = image.getAbsolutePath();
@@ -427,25 +373,23 @@ public class FormAnggota4Activity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case CAMERA_PICK_IMAGE_REQUEST_CODE: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    IS_GRANTED = true;
-                    // permission was granted, yay! Do the
-                    // contacts-related task you need to do.
-
-                } else {
-                    IS_GRANTED = false;
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-                }
-                return;
-            }
+    @AfterPermissionGranted(CAMERA_PICK_IMAGE_REQUEST_CODE)
+    private void permissionExternal() {
+        String[] perms = {Manifest.permission.READ_EXTERNAL_STORAGE};
+        if (EasyPermissions.hasPermissions(this, perms)) {
+            IS_GRANTED = true;
+        } else {
+            EasyPermissions.requestPermissions(this, "This app needs access to your camera so you can take pictures.",
+                    CAMERA_PICK_IMAGE_REQUEST_CODE, perms);
         }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        // Forward results to EasyPermissions
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
     }
 
     /**
@@ -618,5 +562,25 @@ public class FormAnggota4Activity extends AppCompatActivity {
         }
 
         return response;
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+        Log.d("FormWarga4", "onPermissionsGranted:" + requestCode + ":" + perms.size());
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+        Log.d("FormWarga4", "onPermissionsDenied:" + requestCode + ":" + perms.size());
+
+        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
+            new AppSettingsDialog.Builder(this, "This app may not work correctly without the requested permissions. Open the app settings screen to modify app permissions.")
+                    .setTitle("Permissions Required")
+                    .setPositiveButton("Settings")
+                    .setNegativeButton("Settings dialog canceled", null /* click listener */)
+                    .setRequestCode(RC_SETTINGS_SCREEN)
+                    .build()
+                    .show();
+        }
     }
 }
