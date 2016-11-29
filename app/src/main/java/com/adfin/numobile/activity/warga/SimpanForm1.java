@@ -149,6 +149,7 @@ public class SimpanForm1 extends AppCompatActivity {
         //urutan dan jumlah harus sama dengan yang di Model API
         api.insertdataanggota(
                 "form1",
+                "0",
                 strusername.toString(),
                 strnama.toString(),
                 strnoktp.toString(),

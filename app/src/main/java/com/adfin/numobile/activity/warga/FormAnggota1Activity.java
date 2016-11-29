@@ -47,7 +47,8 @@ import retrofit.client.Response;
 public class FormAnggota1Activity extends AppCompatActivity {
 
     public static final String ROOT_URL = "http://numobile.id";
-    EditText etUsername,
+    EditText etIdWarga,
+            etUsername,
             etNamaLengkap,
             etNoKtp,
             etTempatLahir,
@@ -67,6 +68,7 @@ public class FormAnggota1Activity extends AppCompatActivity {
             spKabupaten,
             spKecamatan,
             spDesa;
+    String strIdWarga = "0";
     String strusername,
             strnama,
             strnoktp,
@@ -155,6 +157,9 @@ public class FormAnggota1Activity extends AppCompatActivity {
 
         /* Set Data If Global Variable Already Filled */
         if( globalVariable.getId() != null && !globalVariable.getId().isEmpty() && !globalVariable.getId().equals("null") ){
+            etIdWarga = (EditText) findViewById(R.id.idWarga);
+            strIdWarga = globalVariable.getId();
+            etIdWarga.setText(strIdWarga);
             setDataForm(globalVariable);
         }
         /* U Sure Is Filled ? Im Not */
@@ -328,6 +333,26 @@ public class FormAnggota1Activity extends AppCompatActivity {
                 spStatusPerkawinan.setSelection(i); break;
             }
         }
+
+        etAlamat.setText( globalVariable.getAlamat() );
+
+        subDataProvinsi();
+        etKodePos.setText( globalVariable.getKodePos() );
+        etTelepon.setText( globalVariable.getTelepon() );
+        etHandphone.setText( globalVariable.getHandphone() );
+        etEmail.setText( globalVariable.getEmail() );
+        if( globalVariable.getFacebook() != null && !globalVariable.getFacebook().isEmpty() && !globalVariable.getFacebook().equals("null") ){
+            etFacebook.setText(globalVariable.getFacebook() );
+        }
+        if( globalVariable.getTwitter() != null && !globalVariable.getTwitter().isEmpty() && !globalVariable.getTwitter().equals("null") ){
+            etTwitter.setText(globalVariable.getTwitter() );
+        }
+        if( globalVariable.getInstagram() != null && !globalVariable.getInstagram().isEmpty() && !globalVariable.getInstagram().equals("null") ){
+            etInstagram.setText(globalVariable.getInstagram() );
+        }
+        if( globalVariable.getPathh() != null && !globalVariable.getPathh().isEmpty() && !globalVariable.getPathh().equals("null") ){
+            etPathh.setText(globalVariable.getPathh() );
+        }
     }
 
     private void saveDataInput(){
@@ -342,6 +367,7 @@ public class FormAnggota1Activity extends AppCompatActivity {
         //urutan dan jumlah harus sama dengan yang di Model API
         api.insertdataanggota(
                 "form1",
+                strIdWarga,
                 strusername,
                 strnama,
                 strnoktp,
@@ -566,15 +592,14 @@ public class FormAnggota1Activity extends AppCompatActivity {
                     @Override
                     public void success(CDataProvinsi cdataprovinsi, Response response) {
 
+                        final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
 
-                     lstdataprovinsi = new ArrayList<DataProvinsi>();
-//
+                        lstdataprovinsi = new ArrayList<DataProvinsi>();
+
                         lstdataprovinsi = cdataprovinsi.getDataProvinsi();
                         final String[] tsidprovinsi = new String[lstdataprovinsi.size()];
                         final String[] tskodeprovinsi = new String[lstdataprovinsi.size()];
                         String[] tsnamaprovinsi = new String[lstdataprovinsi.size()];
-//
-                            //Toast.makeText(getApplicationContext(), " banyak user" + Integer.toString(lstdataprovinsi.size()), Toast.LENGTH_LONG).show();
 
                         for (int i = 0; i < lstdataprovinsi.size(); i++) {
                             //Storing names to string array
@@ -586,28 +611,41 @@ public class FormAnggota1Activity extends AppCompatActivity {
                         ArrayAdapter adapter = new ArrayAdapter<String>(FormAnggota1Activity.this, R.layout.support_simple_spinner_dropdown_item, tsnamaprovinsi);
                         spProvinsi.setAdapter(adapter);
 
+                        int setSelect = 0;
+
+                        if( globalVariable.getId() != null && !globalVariable.getId().isEmpty() && !globalVariable.getId().equals("null") ){
+                            setSelect = getIndex(spProvinsi, globalVariable.getProvinsi());
+                        }
 
 
-                        stridprovinsi = tskodeprovinsi[0].toString();
-                        //Toast.makeText(FormAnggota1Activity.this, stridprovinsi.toString() , Toast.LENGTH_LONG).show();
+                        spProvinsi.setSelection(setSelect);
+
+                        stridprovinsi = tskodeprovinsi[setSelect].toString();
 
                         subDataKabupaten();
 
-                               spProvinsi.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                   public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                       stridprovinsi = tskodeprovinsi[position].toString();;
-                                       strnamaprovinsi = parent.getItemAtPosition(position).toString();
-                                       //Toast.makeText(FormAnggota1Activity.this, stridprovinsi.toString() , Toast.LENGTH_LONG).show();
-                                       subDataKabupaten();
+                        spProvinsi.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                stridprovinsi = tskodeprovinsi[position].toString();
+                                strnamaprovinsi = parent.getItemAtPosition(position).toString();
+                                subDataKabupaten();
+                            }
 
-                                   }
+                            public void onNothingSelected(AdapterView<?> parent) {
 
-                                   public void onNothingSelected(AdapterView<?> parent) {
+                            }
+                        });
+                    }
 
-                                   }
-                              });
-
-
+                    private int getIndex(Spinner spinner,String value){
+                        int index = 0;
+                        for (int i = 0; i < spinner.getAdapter().getCount(); i++){
+                            String str1 = (String) spinner.getItemAtPosition(i);
+                            if( str1.toLowerCase().contains(value.toLowerCase()) ){
+                                index = i;
+                            }
+                        }
+                        return index;
                     }
 
                     @Override

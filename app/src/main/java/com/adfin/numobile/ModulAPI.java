@@ -85,6 +85,7 @@ public interface ModulAPI {
     @POST("/NUMobile/tambahanggota.php")
     public void insertdataanggota(
             @Field("token") String token,
+            @Field("id_warga") String vid_warga,
             @Field("vsusername") String vsusername,
             @Field("vsnama") String vsnama,
             @Field("vsnoktp") String vsnoktp,

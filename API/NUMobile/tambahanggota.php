@@ -10,26 +10,43 @@ if(isset($_POST['token'])){
         $con = mysqli_connect(HOST,USER,PASS,DB) or die('Unable to Connect');
 
         if( $_POST['token'] == 'form1' ){
-                // Query Data tbl_warga, please insert valid field for the best return
-                $keys = ''; $values = ' VALUES (';
-                $query = 'INSERT INTO tbl_warga (';
-                foreach($_POST as $key => $value){
-                        if( $key != 'token' && $value ){
-                                $keys .= str_replace('vs', '', $key) . ',';
-                                $values .= "'" . $value . "'" . ',';
+                if( $_POST['id_warga'] ){
+                        // Query Data tbl_warga, please insert valid field for the best return
+                        $keys = '';
+                        $query = 'UPDATE tbl_warga SET ';
+                        foreach($_POST as $key => $value){
+                                if( $value && strpos($key, 'vs') !== false ){
+                                        $keys .= str_replace('vs', '', $key) . '="' . $value . '",';
+                                }
                         }
-                }
-                $keys = rtrim($keys, ',');
-                $values = rtrim($values, ',');
+                        $keys = rtrim($keys, ',');
 
-                $fullQuery = $query . $keys . ')' . $values . ')';
-                // END OF tbl_warga
+                        $fullQuery = $query . $keys . ' WHERE id_warga=' . $_POST['id_warga'];
+                        mysqli_query($con, $fullQuery);
+                        // END OF tbl_warga
 
-                if( $result = mysqli_query($con, $fullQuery) ){
-                        $last_id = mysqli_insert_id($con);
-                        echo $last_id;
                 }else{
-                        echo 0;
+                        // Query Data tbl_warga, please insert valid field for the best return
+                        $keys = ''; $values = ' VALUES (';
+                        $query = 'INSERT INTO tbl_warga (';
+                        foreach($_POST as $key => $value){
+                                if( $key != 'token' && $value ){
+                                        $keys .= str_replace('vs', '', $key) . ',';
+                                        $values .= "'" . $value . "'" . ',';
+                                }
+                        }
+                        $keys = rtrim($keys, ',');
+                        $values = rtrim($values, ',');
+
+                        $fullQuery = $query . $keys . ')' . $values . ')';
+                        // END OF tbl_warga
+
+                        if( $result = mysqli_query($con, $fullQuery) ){
+                                $last_id = mysqli_insert_id($con);
+                                echo $last_id;
+                        }else{
+                                echo 0;
+                        }
                 }
                 
                 // Close My Connection
