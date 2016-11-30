@@ -4,7 +4,15 @@
 
 * module
 	* warga
-	
+		* controller
+		* model
+	* organisasi
+		* controller
+		* model
+	* arsip
+		* controller
+		* model
+		* helper
 * helper
 * service
 * libraries
