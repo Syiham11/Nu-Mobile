@@ -13,6 +13,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,13 +28,11 @@ import android.widget.Toast;
 
 import com.adfin.numobile.R;
 import com.adfin.numobile.activity.GlobalClass;
-import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -49,15 +48,12 @@ import pub.devrel.easypermissions.EasyPermissions;
 
 public class FormAnggota4Activity extends AppCompatActivity implements EasyPermissions.PermissionCallbacks {
 
-    public static final String ROOT_URL = "http://numobile.id/";
+    //public static final String ROOT_URL = "http://numobile.id/";
     EditText etIdWarga;
     Button btnsave;
     ImageView photo;
 
-    protected String mLatitudeLabel;
-    protected String mLongitudeLabel;
-    String strsubject, strkalimat, strphoto = null;
-    static ProgressDialog progressDialog = null;
+    static ProgressDialog progressDialog;
 
     String  strIdWarga;
     String  strusername;
@@ -105,13 +101,8 @@ public class FormAnggota4Activity extends AppCompatActivity implements EasyPermi
     String  strJalurWarga;
     String  strnominal_donasi_warga;
     String  strStatusMember;
-    String  strLat;
-    String  strLong;
-    String  strFlag;
 
-
-
-    String pathImage = null;
+    static String pathImage;
 
     final Context context = this;
 
@@ -125,7 +116,8 @@ public class FormAnggota4Activity extends AppCompatActivity implements EasyPermi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        permissionExternal();
+        if( !IS_GRANTED )
+            permissionExternal();
 
         final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
 
@@ -192,14 +184,13 @@ public class FormAnggota4Activity extends AppCompatActivity implements EasyPermi
         btnsave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (pathImage == null) pathImage = "false";
-                if( pathImage.length() < 5 || pathImage.equals("false") || pathImage.equals(null) ) {
-                    showAlert("Anda belum memilih image");
-                }else{
+                if ((pathImage.length() < 5)) showAlert("Anda belum memilih image");
+                else if (pathImage.equals("null")) showAlert("Anda belum memilih image");
+                else {
                     progressDialog = ProgressDialog.show(FormAnggota4Activity.this, "", "Please wait...", true);
                     new Thread(new Runnable() {
                         public void run() {
-                            uploadFileToServer(pathImage, "http://www.terpusat.com/NUMobile/tambahanggota.php", strIdWarga);
+                            uploadFileToServer("http://www.terpusat.com/NUMobile/tambahanggota.php", strIdWarga);
                         }
                     }).start();
                 }
@@ -229,8 +220,7 @@ public class FormAnggota4Activity extends AppCompatActivity implements EasyPermi
             browseButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    browseImage();
-                    dialog.dismiss();
+                    browseImage(); dialog.dismiss();
                 }
             });
 
@@ -239,8 +229,7 @@ public class FormAnggota4Activity extends AppCompatActivity implements EasyPermi
             captureButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    captureImage();
-                    dialog.dismiss();
+                    captureImage(); dialog.dismiss();
                 }
             });
 
@@ -290,36 +279,35 @@ public class FormAnggota4Activity extends AppCompatActivity implements EasyPermi
         options.inJustDecodeBounds = false;
         bm = BitmapFactory.decodeFile(selectedImagePath, options);
 
-        Picasso.with(getApplicationContext()).load(pathImage).resize(600, 600).into(photo);
-        //photo.setImageBitmap(bm);
+        photo.setImageBitmap(bm);
     }
 
     private void onCaptureImageResult(Intent data) {
-        Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        Bitmap thumbnail; ByteArrayOutputStream bytes;
+        thumbnail = (Bitmap) data.getExtras().get("data");
+        bytes = new ByteArrayOutputStream();
 
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         File imgFolder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), IMAGE_DIRECTORY_NAME);
+        //noinspection ResultOfMethodCallIgnored
         imgFolder.mkdirs();
 
         File image = new File(imgFolder, "img_nu_" + timeStamp + ".jpg");
 
         FileOutputStream fo;
         try {
+            //noinspection ResultOfMethodCallIgnored
             image.createNewFile();
             fo = new FileOutputStream(image);
-            thumbnail.compress(Bitmap.CompressFormat.JPEG, 100, fo);
+            thumbnail.compress(Bitmap.CompressFormat.JPEG, 20, fo);
             fo.write(bytes.toByteArray());
             fo.close();
             pathImage = image.getAbsolutePath();
-            Picasso.with(getApplicationContext()).load(image).resize(600, 600).into(photo);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        //photo.setImageBitmap(thumbnail);
+        photo.setImageBitmap(thumbnail);
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -352,7 +340,7 @@ public class FormAnggota4Activity extends AppCompatActivity implements EasyPermi
 
     @AfterPermissionGranted(CAMERA_PICK_IMAGE_REQUEST_CODE)
     private void permissionExternal() {
-        String[] perms = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        String[] perms = {Manifest.permission.READ_EXTERNAL_STORAGE};
         if (EasyPermissions.hasPermissions(this, perms)) {
             IS_GRANTED = true;
         } else {
@@ -362,7 +350,7 @@ public class FormAnggota4Activity extends AppCompatActivity implements EasyPermi
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         // Forward results to EasyPermissions
@@ -385,9 +373,9 @@ public class FormAnggota4Activity extends AppCompatActivity implements EasyPermi
         alert.show();
     }
 
-    public String uploadFileToServer(String filename, String targetUrl, String id_warga) {
+    public String uploadFileToServer(String targetUrl, String id_warga) {
         String response = "error";
-        FileInputStream fileInputStream = null;
+        FileInputStream fileInputStream;
 
         String lineEnd = "\r\n";
         String twoHyphens = "--";
@@ -395,11 +383,22 @@ public class FormAnggota4Activity extends AppCompatActivity implements EasyPermi
 
         int bytesRead, bytesAvailable, bufferSize;
         byte[] buffer;
-        int maxBufferSize = 1 * 1024;
+        int maxBufferSize = 1024;
 
         try {
-            if(filename != "false")
-                fileInputStream = new FileInputStream(new File(filename));
+            Log.e("File Isi", pathImage);
+            if(!pathImage.equals("null")) fileInputStream = new FileInputStream(new File(pathImage));
+            else{
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        Toast.makeText(FormAnggota4Activity.this, "File bermasalah",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+                progressDialog.dismiss();
+
+                return response;
+            }
 
             URL url = new URL(targetUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -419,8 +418,8 @@ public class FormAnggota4Activity extends AppCompatActivity implements EasyPermi
             DataOutputStream outputStream = new DataOutputStream(connection.getOutputStream());
             outputStream.writeBytes(twoHyphens + boundary + lineEnd);
 
-            ArrayList<String> keyForm = new ArrayList<String>();
-            ArrayList<String> dataForm = new ArrayList<String>();
+            ArrayList<String> keyForm = new ArrayList<>();
+            ArrayList<String> dataForm = new ArrayList<>();
             keyForm.add("id_warga");
             dataForm.add(String.valueOf(id_warga));
             keyForm.add("token");
@@ -437,7 +436,7 @@ public class FormAnggota4Activity extends AppCompatActivity implements EasyPermi
             if (fileInputStream != null) {
                 String connstr;
                 connstr = "Content-Disposition: form-data; name=\"UploadFile\";filename=\""
-                        + filename + "\"" + lineEnd;
+                        + pathImage + "\"" + lineEnd;
 
                 outputStream.writeBytes(connstr);
                 outputStream.writeBytes(lineEnd);
@@ -499,19 +498,19 @@ public class FormAnggota4Activity extends AppCompatActivity implements EasyPermi
                 });
             }
 
-            fileInputStream.close(); outputStream.flush();
+            if(fileInputStream != null) fileInputStream.close();
+            outputStream.flush();
 
             connection.getInputStream(); java.io.InputStream is = connection.getInputStream();
 
             int ch;
-            StringBuffer b = new StringBuffer();
-            while( ( ch = is.read() ) != -1 ){
+            StringBuilder b = new StringBuilder();
+            while(-1 != (ch = is.read())){
                 b.append( (char)ch );
             }
 
 
             outputStream.close();
-            outputStream = null;
 
         } catch (Exception ex) {
             // Exception handling
@@ -523,7 +522,6 @@ public class FormAnggota4Activity extends AppCompatActivity implements EasyPermi
                 }
             });
             ex.printStackTrace();
-            Log.e("Ini Lhoh Error ", ex.getMessage());
         }
         progressDialog.dismiss();
 
@@ -531,8 +529,7 @@ public class FormAnggota4Activity extends AppCompatActivity implements EasyPermi
             runOnUiThread(new Runnable() {
                 public void run() {
                     Context context = FormAnggota4Activity.this;
-                    Intent intent = null;
-                    intent = new Intent(context, AnggotaLihatActivity.class);
+                    Intent intent = new Intent(context, AnggotaLihatActivity.class);
                     (context).startActivity(intent);
                 }
             });
@@ -543,12 +540,12 @@ public class FormAnggota4Activity extends AppCompatActivity implements EasyPermi
 
     @Override
     public void onPermissionsGranted(int requestCode, List<String> perms) {
-        Log.d("FormWarga4", "onPermissionsGranted:" + requestCode + ":" + perms.size());
+        IS_GRANTED = true;
     }
 
     @Override
     public void onPermissionsDenied(int requestCode, List<String> perms) {
-        Log.d("FormWarga4", "onPermissionsDenied:" + requestCode + ":" + perms.size());
+        IS_GRANTED = false;
 
         if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
             new AppSettingsDialog.Builder(this, "This app may not work correctly without the requested permissions. Open the app settings screen to modify app permissions.")
