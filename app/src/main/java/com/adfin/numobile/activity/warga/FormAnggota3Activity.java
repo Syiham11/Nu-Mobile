@@ -206,13 +206,10 @@ public class FormAnggota3Activity extends AppCompatActivity {
                         }
 
                         final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
-
                         globalVariable.setId(strIdWarga);
 
                         Intent intent = new Intent(getApplicationContext(), FormAnggota4Activity.class);
-
                         startActivity(intent);
-
                         finish();
 
                         Toast.makeText(FormAnggota3Activity.this, "Data Berhasil Di Simpan", Toast.LENGTH_LONG).show();
@@ -221,7 +218,7 @@ public class FormAnggota3Activity extends AppCompatActivity {
                     @Override
                     public void failure(RetrofitError error) {
                         //If any error occured displaying the error as toast
-                        Toast.makeText(FormAnggota3Activity.this, "Kesalahan Koneksi Data" + error.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(FormAnggota3Activity.this, "Terjadi kesalahan koneksi", Toast.LENGTH_LONG).show();
                         //btnsetting.setEnabled(true);
                     }
                 }
@@ -284,8 +281,6 @@ public class FormAnggota3Activity extends AppCompatActivity {
                             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                 stridpresantren1 = tsidpesantren1[position].toString();
                                 strnamapesantren1 = parent.getItemAtPosition(position).toString();
-                                //Toast.makeText(FormAnggota1Activity.this, stridprovinsi.toString() , Toast.LENGTH_LONG).show();
-
                             }
 
                             public void onNothingSelected(AdapterView<?> parent) {
@@ -300,7 +295,7 @@ public class FormAnggota3Activity extends AppCompatActivity {
 
                         String merror = error.getMessage();
 
-                        Toast.makeText(FormAnggota3Activity.this, merror.toString() + " Terjadi Kesalahan Kooneksi ", Toast.LENGTH_LONG).show();
+                        Toast.makeText(FormAnggota3Activity.this, "Terjadi kesalahan koneksi", Toast.LENGTH_LONG).show();
                     }
                 }
 
@@ -359,15 +354,11 @@ public class FormAnggota3Activity extends AppCompatActivity {
 
 
                         stridpresantren2 = tsidpesantren2[0].toString();
-                        //Toast.makeText(FormAnggota1Activity.this, stridprovinsi.toString() , Toast.LENGTH_LONG).show();
-
 
                         spPesantren2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                 stridpresantren2 = tsidpesantren2[position].toString();
                                 strnamapesantren2 = parent.getItemAtPosition(position).toString();
-                                //Toast.makeText(FormAnggota1Activity.this, stridprovinsi.toString() , Toast.LENGTH_LONG).show();
-
                             }
 
                             public void onNothingSelected(AdapterView<?> parent) {

@@ -395,7 +395,7 @@ public class FormAnggota1Activity extends AppCompatActivity {
                     public void success(Response result, Response response) {
                         //On success we will read the server's output using bufferedreader
                         //Creating a bufferedreader object
-                        BufferedReader reader = null;
+                        BufferedReader reader;
                         StringBuilder sb = new StringBuilder();
 
                         final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
@@ -472,7 +472,7 @@ public class FormAnggota1Activity extends AppCompatActivity {
 
         //Calling method to get whether report
         api.cekusername(
-                strusercek.toString(),
+                strusercek,
                 new Callback<DataWarga>()
 
                 {
@@ -558,8 +558,7 @@ public class FormAnggota1Activity extends AppCompatActivity {
                                 Toast.makeText(FormAnggota1Activity.this, merror.toString() + " Terjadi Kesalahan Kooneksi ", Toast.LENGTH_LONG).show();
 
                                 Context context = FormAnggota1Activity.this;
-                                Intent intent = null;
-                                intent = new Intent(context, FormAnggota1Activity.class);
+                                Intent intent = new Intent(context, FormAnggota1Activity.class);
                                 (context).startActivity(intent);
                             }
                         });
@@ -603,12 +602,12 @@ public class FormAnggota1Activity extends AppCompatActivity {
 
                         for (int i = 0; i < lstdataprovinsi.size(); i++) {
                             //Storing names to string array
-                            tsidprovinsi[i] = lstdataprovinsi.get(i).getid_provinsi().toString();//getnama hrs sama dgn yang di DataDaftar
-                            tskodeprovinsi[i] = lstdataprovinsi.get(i).getkode_provinsi().toString();
-                            tsnamaprovinsi[i] = lstdataprovinsi.get(i).getnama_provinsi().toString();
+                            tsidprovinsi[i] = lstdataprovinsi.get(i).getid_provinsi();//getnama hrs sama dgn yang di DataDaftar
+                            tskodeprovinsi[i] = lstdataprovinsi.get(i).getkode_provinsi();
+                            tsnamaprovinsi[i] = lstdataprovinsi.get(i).getnama_provinsi();
 
                         }
-                        ArrayAdapter adapter = new ArrayAdapter<String>(FormAnggota1Activity.this, R.layout.support_simple_spinner_dropdown_item, tsnamaprovinsi);
+                        ArrayAdapter adapter = new ArrayAdapter<>(FormAnggota1Activity.this, R.layout.support_simple_spinner_dropdown_item, tsnamaprovinsi);
                         spProvinsi.setAdapter(adapter);
 
                         int setSelect = 0;
@@ -658,8 +657,7 @@ public class FormAnggota1Activity extends AppCompatActivity {
                                 Toast.makeText(FormAnggota1Activity.this, merror.toString() + " Terjadi Kesalahan Kooneksi ", Toast.LENGTH_LONG).show();
 
                                 Context context = FormAnggota1Activity.this;
-                                Intent intent = null;
-                                intent = new Intent(context, FormAnggota1Activity.class);
+                                Intent intent = new Intent(context, FormAnggota1Activity.class);
                                 (context).startActivity(intent);
                             }
                         });
@@ -710,11 +708,8 @@ public class FormAnggota1Activity extends AppCompatActivity {
                             vsnamakabkot[i] = lstdatakabupaten.get(i).getnama_kabkot().toString();
 
                         }
-                        ArrayAdapter adapter = new ArrayAdapter<String>(FormAnggota1Activity.this, R.layout.support_simple_spinner_dropdown_item, vsnamakabkot);
+                        ArrayAdapter adapter = new ArrayAdapter<>(FormAnggota1Activity.this, R.layout.support_simple_spinner_dropdown_item, vsnamakabkot);
                         spKabupaten.setAdapter(adapter);
-
-
-                        //Toast.makeText(FormAnggota1Activity.this, vsnamakabkot[0].toString() , Toast.LENGTH_LONG).show();
 
                         strkodekabkot = vskodekabkot[0].toString();
                         subDataKecamatan();
@@ -745,8 +740,7 @@ public class FormAnggota1Activity extends AppCompatActivity {
                                 Toast.makeText(FormAnggota1Activity.this, merror.toString() + " Terjadi Kesalahan Kooneksi ", Toast.LENGTH_LONG).show();
 
                                 Context context = FormAnggota1Activity.this;
-                                Intent intent = null;
-                                intent = new Intent(context, FormAnggota1Activity.class);
+                                Intent intent = new Intent(context, FormAnggota1Activity.class);
                                 (context).startActivity(intent);
                             }
                         });
@@ -793,33 +787,27 @@ public class FormAnggota1Activity extends AppCompatActivity {
                         final String[] mkodekabkot = new String[lstdatakecamatan.size()];
                         final String[] mkodekecamatan = new String[lstdatakecamatan.size()];
                         final String[] mnamakecamatan = new String[lstdatakecamatan.size()];
-//
-
-                        //Toast.makeText(getApplicationContext(), Integer.toString(lstdatakecamatan.size()), Toast.LENGTH_LONG).show();
 
                         for (int i = 0; i < lstdatakecamatan.size(); i++) {
                             //Storing names to string array
-                            midkecamatan[i] = lstdatakecamatan.get(i).getid_kecamatan().toString();//getnama hrs sama dgn yang di DataDaftar
-                            mkodeprovinsi[i] = lstdatakecamatan.get(i).getkode_provinsi().toString();
-                            mkodekabkot[i] = lstdatakecamatan.get(i).getkode_kabkot().toString();
-                            mkodekecamatan[i] = lstdatakecamatan.get(i).getkode_kecamatan().toString();
-                            mnamakecamatan[i] = lstdatakecamatan.get(i).getnama_kecamatan().toString();
+                            midkecamatan[i] = lstdatakecamatan.get(i).getid_kecamatan();//getnama hrs sama dgn yang di DataDaftar
+                            mkodeprovinsi[i] = lstdatakecamatan.get(i).getkode_provinsi();
+                            mkodekabkot[i] = lstdatakecamatan.get(i).getkode_kabkot();
+                            mkodekecamatan[i] = lstdatakecamatan.get(i).getkode_kecamatan();
+                            mnamakecamatan[i] = lstdatakecamatan.get(i).getnama_kecamatan();
                         }
 
                         ArrayAdapter adapter = new ArrayAdapter<String>(FormAnggota1Activity.this, R.layout.support_simple_spinner_dropdown_item, mnamakecamatan);
                         spKecamatan.setAdapter(adapter);
 
-
-                        //Toast.makeText(FormAnggota1Activity.this, vsnamakabkot[0].toString() , Toast.LENGTH_LONG).show();
-
-                        strkodekecamatan = mkodekecamatan[0].toString();
+                        strkodekecamatan = mkodekecamatan[0];
                         subDataDesa();
 
                         spKecamatan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                strkodekecamatan = mkodekecamatan[position].toString();
+                                strkodekecamatan = mkodekecamatan[position];
                                 strnamakecamatan = parent.getItemAtPosition(position).toString();
-//
+
                                 subDataDesa();
 
                             }
@@ -842,8 +830,7 @@ public class FormAnggota1Activity extends AppCompatActivity {
                                 Toast.makeText(FormAnggota1Activity.this, merror.toString() + " Terjadi Kesalahan Kooneksi ", Toast.LENGTH_LONG).show();
 
                                 Context context = FormAnggota1Activity.this;
-                                Intent intent = null;
-                                intent = new Intent(context, FormAnggota1Activity.class);
+                                Intent intent = new Intent(context, FormAnggota1Activity.class);
                                 (context).startActivity(intent);
                             }
                         });
@@ -863,16 +850,11 @@ public class FormAnggota1Activity extends AppCompatActivity {
 
             //Creating object for our interface
             ModulAPI api = adapter.create(ModulAPI.class);
-        //strkodekecamatan = "5678";
-            //Calling method to get whether report
-            //getDataDaftar yang ada di api
+
             api.getDataDesa(
-                    stridprovinsi.toString(),
-                    //"11",
-                    strkodekabkot.toString(),
-                    //"1101",
-                    strkodekecamatan.toString(),
-                    //"5678",
+                    stridprovinsi,
+                    strkodekabkot,
+                    strkodekecamatan,
                     new Callback<CDataDesa>()
 
                     {
@@ -889,37 +871,26 @@ public class FormAnggota1Activity extends AppCompatActivity {
                             final String[] nkodekecamatan = new String[lstdatadesa.size()];
                             final String[] nkodedesa = new String[lstdatadesa.size()];
                             final String[] nnamadesa = new String[lstdatadesa.size()];
-    //
-                            //Toast.makeText(getApplicationContext(), "Jumlah desa "+Integer.toString(lstdatadesa.size()), Toast.LENGTH_LONG).show();
 
                             if (lstdatadesa.size() > 0) {
                                 for (int i = 0; i < lstdatadesa.size(); i++) {
                                     //Storing names to string array
-                                    niddesa[i] = lstdatadesa.get(i).getid_desa().toString();//getnama hrs sama dgn yang di DataDaftar
-                                    nkodeprovinsi[i] = lstdatadesa.get(i).getkode_provinsi().toString();
-                                    nkodekabkot[i] = lstdatadesa.get(i).getkode_kabkot().toString();
-                                    nkodekecamatan[i] = lstdatadesa.get(i).getkode_kecamatan().toString();
-                                    nkodedesa[i] = lstdatadesa.get(i).getkode_desa().toString();
-                                    nnamadesa[i] = lstdatadesa.get(i).getnama_desa().toString();
-                                    //Toast.makeText(FormAnggota1Activity.this,"Berhasil" , Toast.LENGTH_LONG).show();
-
+                                    niddesa[i] = lstdatadesa.get(i).getid_desa();//getnama hrs sama dgn yang di DataDaftar
+                                    nkodeprovinsi[i] = lstdatadesa.get(i).getkode_provinsi();
+                                    nkodekabkot[i] = lstdatadesa.get(i).getkode_kabkot();
+                                    nkodekecamatan[i] = lstdatadesa.get(i).getkode_kecamatan();
+                                    nkodedesa[i] = lstdatadesa.get(i).getkode_desa();
+                                    nnamadesa[i] = lstdatadesa.get(i).getnama_desa();
                                 }
-                                ArrayAdapter adapter = new ArrayAdapter<String>(FormAnggota1Activity.this, R.layout.support_simple_spinner_dropdown_item, nnamadesa);
+
+                                ArrayAdapter adapter = new ArrayAdapter<>(FormAnggota1Activity.this, R.layout.support_simple_spinner_dropdown_item, nnamadesa);
                                 spDesa.setAdapter(adapter);
 
-
-                                //Toast.makeText(FormAnggota1Activity.this, vsnamakabkot[0].toString() , Toast.LENGTH_LONG).show();
-
-                                strkodedesa = nkodedesa[0].toString();
-                                //subDataDesa();
+                                strkodedesa = nkodedesa[0];
 
                                 spDesa.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                        strkodedesa = nkodedesa[position].toString();
-                                        //strnamakecamatan = parent.getItemAtPosition(position).toString();
-                                        //Toast.makeText(FormAnggota1Activity.this, stridprovinsi.toString() , Toast.LENGTH_LONG).show();
-                                        //subDataDesa();
-
+                                        strkodedesa = nkodedesa[position];
                                     }
 
                                     public void onNothingSelected(AdapterView<?> parent) {
@@ -942,8 +913,7 @@ public class FormAnggota1Activity extends AppCompatActivity {
                                     Toast.makeText(FormAnggota1Activity.this, merror.toString() + " Terjadi Kesalahan Kooneksi ", Toast.LENGTH_LONG).show();
 
                                     Context context = FormAnggota1Activity.this;
-                                    Intent intent = null;
-                                    intent = new Intent(context, FormAnggota1Activity.class);
+                                    Intent intent = new Intent(context, FormAnggota1Activity.class);
                                     (context).startActivity(intent);
                                 }
                             });

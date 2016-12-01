@@ -121,6 +121,13 @@ public class FormAnggota4Activity extends AppCompatActivity implements EasyPermi
 
         final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
 
+        if( globalVariable.getId() == null && globalVariable.getId().isEmpty() && globalVariable.getId().equals("null") ){
+            Context context = FormAnggota4Activity.this;
+            Intent intent = new Intent(context, AnggotaLihatActivity.class);
+            (context).startActivity(intent);
+            finish();
+        }
+
         setContentView(R.layout.activity_form_anggota4);
 
         photo = (ImageView)findViewById(R.id.gambar);
@@ -485,6 +492,10 @@ public class FormAnggota4Activity extends AppCompatActivity implements EasyPermi
                     public void run() {
                         Toast.makeText(FormAnggota4Activity.this, "File sukses diupload.",
                                 Toast.LENGTH_SHORT).show();
+
+                        final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
+
+                        globalVariable.setId(null);
                     }
                 });
             }
@@ -517,7 +528,7 @@ public class FormAnggota4Activity extends AppCompatActivity implements EasyPermi
             response = "error";
             runOnUiThread(new Runnable() {
                 public void run() {
-                    Toast.makeText(FormAnggota4Activity.this, "Terjadi gangguan koneksi",
+                    Toast.makeText(FormAnggota4Activity.this, "Terjadi kesalahan koneksi",
                             Toast.LENGTH_SHORT).show();
                 }
             });
@@ -531,6 +542,7 @@ public class FormAnggota4Activity extends AppCompatActivity implements EasyPermi
                     Context context = FormAnggota4Activity.this;
                     Intent intent = new Intent(context, AnggotaLihatActivity.class);
                     (context).startActivity(intent);
+                    finish();
                 }
             });
         }

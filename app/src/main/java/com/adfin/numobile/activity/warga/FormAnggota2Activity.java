@@ -1,5 +1,6 @@
 package com.adfin.numobile.activity.warga;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -230,13 +231,10 @@ public class FormAnggota2Activity extends AppCompatActivity {
                         }
 
                         final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
-
                         globalVariable.setId(strIdWarga);
 
                         Intent intent = new Intent(getApplicationContext(), FormAnggota3Activity.class);
-
                         startActivity(intent);
-
                         finish();
 
                         Toast.makeText(FormAnggota2Activity.this, "Data Berhasil Di Simpan", Toast.LENGTH_LONG).show();
@@ -245,7 +243,7 @@ public class FormAnggota2Activity extends AppCompatActivity {
                     @Override
                     public void failure(RetrofitError error) {
                         //If any error occured displaying the error as toast
-                        Toast.makeText(FormAnggota2Activity.this, "Kesalahan Koneksi Data" + error.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(FormAnggota2Activity.this, "Terjadi kesalahan koneksi", Toast.LENGTH_LONG).show();
                         //btnsetting.setEnabled(true);
                     }
                 }
@@ -277,11 +275,9 @@ public class FormAnggota2Activity extends AppCompatActivity {
 
 
                         lstdatajenispekerjaan = new ArrayList<DataJenisPekerjaan>();
-//
+
                         lstdatajenispekerjaan = cdatajenispekerjaan.getDataJenisPekerjaan();
                         final String[] tsnamajenispekerjaan = new String[lstdatajenispekerjaan.size()];
-//
-                        //Toast.makeText(getApplicationContext(), " banyak user" + Integer.toString(lstdataprovinsi.size()), Toast.LENGTH_LONG).show();
 
                         for (int i = 0; i < lstdatajenispekerjaan.size(); i++) {
                             //Storing names to string array
@@ -290,24 +286,6 @@ public class FormAnggota2Activity extends AppCompatActivity {
                         }
                         ArrayAdapter adapter = new ArrayAdapter<String>(FormAnggota2Activity.this, R.layout.support_simple_spinner_dropdown_item, tsnamajenispekerjaan);
                         spPekerjaan.setAdapter(adapter);
-
-
-//                        spProvinsi.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                                stridprovinsi = tskodeprovinsi[position].toString();
-//                                ;
-//                                strnamaprovinsi = parent.getItemAtPosition(position).toString();
-//                                //Toast.makeText(FormAnggota1Activity.this, stridprovinsi.toString() , Toast.LENGTH_LONG).show();
-//                                subDataKabupaten();
-//
-//                            }
-//
-//                            public void onNothingSelected(AdapterView<?> parent) {
-//
-//                            }
-//                        });
-
-
                     }
 
                     @Override
@@ -350,8 +328,6 @@ public class FormAnggota2Activity extends AppCompatActivity {
 //
                         lstdatainstansi = cdatainstansi.getDataInstansi();
                         final String[] tsnamainstansi = new String[lstdatainstansi.size()];
-//
-                        //Toast.makeText(getApplicationContext(), " banyak user" + Integer.toString(lstdataprovinsi.size()), Toast.LENGTH_LONG).show();
 
                         for (int i = 0; i < lstdatainstansi.size(); i++) {
                             //Storing names to string array
@@ -360,24 +336,6 @@ public class FormAnggota2Activity extends AppCompatActivity {
                         }
                         ArrayAdapter adapter = new ArrayAdapter<String>(FormAnggota2Activity.this, R.layout.support_simple_spinner_dropdown_item, tsnamainstansi);
                         spInstansi.setAdapter(adapter);
-
-
-//                        spProvinsi.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                                stridprovinsi = tskodeprovinsi[position].toString();
-//                                ;
-//                                strnamaprovinsi = parent.getItemAtPosition(position).toString();
-//                                //Toast.makeText(FormAnggota1Activity.this, stridprovinsi.toString() , Toast.LENGTH_LONG).show();
-//                                subDataKabupaten();
-//
-//                            }
-//
-//                            public void onNothingSelected(AdapterView<?> parent) {
-//
-//                            }
-//                        });
-
-
                     }
 
                     @Override
@@ -417,11 +375,9 @@ public class FormAnggota2Activity extends AppCompatActivity {
 
 
                         lstdatapendapatan = new ArrayList<DataPendapatan>();
-//
+
                         lstdatapendapatan = cdatapendapatan.getDataPendapatan();
                         final String[] tsjumlahpendapatan = new String[lstdatapendapatan.size()];
-//
-                        //Toast.makeText(getApplicationContext(), " banyak user" + Integer.toString(lstdataprovinsi.size()), Toast.LENGTH_LONG).show();
 
                         for (int i = 0; i < lstdatapendapatan.size(); i++) {
                             //Storing names to string array
@@ -430,24 +386,6 @@ public class FormAnggota2Activity extends AppCompatActivity {
                         }
                         ArrayAdapter adapter = new ArrayAdapter<String>(FormAnggota2Activity.this, R.layout.support_simple_spinner_dropdown_item, tsjumlahpendapatan);
                         spPendapatan.setAdapter(adapter);
-
-
-//                        spProvinsi.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                                stridprovinsi = tskodeprovinsi[position].toString();
-//                                ;
-//                                strnamaprovinsi = parent.getItemAtPosition(position).toString();
-//                                //Toast.makeText(FormAnggota1Activity.this, stridprovinsi.toString() , Toast.LENGTH_LONG).show();
-//                                subDataKabupaten();
-//
-//                            }
-//
-//                            public void onNothingSelected(AdapterView<?> parent) {
-//
-//                            }
-//                        });
-
-
                     }
 
                     @Override
@@ -487,11 +425,9 @@ public class FormAnggota2Activity extends AppCompatActivity {
 
 
                         lstdataindukorganisasi = new ArrayList<DataIndukOrganisasi>();
-//
+
                         lstdataindukorganisasi = cdataindukorganisasi.getDataIndukOrganisasi();
                         final String[] tsnamaorganisasi = new String[lstdataindukorganisasi.size()];
-//
-                        //Toast.makeText(getApplicationContext(), " banyak user" + Integer.toString(lstdataprovinsi.size()), Toast.LENGTH_LONG).show();
 
                         for (int i = 0; i < lstdataindukorganisasi.size(); i++) {
                             //Storing names to string array
@@ -500,32 +436,22 @@ public class FormAnggota2Activity extends AppCompatActivity {
                         }
                         ArrayAdapter adapter = new ArrayAdapter<String>(FormAnggota2Activity.this, R.layout.support_simple_spinner_dropdown_item, tsnamaorganisasi);
                         spOrganisasi.setAdapter(adapter);
-
-
-//                        spProvinsi.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                                stridprovinsi = tskodeprovinsi[position].toString();
-//                                ;
-//                                strnamaprovinsi = parent.getItemAtPosition(position).toString();
-//                                //Toast.makeText(FormAnggota1Activity.this, stridprovinsi.toString() , Toast.LENGTH_LONG).show();
-//                                subDataKabupaten();
-//
-//                            }
-//
-//                            public void onNothingSelected(AdapterView<?> parent) {
-//
-//                            }
-//                        });
-
-
                     }
 
                     @Override
                     public void failure(RetrofitError error) {
 
-                        String merror = error.getMessage();
+                        final String merror = error.getMessage();
 
-                        Toast.makeText(FormAnggota2Activity.this, merror.toString() + " Terjadi Kesalahan Kooneksi ", Toast.LENGTH_LONG).show();
+                        runOnUiThread(new Runnable() {
+                            public void run() {
+                                Toast.makeText(FormAnggota2Activity.this, merror.toString() + " Terjadi Kesalahan Kooneksi ", Toast.LENGTH_LONG).show();
+
+                                Context context = FormAnggota2Activity.this;
+                                Intent intent = new Intent(context, FormAnggota2Activity.class);
+                                (context).startActivity(intent);
+                            }
+                        });
                     }
                 }
 
