@@ -5,18 +5,14 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,9 +25,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.adfin.numobile.ModulAPI;
 import com.adfin.numobile.R;
 import com.adfin.numobile.activity.GlobalClass;
+import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -128,6 +124,8 @@ public class FormAnggota4Activity extends AppCompatActivity implements EasyPermi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        permissionExternal();
 
         final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
 
@@ -231,8 +229,7 @@ public class FormAnggota4Activity extends AppCompatActivity implements EasyPermi
             browseButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if( IS_GRANTED ) browseImage();
-                    else permissionExternal();
+                    browseImage();
                     dialog.dismiss();
                 }
             });
@@ -242,8 +239,7 @@ public class FormAnggota4Activity extends AppCompatActivity implements EasyPermi
             captureButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if( IS_GRANTED ) captureImage();
-                    else permissionExternal();
+                    captureImage();
                     dialog.dismiss();
                 }
             });
@@ -294,7 +290,8 @@ public class FormAnggota4Activity extends AppCompatActivity implements EasyPermi
         options.inJustDecodeBounds = false;
         bm = BitmapFactory.decodeFile(selectedImagePath, options);
 
-        photo.setImageBitmap(bm);
+        Picasso.with(getApplicationContext()).load(pathImage).resize(600, 600).into(photo);
+        //photo.setImageBitmap(bm);
     }
 
     private void onCaptureImageResult(Intent data) {
@@ -311,17 +308,18 @@ public class FormAnggota4Activity extends AppCompatActivity implements EasyPermi
         try {
             image.createNewFile();
             fo = new FileOutputStream(image);
-            //thumbnail.compress(Bitmap.CompressFormat.JPEG, 100, fo);
+            thumbnail.compress(Bitmap.CompressFormat.JPEG, 100, fo);
             fo.write(bytes.toByteArray());
             fo.close();
             pathImage = image.getAbsolutePath();
+            Picasso.with(getApplicationContext()).load(image).resize(600, 600).into(photo);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        photo.setImageBitmap(thumbnail);
+        //photo.setImageBitmap(thumbnail);
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -354,7 +352,7 @@ public class FormAnggota4Activity extends AppCompatActivity implements EasyPermi
 
     @AfterPermissionGranted(CAMERA_PICK_IMAGE_REQUEST_CODE)
     private void permissionExternal() {
-        String[] perms = {Manifest.permission.READ_EXTERNAL_STORAGE};
+        String[] perms = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
         if (EasyPermissions.hasPermissions(this, perms)) {
             IS_GRANTED = true;
         } else {
