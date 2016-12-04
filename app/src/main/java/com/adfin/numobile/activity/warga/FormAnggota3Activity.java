@@ -1,6 +1,7 @@
 package com.adfin.numobile.activity.warga;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -57,11 +59,18 @@ public class FormAnggota3Activity extends AppCompatActivity {
     Button btnBack2;
     Button btnNext3;
 
+    LinearLayout linier1;
+    LinearLayout linier1_0;
+    LinearLayout linier1_1;
+    LinearLayout linier2;
+    LinearLayout linier2_0;
+    LinearLayout linier3;
+    LinearLayout linier3_0;
+
     String  strIdWarga;
     String  strYaTidakPesantren;
-    String  strLamaPesantren;
-    String  strPesantren1;
-    String  strPesantren2;
+    String  strLamaPesantren = "0";
+    String  strPesantren1, strPesantren2 = "";
     String  strInfaq;
     String  strJalur;
     String  strnominal_donasi;
@@ -88,6 +97,14 @@ public class FormAnggota3Activity extends AppCompatActivity {
         strIdWarga = globalVariable.getId();
         etIdWarga.setText(strIdWarga);
 
+        linier1 = (LinearLayout) findViewById(R.id.linier1);
+        linier1_0 = (LinearLayout) findViewById(R.id.linier1_0);
+        linier1_1 = (LinearLayout) findViewById(R.id.linier1_1);
+        linier2 = (LinearLayout) findViewById(R.id.linier2);
+        linier2_0 = (LinearLayout) findViewById(R.id.linier2_0);
+        linier3 = (LinearLayout) findViewById(R.id.linier3);
+        linier3_0 = (LinearLayout) findViewById(R.id.linier3_0);
+
         spYaTidakPesantren =(Spinner) findViewById(R.id.spYaTidakPesantren);
         etLamaPesantren = (EditText) findViewById(R.id.etLamaPesantren);
         spPesantren1 =(Spinner) findViewById(R.id.spPesantren1);
@@ -100,23 +117,65 @@ public class FormAnggota3Activity extends AppCompatActivity {
         etnominal_donasi_warga = (EditText) findViewById(R.id.etnominal_donasi_warga);
         spStatusMember = (Spinner) findViewById(R.id.spStatusMember);
 
-
+        if( globalVariable.getId() != null && !globalVariable.getId().isEmpty() && !globalVariable.getId().equals("null") ){
+            etIdWarga = (EditText) findViewById(R.id.idWarga);
+            strIdWarga = globalVariable.getId();
+            etIdWarga.setText(strIdWarga);
+            setDataForm(globalVariable);
+        }
 
         subDataPesantren1();
         subDataPesantren2();
+
+        spYaTidakPesantren.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position == 1){
+                    linier1.setVisibility(View.VISIBLE);
+                    linier1_0.setVisibility(View.VISIBLE);
+                    linier1_1.setVisibility(View.VISIBLE);
+
+                }else{
+                    linier1.setVisibility(View.GONE);
+                    linier1_0.setVisibility(View.GONE);
+                    linier1_1.setVisibility(View.GONE);
+                }
+            }
+
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
+
+        spInfaq.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position == 0){
+                    linier2.setVisibility(View.VISIBLE);
+                    linier2_0.setVisibility(View.VISIBLE);
+                }else{
+                    linier2.setVisibility(View.GONE);
+                    linier2_0.setVisibility(View.GONE);
+                }
+            }
+
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
+
+        spInfaqWarga.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position == 0){
+                    linier3.setVisibility(View.VISIBLE);
+                    linier3_0.setVisibility(View.VISIBLE);
+                }else{
+                    linier3.setVisibility(View.GONE);
+                    linier3_0.setVisibility(View.GONE);
+                }
+            }
+
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
 
         btnNext3 = (Button) findViewById(R.id.btnNext3);
         btnNext3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-//                if (spPesantren.getSelectedItem().toString().length() ==0){
-//                    Toast.makeText(getApplicationContext(), "Pesantren Belum Dipilih" , Toast.LENGTH_LONG).show();
-//                    spPesantren.requestFocus();
-//                    return;
-//                }
-
-
                 globalVariable.setYaTidakPesantren(spYaTidakPesantren.getSelectedItem().toString());
                 globalVariable.setLamaPesantren(etLamaPesantren.getText().toString());
                 globalVariable.setIdPesantren1(spPesantren1.getSelectedItem().toString());
@@ -150,13 +209,52 @@ public class FormAnggota3Activity extends AppCompatActivity {
         btnBack2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(FormAnggota3Activity.this, FormAnggota2Activity.class);
-//                intent.putExtra("id_user",username);
-//                startActivity(intent);
-//                finish();
-
+                Intent intent = new Intent(FormAnggota3Activity.this, FormAnggota2Activity.class);
+                startActivity(intent);
+                finish();
             }
         });
+    }
+
+    private void setDataForm(GlobalClass globalVariable) {
+        etLamaPesantren.setText( globalVariable.getLamaPesantren() );
+
+        String[] pesantrenYa = getResources().getStringArray(R.array.pesantren_array);
+        for(int i=0; i < pesantrenYa.length; i++){
+            if(globalVariable.getYaTidakPesantren() != null && !globalVariable.getYaTidakPesantren().isEmpty() && !globalVariable.getYaTidakPesantren().equals("null")){
+                if (globalVariable.getYaTidakPesantren().contains(pesantrenYa[i])) {
+                    spYaTidakPesantren.setSelection(i);
+                    break;
+                }
+            }
+        }
+
+        /*String[] kawinBelom = getResources().getStringArray(R.array.status_array);
+        for(int i=0; i < JenisKelamin.length; i++){
+            if( globalVariable.getStatusPerkawinan().contains(kawinBelom[i]) ) {
+                spStatusPerkawinan.setSelection(i); break;
+            }
+        }
+
+        etAlamat.setText( globalVariable.getAlamat() );
+
+        subDataProvinsi();
+        etKodePos.setText( globalVariable.getKodePos() );
+        etTelepon.setText( globalVariable.getTelepon() );
+        etHandphone.setText( globalVariable.getHandphone() );
+        etEmail.setText( globalVariable.getEmail() );
+        if( globalVariable.getFacebook() != null && !globalVariable.getFacebook().isEmpty() && !globalVariable.getFacebook().equals("null") ){
+            etFacebook.setText(globalVariable.getFacebook() );
+        }
+        if( globalVariable.getTwitter() != null && !globalVariable.getTwitter().isEmpty() && !globalVariable.getTwitter().equals("null") ){
+            etTwitter.setText(globalVariable.getTwitter() );
+        }
+        if( globalVariable.getInstagram() != null && !globalVariable.getInstagram().isEmpty() && !globalVariable.getInstagram().equals("null") ){
+            etInstagram.setText(globalVariable.getInstagram() );
+        }
+        if( globalVariable.getPathh() != null && !globalVariable.getPathh().isEmpty() && !globalVariable.getPathh().equals("null") ){
+            etPathh.setText(globalVariable.getPathh() );
+        }*/
     }
 
     private void saveDataInput(){
@@ -292,9 +390,6 @@ public class FormAnggota3Activity extends AppCompatActivity {
 
                     @Override
                     public void failure(RetrofitError error) {
-
-                        String merror = error.getMessage();
-
                         Toast.makeText(FormAnggota3Activity.this, "Terjadi kesalahan koneksi", Toast.LENGTH_LONG).show();
                     }
                 }

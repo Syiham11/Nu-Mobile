@@ -112,7 +112,12 @@ public class FormAnggota2Activity extends AppCompatActivity {
         etS2 = (EditText) findViewById(R.id.etS2);
         etS3 = (EditText) findViewById(R.id.etS3);
 
-
+        if( globalVariable.getId() != null && !globalVariable.getId().isEmpty() && !globalVariable.getId().equals("null") ){
+            etIdWarga = (EditText) findViewById(R.id.idWarga);
+            strIdWarga = globalVariable.getId();
+            etIdWarga.setText(strIdWarga);
+            setDataForm(globalVariable);
+        }
 
         subAmbilSpinnerJenisPekerjaan();
         subAmbilSpinnerInstansi();
@@ -188,6 +193,19 @@ public class FormAnggota2Activity extends AppCompatActivity {
         });
     }
 
+    private void setDataForm(GlobalClass globalVariable) {
+        etJabatan.setText( globalVariable.getJabatan() );
+        etKemampuan.setText( globalVariable.getKemampuan() );
+        etSD.setText( globalVariable.getSD() );
+        etSMP.setText( globalVariable.getSMP() );
+        etSMA.setText( globalVariable.getSMA() );
+        etD1.setText( globalVariable.getD1() );
+        etD3.setText( globalVariable.getD3() );
+        etS1.setText( globalVariable.getS1() );
+        etS2.setText( globalVariable.getS2() );
+        etS3.setText( globalVariable.getS3() );
+    }
+
     private void saveDataInput(){
         RestAdapter adapter = new RestAdapter.Builder()
                 .setEndpoint("http://www.terpusat.com") //Setting the Root URL
@@ -214,18 +232,13 @@ public class FormAnggota2Activity extends AppCompatActivity {
                     public void success(Response result, Response response) {
                         //On success we will read the server's output using bufferedreader
                         //Creating a bufferedreader object
-                        BufferedReader reader = null;
-
-
-
-                        //An string to store output from the server
-                        String output = "";
+                        BufferedReader reader;
 
                         try {
                             //Initializing buffered reader
                             reader = new BufferedReader(new InputStreamReader(result.getBody().in()));
                             //Reading the output in the string
-                            output = reader.readLine();
+                            reader.readLine();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -244,7 +257,6 @@ public class FormAnggota2Activity extends AppCompatActivity {
                     public void failure(RetrofitError error) {
                         //If any error occured displaying the error as toast
                         Toast.makeText(FormAnggota2Activity.this, "Terjadi kesalahan koneksi", Toast.LENGTH_LONG).show();
-                        //btnsetting.setEnabled(true);
                     }
                 }
         );
@@ -273,6 +285,7 @@ public class FormAnggota2Activity extends AppCompatActivity {
                     @Override
                     public void success(CDataJenisPekerjaan cdatajenispekerjaan, Response response) {
 
+                        final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
 
                         lstdatajenispekerjaan = new ArrayList<DataJenisPekerjaan>();
 
@@ -286,6 +299,25 @@ public class FormAnggota2Activity extends AppCompatActivity {
                         }
                         ArrayAdapter adapter = new ArrayAdapter<String>(FormAnggota2Activity.this, R.layout.support_simple_spinner_dropdown_item, tsnamajenispekerjaan);
                         spPekerjaan.setAdapter(adapter);
+
+                        int setSelect = 0;
+
+                        if( globalVariable.getId() != null && !globalVariable.getId().isEmpty() && !globalVariable.getId().equals("null") ){
+                            setSelect = getIndex(spPekerjaan, globalVariable.getProvinsi());
+                        }
+
+                        spPekerjaan.setSelection(setSelect);
+                    }
+
+                    private int getIndex(Spinner spinner,String value){
+                        int index = 0;
+                        for (int i = 0; i < spinner.getAdapter().getCount(); i++){
+                            String str1 = (String) spinner.getItemAtPosition(i);
+                            if( str1.toLowerCase().contains(value.toLowerCase()) ){
+                                index = i;
+                            }
+                        }
+                        return index;
                     }
 
                     @Override
@@ -323,10 +355,12 @@ public class FormAnggota2Activity extends AppCompatActivity {
                     @Override
                     public void success(CDataInstansi cdatainstansi, Response response) {
 
+                        final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
 
                         lstdatainstansi = new ArrayList<DataInstansi>();
-//
+
                         lstdatainstansi = cdatainstansi.getDataInstansi();
+
                         final String[] tsnamainstansi = new String[lstdatainstansi.size()];
 
                         for (int i = 0; i < lstdatainstansi.size(); i++) {
@@ -336,6 +370,26 @@ public class FormAnggota2Activity extends AppCompatActivity {
                         }
                         ArrayAdapter adapter = new ArrayAdapter<String>(FormAnggota2Activity.this, R.layout.support_simple_spinner_dropdown_item, tsnamainstansi);
                         spInstansi.setAdapter(adapter);
+
+                        int setSelect = 0;
+
+                        if( globalVariable.getId() != null && !globalVariable.getId().isEmpty() && !globalVariable.getId().equals("null") ){
+                            setSelect = getIndex(spInstansi, globalVariable.getProvinsi());
+                        }
+
+
+                        spInstansi.setSelection(setSelect);
+                    }
+
+                    private int getIndex(Spinner spinner,String value){
+                        int index = 0;
+                        for (int i = 0; i < spinner.getAdapter().getCount(); i++){
+                            String str1 = (String) spinner.getItemAtPosition(i);
+                            if( str1.toLowerCase().contains(value.toLowerCase()) ){
+                                index = i;
+                            }
+                        }
+                        return index;
                     }
 
                     @Override
@@ -373,6 +427,7 @@ public class FormAnggota2Activity extends AppCompatActivity {
                     @Override
                     public void success(CDataPendapatan cdatapendapatan, Response response) {
 
+                        final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
 
                         lstdatapendapatan = new ArrayList<DataPendapatan>();
 
@@ -386,6 +441,26 @@ public class FormAnggota2Activity extends AppCompatActivity {
                         }
                         ArrayAdapter adapter = new ArrayAdapter<String>(FormAnggota2Activity.this, R.layout.support_simple_spinner_dropdown_item, tsjumlahpendapatan);
                         spPendapatan.setAdapter(adapter);
+
+                        int setSelect = 0;
+
+                        if( globalVariable.getId() != null && !globalVariable.getId().isEmpty() && !globalVariable.getId().equals("null") ){
+                            setSelect = getIndex(spPendapatan, globalVariable.getProvinsi());
+                        }
+
+
+                        spPendapatan.setSelection(setSelect);
+                    }
+
+                    private int getIndex(Spinner spinner,String value){
+                        int index = 0;
+                        for (int i = 0; i < spinner.getAdapter().getCount(); i++){
+                            String str1 = (String) spinner.getItemAtPosition(i);
+                            if( str1.toLowerCase().contains(value.toLowerCase()) ){
+                                index = i;
+                            }
+                        }
+                        return index;
                     }
 
                     @Override
@@ -423,6 +498,7 @@ public class FormAnggota2Activity extends AppCompatActivity {
                     @Override
                     public void success(CDataIndukOrganisasi cdataindukorganisasi, Response response) {
 
+                        final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
 
                         lstdataindukorganisasi = new ArrayList<DataIndukOrganisasi>();
 
@@ -436,6 +512,25 @@ public class FormAnggota2Activity extends AppCompatActivity {
                         }
                         ArrayAdapter adapter = new ArrayAdapter<String>(FormAnggota2Activity.this, R.layout.support_simple_spinner_dropdown_item, tsnamaorganisasi);
                         spOrganisasi.setAdapter(adapter);
+
+                        int setSelect = 0;
+
+                        if( globalVariable.getId() != null && !globalVariable.getId().isEmpty() && !globalVariable.getId().equals("null") ){
+                            setSelect = getIndex(spOrganisasi, globalVariable.getProvinsi());
+                        }
+
+                        spOrganisasi.setSelection(setSelect);
+                    }
+
+                    private int getIndex(Spinner spinner,String value){
+                        int index = 0;
+                        for (int i = 0; i < spinner.getAdapter().getCount(); i++){
+                            String str1 = (String) spinner.getItemAtPosition(i);
+                            if( str1.toLowerCase().contains(value.toLowerCase()) ){
+                                index = i;
+                            }
+                        }
+                        return index;
                     }
 
                     @Override

@@ -86,7 +86,6 @@
     <string name="provinsi">Pilih Provinsi</string>
 
     <string-array name="kategori_array">
-        <item>---Jenis Kelamin---</item>
         <item>Pria</item>
         <item>Wanita</item>
     </string-array>
@@ -115,14 +114,12 @@
     </string-array>
 
     <string-array name="kategori_jalur">
-        <item>---Melalui---</item>
         <item>PULSA</item>
         <item>BANK</item>
         <item>T-CAST</item>
     </string-array>
 
     <string-array name="kategori_jalur_warga">
-        <item>---Melalui---</item>
         <item>PULSA</item>
         <item>BANK</item>
         <item>T-CAST</item>
@@ -166,9 +163,8 @@
     </string-array>
 
     <string-array name="pesantren_array">
-        <item>---Pernah Mengenyam Pesantren---</item>
-        <item>YA</item>
-        <item>TIDAK</item>
+        <item>Tidak</item>
+        <item>Ya</item>
     </string-array>
     <string name="title_activity_form_anggota5">FormAnggota5Activity</string>
 
