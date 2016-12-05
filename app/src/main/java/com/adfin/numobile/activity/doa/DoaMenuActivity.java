@@ -9,8 +9,7 @@ import android.widget.Toast;
 import com.adfin.numobile.ModulAPI;
 import com.adfin.numobile.R;
 import com.adfin.numobile.activity.pengurus.PengurusMenuActivity;
-import com.adfin.numobile.helper.ListAdapterDoa;
-import com.adfin.numobile.helper.ListAdapterSDM;
+import com.adfin.numobile.helper.ListAdapterAll;
 import com.adfin.numobile.model.CDataDoa;
 import com.adfin.numobile.model.CDataSDM;
 import com.adfin.numobile.model.DataDoa;
@@ -69,15 +68,15 @@ public class DoaMenuActivity extends AppCompatActivity {
                         lstdataDoa = cdatadoa.getDataDoa();
 
                         final String[] namaDoa = new String[lstdataDoa.size()];
-                        final String[] imageDoa = new String[lstdataDoa.size()];;
+                        final String[] headerDoa = new String[lstdataDoa.size()];;
 
                         for (int i = 0; i < lstdataDoa.size(); i++) {
                             namaDoa[i] = lstdataDoa.get(i).getnama_doa();
-                            imageDoa[i] = lstdataDoa.get(i).geticon_doa();
+                            headerDoa[i] = lstdataDoa.get(i).getimage_header();
 
                         }
 
-                        ListAdapterDoa adapter=new ListAdapterDoa(DoaMenuActivity.this, namaDoa, imageDoa);
+                        ListAdapterAll adapter=new ListAdapterAll(DoaMenuActivity.this, headerDoa, namaDoa, new String[0]);
                         //membuat adapter baru untuk reyclerview
                         recyclerView.setAdapter(adapter);
                         //menset nilai dari adapter
