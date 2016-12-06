@@ -1,0 +1,1 @@
+UPDATE tbl_warga SET ya_tidak_pesantren="---Pernah Mengenyam Pesantren---",lama_pesantren="2",id_pesantren1="5",id_pesantren2="4",infak_organisasi="Ya",donasi_organisasi="BANK",nominal_organisasi="777",infak_warga="Ya",nominal_warga="66171",status_keanggotaan="Pengurus" WHERE id_warga=3
