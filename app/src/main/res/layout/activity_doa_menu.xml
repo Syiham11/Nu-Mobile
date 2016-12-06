@@ -10,4 +10,6 @@
     android:background="@drawable/background"
     tools:context=".activity.doa.DoaMenuActivity">
 
+    <include layout="@layout/content_doa"/>
+
 </RelativeLayout>
