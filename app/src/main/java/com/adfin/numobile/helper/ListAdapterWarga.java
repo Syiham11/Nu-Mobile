@@ -35,6 +35,7 @@ public class ListAdapterWarga extends  RecyclerView.Adapter<WargaViewHolder> {
         this.name = name;
         this.lain = lain;
     }
+
     @Override
     public WargaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v=inflater.inflate(R.layout.list_content, parent, false);
@@ -51,7 +52,7 @@ public class ListAdapterWarga extends  RecyclerView.Adapter<WargaViewHolder> {
         holder.tv2.setText(this.lain[position]);
         holder.imageView.setOnClickListener(clickListener);
         holder.imageView.setTag(holder);
-        if(this.imag[position].length() > 8 )
+        if(this.imag[position] != null && !this.imag[position].equals("null"))
             Picasso.with(this.context)
                     .load("http://www.terpusat.com/NUMobile/" + this.imag[position])
                     .resize(70, 70)
