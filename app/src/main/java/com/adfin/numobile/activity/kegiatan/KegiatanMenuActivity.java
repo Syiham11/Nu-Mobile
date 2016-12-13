@@ -7,48 +7,37 @@ import android.widget.Button;
 import android.view.View;
 
 import com.adfin.numobile.R;
+import com.adfin.numobile.activity.pengurus.PengurusOrganisasi;
 
 public class KegiatanMenuActivity extends AppCompatActivity {
-
-    Button  btnGalleryPeristiwa,
-            btnLaporanPeristiwa,
-            btnBroadcastPeristiwa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kegiatan_menu);
 
-        btnGalleryPeristiwa = (Button) findViewById(R.id.btnGalleryPeristiwa);
-        btnLaporanPeristiwa = (Button) findViewById(R.id.btnLaporanPeristiwa);
-        btnBroadcastPeristiwa = (Button) findViewById(R.id.btnBroadcastPeristiwa);
+        Button btnPhoto = (Button)findViewById(R.id.btnPhoto);
+        Button btnVideo = (Button)findViewById(R.id.btnVideo);
 
 
-        btnGalleryPeristiwa.setOnClickListener(new View.OnClickListener() {
+        btnPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(KegiatanMenuActivity.this, PeristiwaGallery.class);
-                startActivity(i);
+                Intent intent = new Intent(KegiatanMenuActivity.this, PeristiwaPhoto.class);
 
+                startActivity(intent);
             }
         });
 
-        btnLaporanPeristiwa.setOnClickListener(new View.OnClickListener() {
+        btnVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(KegiatanMenuActivity.this, PeristiwaMenuLaporan.class);
-                startActivity(i);
+                Intent intent = new Intent(KegiatanMenuActivity.this, PeristiwaVideo.class);
 
+                startActivity(intent);
             }
         });
 
-        btnBroadcastPeristiwa.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(KegiatanMenuActivity.this, PeristiwaBoardcast.class);
-                startActivity(i);
-            }
-        });
 
     }
 }
