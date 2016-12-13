@@ -3,15 +3,28 @@
     package="com.adfin.numobile">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="com.dka.peta.permission.MAPS_RECEIVE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <uses-feature android:name="android.hardware.location.gps" />
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.sensor.accelerometer"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -29,7 +42,7 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.LoginActivity">
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,7 +50,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".activity.LoginActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -116,25 +129,29 @@
         <!-- MENU KEGIATAN -->
         <activity
             android:name=".activity.kegiatan.KegiatanMenuActivity"
-            android:label="MENU KEARSIPAN"
+            android:label="KEJADIAN"
             android:parentActivityName=".activity.MainActivity" />
-        <activity
-            android:name=".activity.kegiatan.PeristiwaGallery"
-            android:label="GALLERY PERISTIWA"
-            android:parentActivityName=".activity.kegiatan.KegiatanMenuActivity" />
-        <activity
-            android:name=".activity.kegiatan.PeristiwaMenuLaporan"
-            android:label="MENU LAPORAN"
-            android:parentActivityName=".activity.kegiatan.KegiatanMenuActivity" />
         <activity
             android:name=".activity.kegiatan.PeristiwaBoardcast"
             android:label="BROADCAST PERISTIWA"
             android:parentActivityName=".activity.kegiatan.KegiatanMenuActivity" />
-        />
         <activity
-            android:name=".activity.kegiatan.PeristiwaLaporan"
-            android:label="LAPORAN PERISTIWA"
-            android:parentActivityName=".activity.kegiatan.PeristiwaLaporan" />
+            android:name=".activity.kegiatan.PeristiwaPhoto"
+            android:label="FOTO PERISTIWA"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.kegiatan.PeristiwaPhotoAdd"
+            android:label="TAMBAH FOTO PERISTIWA"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".activity.kegiatan.PeristiwaVideo"
+            android:label="VIDEO PERISTIWA"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.kegiatan.PeristiwaVideoAdd"
+            android:label="TAMBAH VIDEO PERISTIWA"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         />
 
         <!-- MENU PELAYANAN -->
@@ -240,10 +257,11 @@
             android:parentActivityName=".activity.MainActivity" />
         <activity android:name=".activity.warga.FormAnggota4Activity" />
 
-        <!-- Google API Key -->
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyCo-uhd7KWVSTxP7dFozzDOW4m7O9MpjEw" />
+            android:value="@string/google_maps_key" />
+
+
     </application>
 
 </manifest>
