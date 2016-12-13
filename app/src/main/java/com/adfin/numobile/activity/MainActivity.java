@@ -13,6 +13,7 @@ import com.adfin.numobile.activity.doa.DoaMenuActivity;
 import com.adfin.numobile.activity.dompet.DompetMenuActivity;
 import com.adfin.numobile.activity.kearsipan.KearsipanMenuActivity;
 import com.adfin.numobile.activity.kegiatan.KegiatanMenuActivity;
+import com.adfin.numobile.activity.kegiatan.PeristiwaBoardcast;
 import com.adfin.numobile.activity.kelautan.KelautanMenuActivity;
 import com.adfin.numobile.activity.kesehatan.KesehatanMenuActivity;
 import com.adfin.numobile.activity.konsultasi.KonsultasiMenuActivity;
@@ -92,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         btnKegiatan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, KegiatanMenuActivity.class);
+                Intent intent = new Intent(MainActivity.this, PeristiwaBoardcast.class);
 
                 startActivity(intent);
             }
