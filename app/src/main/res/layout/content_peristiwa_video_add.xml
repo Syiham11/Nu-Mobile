@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_peristiwa_video_add"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.adfin.numobile.activity.kegiatan.PeristiwaVideoAdd"
+    android:background="@drawable/background_min"
+    tools:showIn="@layout/activity_peristiwa_video_add">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:orientation="vertical"
+        android:gravity="center">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="230dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/component_margin"
+            android:layout_marginBottom="@dimen/component_margin"
+            android:background="#2a2735">
+
+            <VideoView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="top"
+                android:scaleType="centerInside"
+                android:adjustViewBounds="true"
+                android:id="@+id/gambar"
+                android:clickable="true"/>
+
+        </RelativeLayout>
+        <com.adfin.numobile.widget.CanaroTextViewLight
+            android:layout_marginBottom="@dimen/component_margin"
+            android:id="@+id/locationinfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/hint_lokasi"
+            android:textColor="@color/colorTextSecondary"
+            android:textAllCaps="true"
+            android:textSize="@dimen/item_text_size_subtitle" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/component_margin">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:id="@+id/editDescription"
+                android:singleLine="false"
+                android:textSize="@dimen/component_text"
+                android:hint="@string/hint_description"
+                android:background="@drawable/shape_oval"
+                android:textColorHint="@color/colorEditTextSecondary"
+                android:textColor="@color/colorEditTextPrimary"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ProgressBar
+                android:id="@+id/progressBarSpinner"
+                android:layout_height="25dp"
+                android:layout_width="25dp"
+                android:layout_gravity="center"
+                android:indeterminateTint="@color/colorAccent"
+                android:indeterminateTintMode="multiply"/>
+
+            <com.adfin.numobile.widget.CanaroTextViewLight
+                android:id="@+id/errorinfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@android:color/holo_red_light"
+                android:textAllCaps="true"
+                android:textSize="@dimen/item_text_size_subtitle" />
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#329049"
+            android:id="@+id/buttonSave"
+            android:text="@string/button_save"
+            android:layout_gravity="center_horizontal"
+            android:textSize="@dimen/component_button"
+            android:textColor="#fff"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"/>
+    </LinearLayout>
+
+</ScrollView>
