@@ -22,25 +22,19 @@
         <Button
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:id="@+id/btnGalleryPeristiwa"
+            android:id="@+id/btnPhoto"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/gallery_peristiwa"
-          />
-
-        <Button
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:background="@drawable/laporan_peristiwa"
-            android:id="@+id/btnLaporanPeristiwa"
-            android:layout_gravity="center_horizontal"
+            android:background="@drawable/foto"
             />
 
         <Button
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:background="@drawable/broadcast_peristiwa"
-            android:id="@+id/btnBroadcastPeristiwa"
-            android:layout_gravity="center_horizontal" />
+            android:background="@drawable/video"
+            android:id="@+id/btnVideo"
+            android:layout_gravity="center_horizontal"
+            />
+
 
     </LinearLayout>
 </ScrollView>
