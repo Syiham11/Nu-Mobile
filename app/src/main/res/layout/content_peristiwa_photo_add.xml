@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_peristiwa_photo_add"
+    android:background="@drawable/background_min"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.adfin.numobile.activity.kegiatan.PeristiwaPhotoAdd"
+    tools:showIn="@layout/activity_peristiwa_photo_add">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="230dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:background="#2a2735">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="top"
+                android:scaleType="centerInside"
+                android:src="@drawable/p_test"
+                android:adjustViewBounds="true"
+                android:id="@+id/gambar"
+                android:clickable="true"
+                android:background="#2a2735"/>
+
+        </RelativeLayout>
+
+        <com.adfin.numobile.widget.CanaroTextViewLight
+            android:layout_marginBottom="15dp"
+            android:id="@+id/locationinfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Lokasi anda : "
+            android:textColor="#000"
+            android:textAllCaps="true"
+            android:textSize="10sp" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="15dp">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:id="@+id/editDescription"
+                android:singleLine="false"
+                android:textSize="15sp"
+                android:hint="Description"
+                android:background="@drawable/shape_oval"
+                android:textColorHint="@color/colorEditTextSecondary"
+                android:textColor="@color/colorEditTextPrimary"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ProgressBar
+                android:id="@+id/progressBarSpinner"
+                android:layout_height="25dp"
+                android:layout_width="25dp"
+                android:layout_gravity="center"
+                android:indeterminateTint="@color/colorAccent"
+                android:indeterminateTintMode="multiply"/>
+
+            <com.adfin.numobile.widget.CanaroTextViewLight
+                android:id="@+id/errorinfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@android:color/holo_red_light"
+                android:textAllCaps="true"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#329049"
+            android:id="@+id/buttonSave"
+            android:text="@string/button_save"
+            android:layout_gravity="center_horizontal"
+            android:textSize="@dimen/component_button"
+            android:textColor="#fff"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"/>
+
+    </LinearLayout>
+
+
+</ScrollView>
