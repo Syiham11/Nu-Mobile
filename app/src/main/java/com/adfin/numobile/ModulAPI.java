@@ -1,6 +1,7 @@
 package com.adfin.numobile;
 
 import com.adfin.numobile.model.CDataDesa;
+import com.adfin.numobile.model.CDataDoa;
 import com.adfin.numobile.model.CDataIndukOrganisasi;
 import com.adfin.numobile.model.CDataInstansi;
 import com.adfin.numobile.model.CDataJenisPekerjaan;
@@ -10,6 +11,7 @@ import com.adfin.numobile.model.CDataPekerjaan;
 import com.adfin.numobile.model.CDataPendapatan;
 import com.adfin.numobile.model.CDataPesantren;
 import com.adfin.numobile.model.CDataProvinsi;
+import com.adfin.numobile.model.CDataSDM;
 import com.adfin.numobile.model.CDataWarga;
 import com.adfin.numobile.model.DataNoTerkahir;
 import com.adfin.numobile.model.DataWarga;
@@ -80,6 +82,12 @@ public interface ModulAPI {
 
     @GET("/NUMobile/ambildataspinnerpesantren.php") // Udah
     public void  getDataPesantren(Callback<CDataPesantren> callback);
+
+    @GET("/NUMobile/getsdm.php") // 28/11/2016
+    public void  getDataSDM(Callback<CDataSDM> callback);
+
+    @GET("/NUMobile/getdoa.php") // 30/11/2016
+    public void  getDataDoa(Callback<CDataDoa> callback);
 
     @FormUrlEncoded
     @POST("/NUMobile/tambahanggota.php")
