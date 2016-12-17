@@ -2,6 +2,7 @@ package com.adfin.numobile.activity.warga;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,7 +19,9 @@ import android.widget.Toast;
 import com.adfin.numobile.ModulAPI;
 import com.adfin.numobile.R;
 import com.adfin.numobile.activity.GlobalClass;
-import com.adfin.numobile.helper.ListAdapterWarga;
+import com.adfin.numobile.activity.kegiatan.KegiatanMenuActivity;
+import com.adfin.numobile.activity.kegiatan.PeristiwaBoardcast;
+import com.adfin.numobile.helper.ListAdapterAll;
 import com.adfin.numobile.model.CDataPesantren;
 import com.adfin.numobile.model.CDataWarga;
 import com.adfin.numobile.model.DataPesantren;
@@ -43,6 +46,15 @@ public class AnggotaLihatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anggota_lihat);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(AnggotaLihatActivity.this, FormAnggota1Activity.class);
+                startActivityForResult(i, 1);
+            }
+        });
 
         mSwipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipeContainer);
 
@@ -90,7 +102,7 @@ public class AnggotaLihatActivity extends AppCompatActivity {
                         }
 
                         recyclerView= (RecyclerView) findViewById(R.id.recycler_view);
-                        ListAdapterWarga adapter=new ListAdapterWarga(AnggotaLihatActivity.this, imageWarga, namaWarga, alamatWarga);
+                        ListAdapterAll adapter=new ListAdapterAll(AnggotaLihatActivity.this, imageWarga, namaWarga, alamatWarga);
                         //membuat adapter baru untuk reyclerview
                         recyclerView.setAdapter(adapter);
                         //menset nilai dari adapter
