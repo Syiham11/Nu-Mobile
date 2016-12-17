@@ -1,5 +1,7 @@
 package com.adfin.numobile.activity.kegiatan;
 
+import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -47,7 +49,11 @@ public class PeristiwaBoardcast extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         GPSTracker gps = new GPSTracker(this);
-        latit = gps.getLatitude(); longit = gps.getLongitude();
+
+        if(gps.canGetLocation()) {
+            latit = gps.getLatitude();
+            longit = gps.getLongitude();
+        }
 
         setContentView(R.layout.activity_peristiwa_boardcast);
 
@@ -59,10 +65,18 @@ public class PeristiwaBoardcast extends AppCompatActivity {
 
         anotherLabel = (TextView) vmap.findViewById(R.id.another_label);
 
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(PeristiwaBoardcast.this, KegiatanMenuActivity.class);
+                startActivityForResult(i, 1);
+            }
+        });
+
         mMarkersHashMap = new HashMap<>();
 
         getDataWarga();
-
     }
 
     private void getDataWarga() {

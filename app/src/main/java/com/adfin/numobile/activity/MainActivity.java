@@ -34,7 +34,6 @@ import pub.devrel.easypermissions.EasyPermissions;
 
 public class MainActivity extends AppCompatActivity implements EasyPermissions.PermissionCallbacks {
 
-    private static boolean IS_GRANTED = false;
     String username;
 
     @Override
@@ -42,8 +41,7 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if( !IS_GRANTED )
-            permissionExternal();
+        permissionExternal();
 
         //baris 1
         Button btnPengurus = (Button) findViewById(R.id.btn_pengurus);
@@ -221,17 +219,10 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
     @AfterPermissionGranted(200)
     private void permissionExternal() {
         String[] perms = {
-                Manifest.permission.CAMERA,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.READ_CONTACTS,
-                Manifest.permission.INTERNET,
-                Manifest.permission.ACCESS_COARSE_LOCATION
+                Manifest.permission.ACCESS_FINE_LOCATION
         };
-        if (EasyPermissions.hasPermissions(this, perms)) {
-            IS_GRANTED = true;
-        } else {
+        if ( ! EasyPermissions.hasPermissions(this, perms) ) {
             EasyPermissions.requestPermissions(this, "This app needs access to your camera so you can take pictures.",
                     200, perms);
         }
@@ -247,12 +238,10 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
 
     @Override
     public void onPermissionsGranted(int requestCode, List<String> perms) {
-        IS_GRANTED = true;
     }
 
     @Override
     public void onPermissionsDenied(int requestCode, List<String> perms) {
-        IS_GRANTED = false;
 
         if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
             new AppSettingsDialog.Builder(this, "This app may not work correctly without the requested permissions. Open the app settings screen to modify app permissions.")
