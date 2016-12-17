@@ -2,7 +2,6 @@ package com.adfin.numobile.activity.kegiatan;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,8 +12,6 @@ import com.adfin.numobile.R;
 import com.adfin.numobile.helper.GPSTracker;
 import com.adfin.numobile.model.CDataWarga;
 import com.adfin.numobile.model.DataWarga;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -42,20 +39,15 @@ public class PeristiwaBoardcast extends AppCompatActivity {
     View vmap;
 
     private GoogleMap mMap;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
 
-    private GPSTracker gps;
     private double latit, longit = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        gps = new GPSTracker(this); latit = gps.getLatitude(); longit = gps.getLongitude();
+        GPSTracker gps = new GPSTracker(this);
+        latit = gps.getLatitude(); longit = gps.getLongitude();
 
         setContentView(R.layout.activity_peristiwa_boardcast);
 
@@ -67,11 +59,10 @@ public class PeristiwaBoardcast extends AppCompatActivity {
 
         anotherLabel = (TextView) vmap.findViewById(R.id.another_label);
 
-        mMarkersHashMap = new HashMap<Marker, DataWarga>();
+        mMarkersHashMap = new HashMap<>();
 
         getDataWarga();
 
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     private void getDataWarga() {
@@ -88,10 +79,6 @@ public class PeristiwaBoardcast extends AppCompatActivity {
 
                         lstdatawarga = cdatawarga.getDataWarga();
 
-                        for (int i = 0; i < lstdatawarga.size(); i++) {
-                            Log.e("Meee", lstdatawarga.get(i).getnama());
-                        }
-
                         setUpMap();
 
                         plotMarkers(lstdatawarga);
@@ -104,7 +91,7 @@ public class PeristiwaBoardcast extends AppCompatActivity {
 
                         runOnUiThread(new Runnable() {
                             public void run() {
-                                Toast.makeText(PeristiwaBoardcast.this, merror.toString() + " Terjadi Kesalahan Kooneksi ", Toast.LENGTH_LONG).show();
+                                Toast.makeText(PeristiwaBoardcast.this, merror + " Terjadi Kesalahan Kooneksi ", Toast.LENGTH_LONG).show();
                             }
                         });
                     }
@@ -151,7 +138,7 @@ public class PeristiwaBoardcast extends AppCompatActivity {
     }
 
     public class MarkerInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
-        public MarkerInfoWindowAdapter() {
+        MarkerInfoWindowAdapter() {
         }
 
         @Override
