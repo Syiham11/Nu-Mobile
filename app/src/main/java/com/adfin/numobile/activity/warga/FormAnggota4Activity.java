@@ -123,13 +123,6 @@ public class FormAnggota4Activity extends AppCompatActivity implements EasyPermi
 
         final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
 
-        if( globalVariable.getId() == null ){
-            Context context = FormAnggota4Activity.this;
-            Intent intent = new Intent(context, AnggotaLihatActivity.class);
-            (context).startActivity(intent);
-            finish();
-        }
-
         setContentView(R.layout.activity_form_anggota4);
 
         photo = (ImageView)findViewById(R.id.gambar);
