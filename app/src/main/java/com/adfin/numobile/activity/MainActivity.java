@@ -12,11 +12,7 @@ import com.adfin.numobile.R;
 import com.adfin.numobile.activity.desa.DesaMenuActivity;
 import com.adfin.numobile.activity.doa.DoaMenuActivity;
 import com.adfin.numobile.activity.dompet.DompetMenuActivity;
-import com.adfin.numobile.activity.kearsipan.KearsipanMenuActivity;
-<<<<<<< HEAD
 import com.adfin.numobile.activity.kearsipan.KearsipanSuratKeluar;
-=======
->>>>>>> cd2caf169e03a11e75f42a41b8f632d2c6187efe
 import com.adfin.numobile.activity.kegiatan.PeristiwaBoardcast;
 import com.adfin.numobile.activity.kelautan.KelautanMenuActivity;
 import com.adfin.numobile.activity.kesehatan.KesehatanMenuActivity;
