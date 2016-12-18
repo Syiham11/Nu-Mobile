@@ -3,8 +3,8 @@
 if(isset($_POST['token'])){
         file_put_contents(@$_POST['token'] . '_demo.json', json_encode($_POST));
         define('HOST','localhost');
-        define('USER','media');
-        define('PASS','tubokarto1904');
+        define('USER','numobile');
+        define('PASS','sitiajayangbuat');
         define('DB','numobile');
 
         $con = mysqli_connect(HOST,USER,PASS,DB) or die('Unable to Connect');
@@ -16,6 +16,24 @@ if(isset($_POST['token'])){
                         $query = 'UPDATE tbl_warga SET ';
                         foreach($_POST as $key => $value){
                                 if( $value && strpos($key, 'vs') !== false ){
+                                        if( $key == 'vsprovinsi' ){
+                                                $qF2 = mysqli_query($con, 'SELECT kode_provinsi FROM tbl_provinsi WHERE nama_provinsi ="' . $value . '"');
+                                                $row = mysqli_fetch_assoc($qF2);
+                                                $value = $row['kode_provinsi'];
+                                        }else if( $key == 'vskabkot' ){
+                                                $qF2 = mysqli_query($con, 'SELECT kode_kabkot FROM tbl_kabkot WHERE nama_kabkot ="' . $value . '"');
+                                                $row = mysqli_fetch_assoc($qF2);
+                                                $value = $row['kode_kabkot'];
+                                        }else if( $key == 'vskecamatan' ){
+                                                $qF2 = mysqli_query($con, 'SELECT kode_kecamatan FROM tbl_kecamatan WHERE nama_kecamatan ="' . $value . '"');
+                                                $row = mysqli_fetch_assoc($qF2);
+                                                $value = $row['kode_kecamatan'];
+                                        }else if( $key == 'vsdesa' ){
+                                                $qF2 = mysqli_query($con, 'SELECT kode_desa FROM tbl_desa WHERE nama_desa ="' . $value . '"');
+                                                $row = mysqli_fetch_assoc($qF2);
+                                                $value = $row['kode_desa'];
+                                        }
+
                                         $keys .= str_replace('vs', '', $key) . '="' . $value . '",';
                                 }
                         }
@@ -32,6 +50,24 @@ if(isset($_POST['token'])){
                         $query = 'INSERT INTO tbl_warga (';
                         foreach($_POST as $key => $value){
                                 if( $key != 'token' && $value ){
+                                        if( $key == 'vsprovinsi' ){
+                                                $qF2 = mysqli_query($con, 'SELECT kode_provinsi FROM tbl_provinsi WHERE nama_provinsi ="' . $value . '"');
+                                                $row = mysqli_fetch_assoc($qF2);
+                                                $value = $row['kode_provinsi'];
+                                        }else if( $key == 'vskabkot' ){
+                                                $qF2 = mysqli_query($con, 'SELECT kode_kabkot FROM tbl_kabkot WHERE nama_kabkot ="' . $value . '"');
+                                                $row = mysqli_fetch_assoc($qF2);
+                                                $value = $row['kode_kabkot'];
+                                        }else if( $key == 'vskecamatan' ){
+                                                $qF2 = mysqli_query($con, 'SELECT kode_kecamatan FROM tbl_kecamatan WHERE nama_kecamatan ="' . $value . '"');
+                                                $row = mysqli_fetch_assoc($qF2);
+                                                $value = $row['kode_kecamatan'];
+                                        }else if( $key == 'vsdesa' ){
+                                                $qF2 = mysqli_query($con, 'SELECT kode_desa FROM tbl_desa WHERE nama_desa ="' . $value . '"');
+                                                $row = mysqli_fetch_assoc($qF2);
+                                                $value = $row['kode_desa'];
+                                        }
+
                                         $keys .= str_replace('vs', '', $key) . ',';
                                         $values .= "'" . $value . "'" . ',';
                                 }
@@ -73,6 +109,7 @@ if(isset($_POST['token'])){
                                         $row = mysqli_fetch_assoc($qF2);
                                         $value = $row['id_induk_organisasi'];
                                 }
+
                                 $keys .= str_replace('vs', '', $key) . '="' . $value . '",';
                         }
                 }
@@ -109,6 +146,7 @@ if(isset($_POST['token'])){
                                         $row = mysqli_fetch_assoc($qF2);
                                         $value = $row['id_pesantren'];
                                 }
+
                                 $keys .= str_replace('vs', '', $key) . '="' . $value . '",';
                         }
                 }
@@ -123,29 +161,25 @@ if(isset($_POST['token'])){
                 // Close My Connection
                 mysqli_close($con);
         }else if($_POST['token'] == 'form4'){
-                file_put_contents('files_' . $_POST['token'] . '.json', json_encode($_FILES));
                 $target_dir = "uploads/";
                 if( ! is_dir($target_dir) ){
                         mkdir($target_dir);
                 }
-                $target_file = $target_dir . basename($_FILES["UploadFile"]["name"]);
-                $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-                // Check if image file is a actual image or fake image
-                $check = getimagesize($_FILES["UploadFile"]["tmp_name"]);
-                if($check !== false) {
-                        if (move_uploaded_file($_FILES["UploadFile"]["tmp_name"], $target_file)) {
-                                // Query Data tbl_warga, please insert valid field for the best return
-                                $fullQuery = 'UPDATE tbl_warga SET photo = "' . $target_file . '"' . ' WHERE id_warga =' . $_POST['id_warga'];
-                                mysqli_query($con, $fullQuery);
-                                // END OF tbl_warga
 
-                                echo $_POST['id_warga'];
+                $img = base64_decode($_POST['image']);
+                $fullpath = $target_dir . $_POST['id_warga'] . ".jpg";
+                $success = @file_put_contents($fullpath, $img);
 
-                                // Close My Connection
-                                mysqli_close($con);
-                        }else{
-                                echo 0;
-                        }
+                if( $success ) {
+                        // Query Data tbl_warga, please insert valid field for the best return
+                        $fullQuery = 'UPDATE tbl_warga SET photo = "' . $fullpath . '"' . ' WHERE id_warga =' . $_POST['id_warga'];
+                        mysqli_query($con, $fullQuery);
+                        // END OF tbl_warga
+
+                        // Close My Connection
+                        mysqli_close($con);
+
+                        echo $_POST['id_warga'];
                 }else{
                         echo 0;
                 }

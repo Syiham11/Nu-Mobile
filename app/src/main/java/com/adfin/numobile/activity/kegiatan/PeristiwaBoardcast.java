@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -50,10 +51,9 @@ public class PeristiwaBoardcast extends AppCompatActivity {
 
         GPSTracker gps = new GPSTracker(this);
 
-        if(gps.canGetLocation()) {
-            latit = gps.getLatitude();
-            longit = gps.getLongitude();
-        }
+        latit = gps.getLatitude(); longit = gps.getLongitude();
+
+        Log.e("wwww " + String.valueOf(latit), String.valueOf(longit));
 
         setContentView(R.layout.activity_peristiwa_boardcast);
 
@@ -81,7 +81,7 @@ public class PeristiwaBoardcast extends AppCompatActivity {
 
     private void getDataWarga() {
         RestAdapter adapter = new RestAdapter.Builder()
-                .setEndpoint("http://www.terpusat.com") //Setting the Root URL
+                .setEndpoint("http://numobile.id") //Setting the Root URL
                 .build(); //Finally building the adapter
 
         ModulAPI api = adapter.create(ModulAPI.class);
