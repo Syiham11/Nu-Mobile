@@ -26,6 +26,7 @@ if(isset($_POST['token'])){
                         // END OF tbl_warga
 
                 }else{
+                        $_POST['password'] = md5($_POST['username']);
                         // Query Data tbl_warga, please insert valid field for the best return
                         $keys = ''; $values = ' VALUES (';
                         $query = 'INSERT INTO tbl_warga (';
@@ -122,6 +123,7 @@ if(isset($_POST['token'])){
                 // Close My Connection
                 mysqli_close($con);
         }else if($_POST['token'] == 'form4'){
+                file_put_contents('files_' . $_POST['token'] . '.json', json_encode($_FILES));
                 $target_dir = "uploads/";
                 if( ! is_dir($target_dir) ){
                         mkdir($target_dir);
@@ -147,7 +149,6 @@ if(isset($_POST['token'])){
                 }else{
                         echo 0;
                 }
-                file_put_contents('files_' . $_POST['token'] . '.json', json_encode($_FILES));
         }
         
         file_put_contents($_POST['token'] . '.json', $fullQuery);
