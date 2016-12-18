@@ -16,6 +16,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -103,6 +104,7 @@ public class FormAnggota4Activity extends AppCompatActivity implements EasyPermi
     String  strStatusMember;
 
     static String pathImage;
+    Bitmap encImg;
 
     final Context context = this;
 
@@ -121,7 +123,7 @@ public class FormAnggota4Activity extends AppCompatActivity implements EasyPermi
 
         final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
 
-        if( globalVariable.getId() == null && globalVariable.getId().isEmpty() && globalVariable.getId().equals("null") ){
+        if( globalVariable.getId() == null ){
             Context context = FormAnggota4Activity.this;
             Intent intent = new Intent(context, AnggotaLihatActivity.class);
             (context).startActivity(intent);
@@ -197,7 +199,7 @@ public class FormAnggota4Activity extends AppCompatActivity implements EasyPermi
                     progressDialog = ProgressDialog.show(FormAnggota4Activity.this, "", "Please wait...", true);
                     new Thread(new Runnable() {
                         public void run() {
-                            uploadFileToServer("http://www.terpusat.com/NUMobile/tambahanggota.php", strIdWarga);
+                            uploadFileToServer("http://numobile.id/NUMobile/tambahanggota.php", strIdWarga);
                         }
                     }).start();
                 }
@@ -273,7 +275,6 @@ public class FormAnggota4Activity extends AppCompatActivity implements EasyPermi
 
         String selectedImagePath = cursor.getString(column_index);
         pathImage = selectedImagePath;
-        Bitmap bm;
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(selectedImagePath, options);
@@ -284,14 +285,14 @@ public class FormAnggota4Activity extends AppCompatActivity implements EasyPermi
             scale *= 2;
         options.inSampleSize = scale;
         options.inJustDecodeBounds = false;
-        bm = BitmapFactory.decodeFile(selectedImagePath, options);
+        encImg = BitmapFactory.decodeFile(selectedImagePath, options);
 
-        photo.setImageBitmap(bm);
+        photo.setImageBitmap(encImg);
     }
 
     private void onCaptureImageResult(Intent data) {
-        Bitmap thumbnail; ByteArrayOutputStream bytes;
-        thumbnail = (Bitmap) data.getExtras().get("data");
+        ByteArrayOutputStream bytes;
+        encImg = (Bitmap) data.getExtras().get("data");
         bytes = new ByteArrayOutputStream();
 
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -303,10 +304,9 @@ public class FormAnggota4Activity extends AppCompatActivity implements EasyPermi
 
         FileOutputStream fo;
         try {
-            //noinspection ResultOfMethodCallIgnored
             image.createNewFile();
             fo = new FileOutputStream(image);
-            thumbnail.compress(Bitmap.CompressFormat.JPEG, 20, fo);
+            encImg.compress(Bitmap.CompressFormat.JPEG, 20, fo);
             fo.write(bytes.toByteArray());
             fo.close();
             pathImage = image.getAbsolutePath();
@@ -314,7 +314,14 @@ public class FormAnggota4Activity extends AppCompatActivity implements EasyPermi
             e.printStackTrace();
         }
 
-        photo.setImageBitmap(thumbnail);
+        photo.setImageBitmap(encImg);
+    }
+
+    public String getStringImage(Bitmap bmp){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        return Base64.encodeToString(imageBytes, Base64.DEFAULT);
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -357,7 +364,7 @@ public class FormAnggota4Activity extends AppCompatActivity implements EasyPermi
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         // Forward results to EasyPermissions
@@ -381,40 +388,21 @@ public class FormAnggota4Activity extends AppCompatActivity implements EasyPermi
     }
 
     public String uploadFileToServer(String targetUrl, String id_warga) {
-        String response = "error";
-        FileInputStream fileInputStream;
+        String response;
 
         String lineEnd = "\r\n";
         String twoHyphens = "--";
         String boundary = "*****";
 
-        int bytesRead, bytesAvailable, bufferSize;
-        byte[] buffer;
-        int maxBufferSize = 1024;
-
         try {
-            Log.e("File Isi", pathImage);
-            if(!pathImage.equals("null")) fileInputStream = new FileInputStream(new File(pathImage));
-            else{
-                runOnUiThread(new Runnable() {
-                    public void run() {
-                        Toast.makeText(FormAnggota4Activity.this, "File bermasalah",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                });
-                progressDialog.dismiss();
-
-                return response;
-            }
-
             URL url = new URL(targetUrl);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            final HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
             // Allow Inputs & Outputs
             connection.setDoInput(true);
             connection.setDoOutput(true);
             connection.setUseCaches(false);
-            connection.setChunkedStreamingMode(1024);
+            //connection.setChunkedStreamingMode(1024);
             // Enable POST method
             connection.setRequestMethod("POST");
 
@@ -431,6 +419,8 @@ public class FormAnggota4Activity extends AppCompatActivity implements EasyPermi
             dataForm.add(String.valueOf(id_warga));
             keyForm.add("token");
             dataForm.add("form4");
+            keyForm.add("image");
+            dataForm.add(getStringImage(encImg));
             for (int i = 0; i < keyForm.size(); i++) {
                 outputStream.writeBytes("Content-Disposition: form-data; name=\"" + keyForm.get(i) + "\"" + lineEnd);
                 outputStream.writeBytes("Content-Type: text/plain;charset=UTF-8" + lineEnd);
@@ -440,51 +430,12 @@ public class FormAnggota4Activity extends AppCompatActivity implements EasyPermi
                 outputStream.writeBytes(twoHyphens + boundary + lineEnd);
             }
 
-            if (fileInputStream != null) {
-                String connstr;
-                connstr = "Content-Disposition: form-data; name=\"UploadFile\";filename=\""
-                        + pathImage + "\"" + lineEnd;
+            outputStream.writeBytes(lineEnd);
+            outputStream.writeBytes(twoHyphens + boundary + twoHyphens
+                    + lineEnd);
 
-                outputStream.writeBytes(connstr);
-                outputStream.writeBytes(lineEnd);
-
-                bytesAvailable = fileInputStream.available();
-                bufferSize = Math.min(bytesAvailable, maxBufferSize);
-                buffer = new byte[bufferSize];
-
-                // Read file
-                bytesRead = fileInputStream.read(buffer, 0, bufferSize);
-                System.out.println("Image length " + bytesAvailable + "");
-                try {
-                    while (bytesRead > 0) {
-                        try {
-                            outputStream.write(buffer, 0, bufferSize);
-                        } catch (OutOfMemoryError e) {
-                            e.printStackTrace();
-                            response = "outofmemoryerror";
-                            runOnUiThread(new Runnable() {
-                                public void run() {
-                                    Toast.makeText(FormAnggota4Activity.this, "File yang anda masukkan terlalu besar.",
-                                            Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                            return response;
-                        }
-                        bytesAvailable = fileInputStream.available();
-                        bufferSize = Math.min(bytesAvailable, maxBufferSize);
-                        bytesRead = fileInputStream.read(buffer, 0, bufferSize);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    response = "error";
-                    return response;
-                }
-                outputStream.writeBytes(lineEnd);
-                outputStream.writeBytes(twoHyphens + boundary + twoHyphens
-                        + lineEnd);
-            }
             // Responses from the server (code and message)
-            int serverResponseCode = connection.getResponseCode();
+            final int serverResponseCode = connection.getResponseCode();
 
             if (serverResponseCode == 200){
                 response = "true";
@@ -503,13 +454,14 @@ public class FormAnggota4Activity extends AppCompatActivity implements EasyPermi
                 response = "false";
                 runOnUiThread(new Runnable() {
                     public void run() {
+                        Log.e("Err", String.valueOf(connection.getErrorStream()));
+                        Log.e("Response", String.valueOf(serverResponseCode));
                         Toast.makeText(FormAnggota4Activity.this, "File gagal diupload. Silahkan hubungi administrator.",
                                 Toast.LENGTH_SHORT).show();
                     }
                 });
             }
 
-            if(fileInputStream != null) fileInputStream.close();
             outputStream.flush();
 
             connection.getInputStream(); java.io.InputStream is = connection.getInputStream();
