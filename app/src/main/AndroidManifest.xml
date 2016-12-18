@@ -30,10 +30,6 @@
         android:name="android.hardware.camera"
         android:required="true" />
 
-    <!--
-        android:largeHeap="true"
-        android:hardwareAccelerated="false"
-    -->
     <application
         android:name=".activity.GlobalClass"
         android:allowBackup="true"
@@ -151,7 +147,7 @@
         <activity
             android:name=".activity.kegiatan.PeristiwaVideoAdd"
             android:label="TAMBAH VIDEO PERISTIWA"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         />
 
         <!-- MENU PELAYANAN -->

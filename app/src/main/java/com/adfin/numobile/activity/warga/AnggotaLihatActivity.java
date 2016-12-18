@@ -1,6 +1,5 @@
 package com.adfin.numobile.activity.warga;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -8,23 +7,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.adfin.numobile.ModulAPI;
 import com.adfin.numobile.R;
-import com.adfin.numobile.activity.GlobalClass;
-import com.adfin.numobile.activity.kegiatan.KegiatanMenuActivity;
-import com.adfin.numobile.activity.kegiatan.PeristiwaBoardcast;
 import com.adfin.numobile.helper.ListAdapterAll;
-import com.adfin.numobile.model.CDataPesantren;
 import com.adfin.numobile.model.CDataWarga;
-import com.adfin.numobile.model.DataPesantren;
 import com.adfin.numobile.model.DataWarga;
 
 import java.util.ArrayList;
@@ -73,7 +62,7 @@ public class AnggotaLihatActivity extends AppCompatActivity {
         //Creating a RestAdapter
 
         RestAdapter adapter = new RestAdapter.Builder()
-                .setEndpoint("http://www.terpusat.com") //Setting the Root URL
+                .setEndpoint("http://numobile.id") //Setting the Root URL
                 .build(); //Finally building the adapter
 
         //Creating object for our interface
@@ -87,7 +76,7 @@ public class AnggotaLihatActivity extends AppCompatActivity {
                 {
                     @Override
                     public void success(CDataWarga cdatawarga, Response response) {
-                        lstdatawarga = new ArrayList<DataWarga>();
+                        lstdatawarga = new ArrayList<>();
 
                         lstdatawarga = cdatawarga.getDataWarga();
 
@@ -103,11 +92,8 @@ public class AnggotaLihatActivity extends AppCompatActivity {
 
                         recyclerView= (RecyclerView) findViewById(R.id.recycler_view);
                         ListAdapterAll adapter=new ListAdapterAll(AnggotaLihatActivity.this, imageWarga, namaWarga, alamatWarga);
-                        //membuat adapter baru untuk reyclerview
                         recyclerView.setAdapter(adapter);
-                        //menset nilai dari adapter
-                        //recyclerView.setHasFixedSize(true);
-                        //menset setukuran
+                        recyclerView.setHasFixedSize(true);
                         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
                         mSwipeRefreshLayout.setRefreshing(false);
@@ -120,7 +106,7 @@ public class AnggotaLihatActivity extends AppCompatActivity {
 
                         runOnUiThread(new Runnable() {
                             public void run() {
-                                Toast.makeText(AnggotaLihatActivity.this, merror.toString() + " Terjadi Kesalahan Kooneksi ", Toast.LENGTH_LONG).show();
+                                Toast.makeText(AnggotaLihatActivity.this, merror + " Terjadi Kesalahan Kooneksi ", Toast.LENGTH_LONG).show();
                             }
                         });
                     }

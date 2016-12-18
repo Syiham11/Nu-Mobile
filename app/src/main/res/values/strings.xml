@@ -167,5 +167,5 @@
         <item>Ya</item>
     </string-array>
     <string name="title_activity_form_anggota5">FormAnggota5Activity</string>
-
+    <string name="google_maps_key">AIzaSyCo-uhd7KWVSTxP7dFozzDOW4m7O9MpjEw</string>
 </resources>

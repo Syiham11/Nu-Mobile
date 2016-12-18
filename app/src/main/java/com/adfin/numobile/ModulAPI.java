@@ -47,6 +47,12 @@ public interface ModulAPI {
     @GET("/NUMobile/getusers.php") // Sudah
     public void  getDataWarga(Callback<CDataWarga> callback);
 
+    @GET("/NUMobile/getuserradius.php") // Sudah
+    public void  getDataWargaRadius(
+            @Query("lat") String latitude,
+            @Query("long") String longitude,
+            Callback<CDataWarga> callback);
+
     @GET("/NUMobile/ambildataprovinsi.php") // udah
     public void  getDataProvinsi(Callback<CDataProvinsi> callback);
 

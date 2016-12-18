@@ -52,8 +52,7 @@ public class ListAdapterAll extends  RecyclerView.Adapter<ViewHolderAll>{
             holder.tv2.setText(this.lain[position]);
         holder.imageView.setOnClickListener(clickListener);
         holder.imageView.setTag(holder);
-        if(this.imag[position].length() > 8 ) {
-            Log.e("Image", this.imag[position]);
+        if(this.imag[position] != null && !this.imag[position].equals("null")) {
             Picasso.with(this.context)
                     .load(this.imag[position])
                     .resize(70, 70)
