@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_min"
+    tools:context="com.adfin.numobile.activity.kearsipan.KearsipanSuratMasuk">
+
+    <RelativeLayout
+        android:layout_marginTop="@dimen/component_margin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="top"
+        android:paddingLeft="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:hint="Dari"
+            android:textSize="20sp"
+            android:textColorHint="#000"
+            android:textColor="@color/colorEditTextPrimary"
+            android:id="@+id/textView"
+            android:layout_marginTop="20dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/editDari"
+            android:textSize="20sp"
+            android:textColorHint="#000"
+            android:textColor="@color/colorEditTextPrimary"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="90dp" />
+
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:hint="Kepada"
+            android:textSize="20sp"
+            android:textColorHint="#000"
+            android:textColor="@color/colorEditTextPrimary"
+            android:id="@+id/textView2"
+            android:layout_below="@+id/textView"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="20dp"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/editKepada"
+            android:textSize="20sp"
+            android:textColorHint="#000"
+            android:layout_below="@+id/editDari"
+            android:textColor="@color/colorEditTextPrimary"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="90dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editSubjek"
+            android:hint="Subjek"
+            android:textSize="20sp"
+            android:textColorHint="#000"
+            android:layout_below="@+id/editKepada"
+            android:textColor="@color/colorEditTextPrimary"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="20dp"
+            android:layout_alignParentStart="true"
+             />
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/p_test"
+            android:adjustViewBounds="true"
+            android:id="@+id/gambar"
+            android:clickable="true"
+            android:background="#2a2735"
+            android:scaleType="centerInside"
+            android:layout_below="@+id/editSubjek"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="22dp"
+            android:layout_marginEnd="22dp"
+            android:layout_marginTop="25dp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#329049"
+            android:id="@+id/buttonSave"
+            android:text="@string/button_save"
+            android:textSize="@dimen/component_button"
+            android:textColor="#fff"
+            android:layout_below="@+id/gambar"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="15dp"
+            android:layout_alignRight="@+id/gambar"
+            android:layout_alignEnd="@+id/gambar" />
+
+
+    </RelativeLayout>
+
+</ScrollView>
