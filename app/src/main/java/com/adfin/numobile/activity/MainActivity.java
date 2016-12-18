@@ -1,9 +1,10 @@
 package com.adfin.numobile.activity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 
@@ -12,7 +13,7 @@ import com.adfin.numobile.activity.desa.DesaMenuActivity;
 import com.adfin.numobile.activity.doa.DoaMenuActivity;
 import com.adfin.numobile.activity.dompet.DompetMenuActivity;
 import com.adfin.numobile.activity.kearsipan.KearsipanMenuActivity;
-import com.adfin.numobile.activity.kegiatan.KegiatanMenuActivity;
+import com.adfin.numobile.activity.kearsipan.KearsipanSuratKeluar;
 import com.adfin.numobile.activity.kegiatan.PeristiwaBoardcast;
 import com.adfin.numobile.activity.kelautan.KelautanMenuActivity;
 import com.adfin.numobile.activity.kesehatan.KesehatanMenuActivity;
@@ -24,11 +25,15 @@ import com.adfin.numobile.activity.pengurus.PengurusMenuActivity;
 import com.adfin.numobile.activity.pertanian.PertanianMenuActivity;
 import com.adfin.numobile.activity.promosi.PromosiMenuActivity;
 import com.adfin.numobile.activity.warga.AnggotaLihatActivity;
-import com.adfin.numobile.activity.warga.AnggotaMenuActivity;
 import com.adfin.numobile.activity.warung.WarungMenuActivity;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.List;
 
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.AppSettingsDialog;
+import pub.devrel.easypermissions.EasyPermissions;
+
+public class MainActivity extends AppCompatActivity implements EasyPermissions.PermissionCallbacks {
 
     String username;
 
@@ -37,9 +42,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Intent i = getIntent();
-        // Receiving the Data
-        //username = i.getStringExtra("id_user");
+        permissionExternal();
 
         //baris 1
         Button btnPengurus = (Button) findViewById(R.id.btn_pengurus);
@@ -85,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         btnArsip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, KearsipanMenuActivity.class);
+                Intent intent = new Intent(MainActivity.this, KearsipanSuratKeluar.class);
 
                 startActivity(intent);
             }
@@ -212,5 +215,44 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @AfterPermissionGranted(200)
+    private void permissionExternal() {
+        String[] perms = {
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.ACCESS_FINE_LOCATION
+        };
+        if ( ! EasyPermissions.hasPermissions(this, perms) ) {
+            EasyPermissions.requestPermissions(this, "This app needs access to your camera so you can take pictures.",
+                    200, perms);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        // EasyPermissions handles the request result.
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+
+        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
+            new AppSettingsDialog.Builder(this, "This app may not work correctly without the requested permissions. Open the app settings screen to modify app permissions.")
+                    .setTitle("Permissions Required")
+                    .setPositiveButton("Settings")
+                    .setNegativeButton("Settings dialog canceled", null)
+                    .setRequestCode(500)
+                    .build()
+                    .show();
+        }
+
     }
 }
