@@ -9,49 +9,32 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@drawable/background"
-    tools:showIn="@layout/content_menu_kearsipan"
     tools:context=".activity.kearsipan.KearsipanMenuActivity">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <!-- baris 1-->
-    <Button
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:background="@drawable/sura_masuk"
-        android:id="@+id/btn_surat_masuk"
-        android:layout_marginTop="100dp"
-        />
-    <Button
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:background="@drawable/surat_keluar"
-        android:id="@+id/btn_surat_keluar"
-        android:layout_marginTop="100dp"
-        android:layout_marginLeft="180dp"
-        />
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:gravity="center">
 
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:id="@+id/btn_surat_masuk"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/sura_masuk"
+            />
 
-    <!-- baris 2-->
-    <Button
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:background="@drawable/surat_disposisi"
-        android:id="@+id/btn_surat_disposisi"
-        android:layout_marginTop="270dp"
-        />
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@drawable/chatting"
+            android:id="@+id/btn_chatting"
+            android:layout_gravity="center_horizontal"
+            />
 
-    <Button
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:background="@drawable/chatting"
-        android:id="@+id/btn_chatting"
-        android:layout_marginTop="270dp"
-        android:layout_marginLeft="180dp"
-        />
+    </LinearLayout>
 
-
-    </RelativeLayout>
 
 </LinearLayout>
