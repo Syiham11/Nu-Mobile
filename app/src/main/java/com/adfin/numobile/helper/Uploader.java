@@ -131,15 +131,19 @@ public class Uploader {
                     public void run() {
                         progressDialog.dismiss();
 
-                        if(s.equals("error"))
-                            Toast.makeText(mContext, "Upload Gagal, Silahkan Coba Kembali",
-                                    Toast.LENGTH_SHORT).show();
-                        else if(s.equals("server"))
-                            Toast.makeText(mContext, "Terjadi Kesalahan Server, Hubungi Administrator",
-                                    Toast.LENGTH_SHORT).show();
-                        else if(s.equals("success")){
-                            Intent intent = new Intent(mContext, mRedirect);
-                            mContext.startActivity(intent);
+                        switch (s) {
+                            case "error":
+                                Toast.makeText(mContext, "Upload Gagal, Silahkan Coba Kembali",
+                                        Toast.LENGTH_SHORT).show();
+                                break;
+                            case "server":
+                                Toast.makeText(mContext, "Terjadi Kesalahan Server, Hubungi Administrator",
+                                        Toast.LENGTH_SHORT).show();
+                                break;
+                            case "success":
+                                Intent intent = new Intent(mContext, mRedirect);
+                                mContext.startActivity(intent);
+                                break;
                         }
                     }
                 });
