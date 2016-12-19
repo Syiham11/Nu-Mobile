@@ -20,7 +20,7 @@ public class RalewayTextViewRegular extends TextView {
 
     public RalewayTextViewRegular(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        setTypeface(App.ralewayRegular);
+        //setTypeface(App.ralewayRegular);
     }
 
 }

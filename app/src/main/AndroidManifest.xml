@@ -31,14 +31,13 @@
         android:required="true" />
 
     <application
-        android:name=".activity.GlobalClass"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".module.warga.controller.Home">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

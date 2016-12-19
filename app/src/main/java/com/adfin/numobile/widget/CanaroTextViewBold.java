@@ -19,7 +19,7 @@ public class CanaroTextViewBold extends TextView {
 
     public CanaroTextViewBold(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        setTypeface(App.canaroExtraBold);
+        //setTypeface(App.canaroExtraBold);
     }
 
 }

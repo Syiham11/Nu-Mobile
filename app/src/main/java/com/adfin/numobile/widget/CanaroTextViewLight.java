@@ -20,7 +20,7 @@ public class CanaroTextViewLight extends TextView {
 
     public CanaroTextViewLight(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        setTypeface(App.canaroLight);
+        //setTypeface(App.canaroLight);
     }
 
 }

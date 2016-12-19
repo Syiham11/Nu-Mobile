@@ -19,7 +19,7 @@ public class RalewayTextViewLight extends TextView {
 
     public RalewayTextViewLight(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        setTypeface(App.ralewayLight);
+        //setTypeface(App.ralewayLight);
     }
 
 }
