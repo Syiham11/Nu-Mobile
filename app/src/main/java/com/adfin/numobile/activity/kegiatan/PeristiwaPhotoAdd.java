@@ -93,7 +93,7 @@ public class PeristiwaPhotoAdd extends AppCompatActivity {
                     data.put("langitude", String.valueOf(longit));
                     data.put("type", "1");
 
-                    Uploader.with(PeristiwaPhotoAdd.this)
+                    Uploader.with(PeristiwaPhotoAdd.this, PeristiwaPhoto.class)
                             .load("http://www.terpusat.com/NUMobile/simpanperistiwa.php")
                             .data(data)
                             .message("Mohon Tunggu ....")

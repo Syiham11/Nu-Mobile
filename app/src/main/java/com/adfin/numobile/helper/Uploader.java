@@ -23,10 +23,12 @@ public class Uploader {
     private String mMsg;
     private Boolean error = false;
     private static Context mContext;
+    private static Class mRedirect;
 
     @Nullable
-    public static Uploader with(Context context){
+    public static Uploader with(Context context, Class redirect){
         mContext = context;
+        mRedirect = redirect;
         return new Uploader();
     }
 
@@ -137,6 +139,10 @@ public class Uploader {
                         else if(s.equals("server"))
                             Toast.makeText(mContext, "Terjadi Kesalahan Server, Hubungi Administrator",
                                     Toast.LENGTH_SHORT).show();
+                        else if(s.equals("success")){
+                            Intent intent = new Intent(mContext, mRedirect);
+                            mContext.startActivity(intent);
+                        }
                     }
                 });
             }
