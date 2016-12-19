@@ -14,7 +14,11 @@ if(isset($_POST['token'])){
 
 	if(isset($_POST['path']) && $_POST['path']){
 		$img = base64_decode($_POST['path']);
-		$fullpath = $target_dir . strtotime("now") . ".jpg";
+		if($_POST['type'] == 1)
+			$fullpath = $target_dir . strtotime("now") . ".jpg";
+		else
+			$fullpath = $target_dir . strtotime("now") . ".mp4";
+
 		$success = @file_put_contents($fullpath, $img);
 	}else{
 		$success = true;

@@ -49,8 +49,6 @@ public class Uploader {
 
     public Uploader upload() {
         class backgroundUpload extends AsyncTask<String, Void, String> {
-            /*StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);*/
 
             private ProgressDialog progressDialog;
 
