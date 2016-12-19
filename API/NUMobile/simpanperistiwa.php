@@ -1,8 +1,11 @@
 <?php
 if(isset($_POST['token'])){
+
+	file_put_contents('azzzz.json', json_encode($_POST));
+
 	define('HOST','localhost');
-	define('USER','numobile');
-	define('PASS','sitiajayangbuat');
+	define('USER','media');
+	define('PASS','tubokarto1904');
 	define('DB','numobile');
 
 	$con = mysqli_connect(HOST,USER,PASS,DB) or die('Unable to Connect');

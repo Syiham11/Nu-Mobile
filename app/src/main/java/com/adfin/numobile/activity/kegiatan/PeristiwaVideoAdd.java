@@ -178,7 +178,7 @@ public class PeristiwaVideoAdd extends AppCompatActivity {
                 file = new File(pathImage);
                 videoView.setVideoPath(selectedImagePath);
                 videoView.requestFocus();
-                //videoView.start();
+                videoView.start();
             } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(getApplicationContext(),
                         "User cancelled image picker", Toast.LENGTH_SHORT)
@@ -196,7 +196,7 @@ public class PeristiwaVideoAdd extends AppCompatActivity {
             file = new File(fileUri.getPath());
             videoView.setVideoPath(fileUri.getPath());
             pathImage = fileUri.getPath();
-            //videoView.start();
+            videoView.start();
         } catch (Exception e) {
             e.printStackTrace();
         }
