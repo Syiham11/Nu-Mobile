@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <uses-feature android:name="android.hardware.location.gps" />
@@ -258,6 +259,10 @@
         <activity
             android:name=".activity.kearsipan.KearsipanChatting"
             android:label="@string/title_activity_kearsipan_chatting"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.kearsipan.KearsipanChattingPengurus"
+            android:label="@string/title_activity_kearsipan_chatting_pengurus"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
