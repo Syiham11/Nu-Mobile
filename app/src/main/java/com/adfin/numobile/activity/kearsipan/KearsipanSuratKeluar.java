@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 
 import com.adfin.numobile.R;
@@ -17,13 +18,12 @@ public class KearsipanSuratKeluar extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kearsipan_surat_keluar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(KearsipanSuratKeluar.this, KearsipanMenuActivity.class);
-                startActivityForResult(i, 1);
-            }
-        });
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_add_kearsipan, menu);
+        return true;
+    }
+
 }

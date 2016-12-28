@@ -1,0 +1,45 @@
+﻿Merge branch 'beta' of https://github.com/prakasa1904/Nu-Mobile into beta
+
+# Conflicts:
+#	app/src/main/java/com/adfin/numobile/activity/MainActivity.java
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch beta
+# Your branch is up-to-date with 'origin/beta'.
+#
+# All conflicts fixed but you are still merging.
+#
+# Changes to be committed:
+#	modified:   .idea/inspectionProfiles/Project_Default.xml
+#	modified:   .idea/misc.xml
+#	deleted:    .idea/vcs.xml
+#	new file:   API/NUMobile/getuserradius.php
+#	modified:   API/NUMobile/tambahanggota.php
+#	modified:   README.md
+#	modified:   app/src/main/AndroidManifest.xml
+#	modified:   app/src/main/java/com/adfin/numobile/ModulAPI.java
+#	modified:   app/src/main/java/com/adfin/numobile/activity/MainActivity.java
+#	modified:   app/src/main/java/com/adfin/numobile/activity/kegiatan/PeristiwaBoardcast.java
+#	modified:   app/src/main/java/com/adfin/numobile/activity/warga/AnggotaLihatActivity.java
+#	modified:   app/src/main/java/com/adfin/numobile/activity/warga/FormAnggota1Activity.java
+#	modified:   app/src/main/java/com/adfin/numobile/activity/warga/FormAnggota2Activity.java
+#	modified:   app/src/main/java/com/adfin/numobile/activity/warga/FormAnggota3Activity.java
+#	modified:   app/src/main/java/com/adfin/numobile/activity/warga/FormAnggota4Activity.java
+#	new file:   app/src/main/java/com/adfin/numobile/helper/GPSTracker.java
+#	modified:   app/src/main/java/com/adfin/numobile/helper/ListAdapterAll.java
+#	modified:   app/src/main/java/com/adfin/numobile/model/DataWarga.java
+#	modified:   app/src/main/res/layout/activity_doa_menu.xml
+#	modified:   app/src/main/res/layout/content_peristiwa_broadcast.xml
+#	modified:   app/src/main/res/layout/infomap.xml
+#	modified:   app/src/main/res/values/colors.xml
+#	modified:   app/src/main/res/values/strings.xml
+#	modified:   build.gradle
+#
+
