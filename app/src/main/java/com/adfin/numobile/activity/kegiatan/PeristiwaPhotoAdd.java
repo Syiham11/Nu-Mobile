@@ -1,6 +1,7 @@
 package com.adfin.numobile.activity.kegiatan;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
@@ -11,10 +12,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,30 +28,36 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.adfin.numobile.R;
+import com.adfin.numobile.helper.GPSTracker;
+import com.adfin.numobile.helper.Uploader;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
-import java.util.Random;
 
 public class PeristiwaPhotoAdd extends AppCompatActivity {
 
     ImageView imageView;
     EditText deskripsi;
+    Button btnsave;
     TextView textError, textLocation;
     ProgressBar progressBar;
 
     String pathImage = "";
+    Bitmap encImg;
+    private double latit, longit = 0;
     final Context context = this;
 
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
     private static final int CAMERA_PICK_IMAGE_REQUEST_CODE = 200;
     private static final String IMAGE_DIRECTORY_NAME = "NU";
     public static final int MEDIA_TYPE_IMAGE = 1;
-    public static final int MEDIA_TYPE_PICK = 2;
     private Uri fileUri;
+
+    HashMap data = new HashMap();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,15 +72,33 @@ public class PeristiwaPhotoAdd extends AppCompatActivity {
         textError.setVisibility(View.GONE);
         progressBar.setVisibility(View.GONE);
 
+        GPSTracker gps = new GPSTracker(this);
+
+        latit = gps.getLatitude(); longit = gps.getLongitude();
+
         imageView = (ImageView) findViewById(R.id.gambar);
 
-        Button buttonSave = (Button) findViewById(R.id.buttonSave);
-        buttonSave.setOnClickListener(new View.OnClickListener() {
+        btnsave = (Button) findViewById(R.id.buttonSave);
+        btnsave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (  ( !deskripsi.getText().toString().equals("")) && ( !pathImage.equals(""))) {
-                    progressBar.setVisibility(View.VISIBLE);
-                    //saveData();
+                    //progressBar.setVisibility(View.VISIBLE);
+
+                    data.put("token", "token");
+                    data.put("id_warga", "1");
+                    data.put("deskripsi", deskripsi.getText().toString());
+                    data.put("path", getStringImage(encImg));
+                    data.put("latitude", String.valueOf(latit));
+                    data.put("langitude", String.valueOf(longit));
+                    data.put("type", "1");
+
+                    Uploader.with(PeristiwaPhotoAdd.this, PeristiwaPhoto.class)
+                            .load("http://www.terpusat.com/NUMobile/simpanperistiwa.php")
+                            .data(data)
+                            .message("Mohon Tunggu ....")
+                            .upload()
+                            .finish();
                 }else if (  ( deskripsi.getText().toString().equals("")) && ( !pathImage.equals(""))) {
                     textError.setVisibility(View.VISIBLE);
                     textError.setText("Masukan deskripsi kegiatan!");
@@ -87,7 +111,6 @@ public class PeristiwaPhotoAdd extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     private void captureImage() {
@@ -129,7 +152,6 @@ public class PeristiwaPhotoAdd extends AppCompatActivity {
                 cursor.moveToFirst();
                 String selectedImagePath = cursor.getString(column_index);
                 pathImage = cursor.getString(column_index);
-                Bitmap bm;
                 BitmapFactory.Options options = new BitmapFactory.Options();
                 options.inJustDecodeBounds = true;
                 BitmapFactory.decodeFile(selectedImagePath, options);
@@ -140,8 +162,8 @@ public class PeristiwaPhotoAdd extends AppCompatActivity {
                     scale *= 2;
                 options.inSampleSize = scale;
                 options.inJustDecodeBounds = false;
-                bm = BitmapFactory.decodeFile(selectedImagePath, options);
-                imageView.setImageBitmap(bm);
+                encImg = BitmapFactory.decodeFile(selectedImagePath, options);
+                imageView.setImageBitmap(encImg);
             } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(getApplicationContext(),
                         "User cancelled image picker", Toast.LENGTH_SHORT)
@@ -159,11 +181,11 @@ public class PeristiwaPhotoAdd extends AppCompatActivity {
             imageView.setVisibility(View.VISIBLE);
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inSampleSize = 8;
-            final Bitmap bitmap = BitmapFactory.decodeFile(fileUri.getPath(),
+            encImg = BitmapFactory.decodeFile(fileUri.getPath(),
                     options);
             pathImage = fileUri.getPath();
 
-            imageView.setImageBitmap(bitmap);
+            imageView.setImageBitmap(encImg);
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
@@ -200,64 +222,12 @@ public class PeristiwaPhotoAdd extends AppCompatActivity {
         return mediaFile;
     }
 
-
-//    protected synchronized void buildGoogleApiClient() {
-//        mGoogleApiClient = new GoogleApiClient.Builder(this)
-//                .addConnectionCallbacks(this)
-//                .addOnConnectionFailedListener(this)
-//                .addApi(LocationServices.API)
-//                .build();
-//    }
-
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        mGoogleApiClient.connect();
-//    }
-//
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//        if (mGoogleApiClient.isConnected()) {
-//            mGoogleApiClient.disconnect();
-//        }
-//    }
-
-//    /**
-//     * Runs when a GoogleApiClient object successfully connects.
-//     */
-//    @Override
-//    public void onConnected(Bundle connectionHint) {
-//        // Provides a simple way of getting a device's location and is well suited for
-//        // applications that do not require a fine-grained location and that do not need location
-//        // updates. Gets the best and most recent location currently available, which may be null
-//        // in rare cases when a location is not available.
-//        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-//        if (mLastLocation != null) {
-//            mLatitudeLabel = String.format("%f", mLastLocation.getLatitude());
-//            mLongitudeLabel = String.format("%f", mLastLocation.getLongitude());
-//
-//            textLocation.setText("Lokasi, " + mLatitudeLabel + " & " + mLongitudeLabel);
-//        } else {
-//            textLocation.setText("Lokasi tidak ditemukan.");
-//        }
-//    }
-//
-//    @Override
-//    public void onConnectionFailed(ConnectionResult result) {
-//        // Refer to the javadoc for ConnectionResult to see what error codes might be returned in
-//        // onConnectionFailed.
-////        Log.i(TAG, "Connection failed: ConnectionResult.getErrorCode() = " + result.getErrorCode());
-//    }
-//
-//
-//    @Override
-//    public void onConnectionSuspended(int cause) {
-//        // The connection to Google Play services was lost for some reason. We call connect() to
-//        // attempt to re-establish the connection.
-////        Log.i(TAG, "Connection suspended");
-//        mGoogleApiClient.connect();
-//    }
+    private String getStringImage(Bitmap bmp){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        return Base64.encodeToString(imageBytes, Base64.DEFAULT);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -301,29 +271,6 @@ public class PeristiwaPhotoAdd extends AppCompatActivity {
 
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void saveImage(Bitmap bitmap) {
-        File file = new File(fileUri.getPath());
-        String root = Environment.getExternalStorageDirectory().toString();
-        File myDir = new File(root + "/KKN");
-        myDir.mkdirs();
-        Random generator = new Random();
-        int n = 10000;
-        n = generator.nextInt(n);
-        String fname = "Image-" + n + ".jpg";
-        file = new File(myDir, fname);
-
-        if (file.exists())
-            file.delete();
-        try {
-            FileOutputStream out = new FileOutputStream(file);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
-            out.flush();
-            out.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @Override

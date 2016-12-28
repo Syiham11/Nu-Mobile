@@ -299,7 +299,7 @@ public class FormAnggota4Activity extends AppCompatActivity implements EasyPermi
         try {
             image.createNewFile();
             fo = new FileOutputStream(image);
-            encImg.compress(Bitmap.CompressFormat.JPEG, 20, fo);
+            encImg.compress(Bitmap.CompressFormat.JPEG, 100, fo);
             fo.write(bytes.toByteArray());
             fo.close();
             pathImage = image.getAbsolutePath();

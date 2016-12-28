@@ -16,14 +16,6 @@
         android:id="@+id/swipeContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <!--<ListView
-            android:id="@+id/list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:listSelector="@drawable/selector_menu"
-            android:divider="@color/colorBackground"
-            android:dividerHeight="0.8dp"/>-->
         <android.support.v7.widget.RecyclerView
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/recycler_view"
@@ -34,7 +26,5 @@
             android:paddingTop="16dp"
             android:scrollbars="vertical"
             />
-
     </android.support.v4.widget.SwipeRefreshLayout>
-
 </RelativeLayout>

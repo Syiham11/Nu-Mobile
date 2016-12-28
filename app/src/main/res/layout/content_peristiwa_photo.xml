@@ -10,7 +10,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.adfin.numobile.activity.kegiatan.PeristiwaPhoto"
+    tools:context=".activity.kegiatan.PeristiwaPhoto"
     android:background="@drawable/background_min"
     tools:showIn="@layout/activity_peristiwa_photo">
 
@@ -20,13 +20,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ListView
-            android:id="@+id/list"
+        <android.support.v7.widget.RecyclerView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/background_min"
-            android:dividerHeight="0.8dp"/>
-
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="16dp"
+            android:paddingTop="16dp"
+            android:scrollbars="vertical"
+            />
     </android.support.v4.widget.SwipeRefreshLayout>
-
 </RelativeLayout>

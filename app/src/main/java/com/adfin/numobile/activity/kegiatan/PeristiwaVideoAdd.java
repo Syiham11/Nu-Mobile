@@ -17,6 +17,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
+import android.util.Base64OutputStream;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,6 +32,8 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.adfin.numobile.R;
+import com.adfin.numobile.helper.GPSTracker;
+import com.adfin.numobile.helper.Uploader;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -38,11 +41,13 @@ import com.google.android.gms.location.LocationServices;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 
 public class PeristiwaVideoAdd extends AppCompatActivity {
@@ -53,21 +58,18 @@ public class PeristiwaVideoAdd extends AppCompatActivity {
     ProgressBar progressBar;
 
     String pathImage = "";
+    static File file;
+    private double latit, longit = 0;
     final Context context = this;
-
-    protected String mLatitudeLabel;
-    protected String mLongitudeLabel;
-
-    protected GoogleApiClient mGoogleApiClient;
-    protected Location mLastLocation;
 
 
     private static final int CAMERA_CAPTURE_VIDEO_REQUEST_CODE = 100;
     private static final int CAMERA_PICK_IMAGE_REQUEST_CODE = 200;
     private static final String IMAGE_DIRECTORY_NAME = "NU";
     public static final int MEDIA_TYPE_VIDEO = 1;
-    public static final int MEDIA_TYPE_PICK = 2;
     private Uri fileUri;
+
+    HashMap data = new HashMap();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,14 +77,16 @@ public class PeristiwaVideoAdd extends AppCompatActivity {
         setContentView(R.layout.activity_peristiwa_video_add);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
         deskripsi = (EditText) findViewById(R.id.editDescription);
         textError = (TextView) findViewById(R.id.errorinfo);
         textLocation = (TextView) findViewById(R.id.locationinfo);
         progressBar = (ProgressBar) findViewById(R.id.progressBarSpinner);
         textError.setVisibility(View.GONE);
         progressBar.setVisibility(View.GONE);
+
+        GPSTracker gps = new GPSTracker(this);
+
+        latit = gps.getLatitude(); longit = gps.getLongitude();
 
         videoView = (VideoView) findViewById(R.id.gambar);
 
@@ -91,8 +95,23 @@ public class PeristiwaVideoAdd extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if ((!deskripsi.getText().toString().equals("")) && (!pathImage.equals(""))) {
-                    progressBar.setVisibility(View.VISIBLE);
-                    //saveData();
+                    //progressBar.setVisibility(View.VISIBLE);
+
+                    data.put("token", "token");
+                    data.put("id_warga", "1");
+                    data.put("deskripsi", deskripsi.getText().toString());
+                    data.put("path", getStringImage());
+                    data.put("latitude", String.valueOf(latit));
+                    data.put("langitude", String.valueOf(longit));
+                    data.put("type", "2");
+
+                    Uploader.with(PeristiwaVideoAdd.this, PeristiwaVideo.class)
+                            .load("http://www.terpusat.com/NUMobile/simpanperistiwa.php")
+                            .data(data)
+                            .message("Mohon Tunggu ....")
+                            .upload()
+                            .finish();
+
                 } else if ((deskripsi.getText().toString().equals("")) && (!pathImage.equals(""))) {
                     textError.setVisibility(View.VISIBLE);
                     textError.setText("Masukan deskripsi kegiatan!");
@@ -156,6 +175,7 @@ public class PeristiwaVideoAdd extends AppCompatActivity {
                 cursor.moveToFirst();
                 String selectedImagePath = cursor.getString(column_index);
                 pathImage = cursor.getString(column_index);
+                file = new File(pathImage);
                 videoView.setVideoPath(selectedImagePath);
                 videoView.requestFocus();
                 videoView.start();
@@ -173,7 +193,7 @@ public class PeristiwaVideoAdd extends AppCompatActivity {
 
     private void previewVideo() {
         try {
-
+            file = new File(fileUri.getPath());
             videoView.setVideoPath(fileUri.getPath());
             pathImage = fileUri.getPath();
             videoView.start();
@@ -212,94 +232,40 @@ public class PeristiwaVideoAdd extends AppCompatActivity {
         // Create a media file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
                 Locale.getDefault()).format(new Date());
-        File mediaFile;
         if (type == MEDIA_TYPE_VIDEO) {
-            mediaFile = new File(mediaStorageDir.getPath() + File.separator
+            file = new File(mediaStorageDir.getPath() + File.separator
                     + "VID_" + timeStamp + ".mp4");
         } else {
             return null;
         }
 
-        return mediaFile;
+        return file;
     }
 
-//    protected synchronized void buildGoogleApiClient() {
-//        mGoogleApiClient = new GoogleApiClient.Builder(this)
-//                .addConnectionCallbacks(this)
-//                .addOnConnectionFailedListener(this)
-//                .addApi(LocationServices.API)
-//                .build();
-//    }
+    private String getStringImage(){
+        InputStream inputStream;
+        try {
+            inputStream = new FileInputStream(file.getAbsolutePath());
+            byte[] buffer = new byte[8192];
+            int bytesRead;
+            ByteArrayOutputStream output = new ByteArrayOutputStream();
+            Base64OutputStream output64 = new Base64OutputStream(output, Base64.DEFAULT);
+            try {
+                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                    output64.write(buffer, 0, bytesRead);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            output64.close();
 
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        mGoogleApiClient.connect();
-//    }
-//
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//        if (mGoogleApiClient.isConnected()) {
-//            mGoogleApiClient.disconnect();
-//        }
-//    }
+            return output.toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
-//    /**
-//     * Runs when a GoogleApiClient object successfully connects.
-//     */
-//    @Override
-//    public void onConnected(Bundle connectionHint) {
-//        // Provides a simple way of getting a device's location and is well suited for
-//        // applications that do not require a fine-grained location and that do not need location
-//        // updates. Gets the best and most recent location currently available, which may be null
-//        // in rare cases when a location is not available.
-//        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-//        if (mLastLocation != null) {
-//            mLatitudeLabel = String.format("%f", mLastLocation.getLatitude());
-//            mLongitudeLabel = String.format("%f", mLastLocation.getLongitude());
-//
-//            textLocation.setText("Lokasi, " + mLatitudeLabel + " & " + mLongitudeLabel);
-//        } else {
-//            textLocation.setText("Lokasi tidak ditemukan.");
-//        }
-//    }
-//
-//    @Override
-//    public void onConnectionFailed(ConnectionResult result) {
-//        // Refer to the javadoc for ConnectionResult to see what error codes might be returned in
-//        // onConnectionFailed.
-////        Log.i(TAG, "Connection failed: ConnectionResult.getErrorCode() = " + result.getErrorCode());
-//    }
-//
-//
-//    @Override
-//    public void onConnectionSuspended(int cause) {
-//        // The connection to Google Play services was lost for some reason. We call connect() to
-//        // attempt to re-establish the connection.
-////        Log.i(TAG, "Connection suspended");
-//        mGoogleApiClient.connect();
-//    }
-
-//    protected void onSaveInstanceState(Bundle outState) {
-//        super.onSaveInstanceState(outState);
-//
-//        // save file url in bundle as it will be null on scren orientation
-//        // changes
-//        outState.putParcelable("file_uri", fileUri);
-//    }
-
-    /*
-     * Here we restore the fileUri again
-     */
-//    @Override
-//    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-//        super.onRestoreInstanceState(savedInstanceState);
-//
-//        // get the file url
-//        fileUri = savedInstanceState.getParcelable("file_uri");
-//    }
-//
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_add, menu);

@@ -7,8 +7,8 @@ import com.adfin.numobile.model.CDataInstansi;
 import com.adfin.numobile.model.CDataJenisPekerjaan;
 import com.adfin.numobile.model.CDataKabupten;
 import com.adfin.numobile.model.CDataKecamatan;
-import com.adfin.numobile.model.CDataPekerjaan;
 import com.adfin.numobile.model.CDataPendapatan;
+import com.adfin.numobile.model.CDataPeristiwa;
 import com.adfin.numobile.model.CDataPesantren;
 import com.adfin.numobile.model.CDataProvinsi;
 import com.adfin.numobile.model.CDataSDM;
@@ -24,80 +24,76 @@ import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.Query;
 
-/**
- * Created by Siti on 9/9/2016.
- */
+// Created by Siti on 9/9/2016.
 public interface ModulAPI {
-
-
     @GET("/NUMobile/ceksudahdaftar.php") // Belum
-    public void ceksudahdaftar(
+    void ceksudahdaftar(
             @Query("vsusername") String vsusername,
             @Query("vspassword") String vspassword,
             Callback<DataWarga> callback);
 
     @GET("/NUMobile/cekusername.php") // belum
-    public void cekusername(
+    void cekusername(
             @Query("vsusername") String vsusername,
             Callback<DataWarga> callback);
 
     @GET("/NUMobile/ambilid_warga.php") // belum
-    public void  getDataIdWarga(Callback<DataNoTerkahir> callback);
+    void  getDataIdWarga(Callback<DataNoTerkahir> callback);
 
     @GET("/NUMobile/getusers.php") // Sudah
-    public void  getDataWarga(Callback<CDataWarga> callback);
+    void  getDataWarga(Callback<CDataWarga> callback);
 
     @GET("/NUMobile/getuserradius.php") // Sudah
-    public void  getDataWargaRadius(
+    void  getDataWargaRadius(
             @Query("lat") String latitude,
             @Query("long") String longitude,
             Callback<CDataWarga> callback);
 
     @GET("/NUMobile/ambildataprovinsi.php") // udah
-    public void  getDataProvinsi(Callback<CDataProvinsi> callback);
+    void  getDataProvinsi(Callback<CDataProvinsi> callback);
 
     @GET("/NUMobile/ambildatakabupaten.php") // udah
-    public void  getDataKabupaten(
+    void  getDataKabupaten(
             @Query("vskodeprovinsi") String vskodeprovinsi,
             Callback<CDataKabupten> callback);
 
     @GET("/NUMobile/ambildatakecamatan.php") // udah
-    public void  getDataKecamatan(
+    void  getDataKecamatan(
             @Query("vskodeprovinsi") String vskodeprovinsi,
             @Query("vskodekabkot") String vskodekabkot,
             Callback<CDataKecamatan> callback);
 
     @GET("/NUMobile/ambildatadesa.php") // udah
-    public void  getDataDesa(
+    void  getDataDesa(
             @Query("vskodeprovinsi") String vskodeprovinsi,
             @Query("vskodekabkot") String vskodekabkot,
             @Query("vskodekecamatan") String vskodekecamatan,
             Callback<CDataDesa> callback);
 
     @GET("/NUMobile/ambildataspinnerjenispekerjaan.php") // Udah
-    public void  getDataJenisPekerjaan(Callback<CDataJenisPekerjaan> callback);
+    void  getDataJenisPekerjaan(Callback<CDataJenisPekerjaan> callback);
 
     @GET("/NUMobile/ambildataspinnerinstansi.php") // Udah
-    public void  getDataInstansi(Callback<CDataInstansi> callback);
+    void  getDataInstansi(Callback<CDataInstansi> callback);
 
     @GET("/NUMobile/ambildataspinnerpendapatan.php") // Udah
-    public void  getDataPendapatan(Callback<CDataPendapatan> callback);
+    void  getDataPendapatan(Callback<CDataPendapatan> callback);
 
     @GET("/NUMobile/ambildataspinnerindukorganisasi.php") // Udah
-    public void  getDataIndukOrganisasi(Callback<CDataIndukOrganisasi> callback);
+    void  getDataIndukOrganisasi(Callback<CDataIndukOrganisasi> callback);
 
     @GET("/NUMobile/ambildataspinnerpesantren.php") // Udah
-    public void  getDataPesantren(Callback<CDataPesantren> callback);
+    void  getDataPesantren(Callback<CDataPesantren> callback);
 
     @GET("/NUMobile/getsdm.php") // 28/11/2016
-    public void  getDataSDM(Callback<CDataSDM> callback);
+    void  getDataSDM(Callback<CDataSDM> callback);
 
     @GET("/NUMobile/getdoa.php") // 30/11/2016
-    public void  getDataDoa(Callback<CDataDoa> callback);
+    void  getDataDoa(Callback<CDataDoa> callback);
 
     @FormUrlEncoded
     @POST("/NUMobile/tambahanggota.php")
-    public void insertdataanggota(
+    void insertdataanggota(
             @Field("token") String token,
             @Field("id_warga") String vid_warga,
             @Field("vsusername") String vsusername,
@@ -124,7 +120,7 @@ public interface ModulAPI {
 
     @FormUrlEncoded
     @POST("/NUMobile/tambahanggota.php")//jumlah dan susunan antara yg ini harus sama dengan yang di php
-    public void insertdataanggotal(
+    void insertdataanggotal(
             @Field("token") String token,
             @Field("id_warga") String vid_warga,
             @Field("vsid_jenis_pekerjaan") String vsnama_pekerjaan,
@@ -138,7 +134,7 @@ public interface ModulAPI {
 
     @FormUrlEncoded
     @POST("/NUMobile/tambahanggota.php")//jumlah dan susunan antara yg ini harus sama dengan yang di php
-    public void insertdataanggota2(
+    void insertdataanggota2(
             @Field("token") String token,
             @Field("id_warga") String vid_warga,
             @Field("vsya_tidak_pesantren") String vsya_tidak_pesantren,
@@ -157,14 +153,29 @@ public interface ModulAPI {
 
     @FormUrlEncoded
     @POST("/NUMobile/simpanLatLong.php") // udah
-    public void simpanLatLong(
+    void simpanLatLong(
             @Field("vsusername") String vsusername,
             @Field("vslatitude") String vslatitude,
             @Field("vslongtitude") String vslongtitude,
             Callback<Response> callback);
 
+    @FormUrlEncoded
+    @POST("/NUMobile/simpanperistiwa.php") // Belum
+    void simpanPeristiwa(
+            @Field("token") String token,
+            @Field("id_peristiwa") String idperistiwa,
+            @Field("id_warga") String idwarga,
+            @Field("deskripsi") String vslatitude,
+            @Field("path") String vslongtitude,
+            @Field("latitude") String latitude,
+            @Field("langitude") String langitude,
+            @Field("type") String type,
+            Callback<Response> callback);
 
-
+    @GET("/NUMobile/getperistiwa.php") // Sudah
+    void  getDataPeristiwa(
+            @Query("type") String type,
+            Callback<CDataPeristiwa> callback);
 }
 
 

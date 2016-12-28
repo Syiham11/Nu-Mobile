@@ -12,11 +12,7 @@ import com.adfin.numobile.R;
 import com.adfin.numobile.activity.desa.DesaMenuActivity;
 import com.adfin.numobile.activity.doa.DoaMenuActivity;
 import com.adfin.numobile.activity.dompet.DompetMenuActivity;
-import com.adfin.numobile.activity.kearsipan.KearsipanMenuActivity;
-<<<<<<< HEAD
 import com.adfin.numobile.activity.kearsipan.KearsipanSuratKeluar;
-=======
->>>>>>> cd2caf169e03a11e75f42a41b8f632d2c6187efe
 import com.adfin.numobile.activity.kegiatan.PeristiwaBoardcast;
 import com.adfin.numobile.activity.kelautan.KelautanMenuActivity;
 import com.adfin.numobile.activity.kesehatan.KesehatanMenuActivity;
@@ -29,6 +25,7 @@ import com.adfin.numobile.activity.pertanian.PertanianMenuActivity;
 import com.adfin.numobile.activity.promosi.PromosiMenuActivity;
 import com.adfin.numobile.activity.warga.AnggotaLihatActivity;
 import com.adfin.numobile.activity.warung.WarungMenuActivity;
+import com.adfin.numobile.helper.Nengkene;
 
 import java.util.List;
 
@@ -38,7 +35,7 @@ import pub.devrel.easypermissions.EasyPermissions;
 
 public class MainActivity extends AppCompatActivity implements EasyPermissions.PermissionCallbacks {
 
-    String username;
+    Nengkene location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +43,8 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
         setContentView(R.layout.activity_main);
 
         permissionExternal();
+
+        location = Nengkene.with(getApplicationContext()).start().get();
 
         //baris 1
         Button btnPengurus = (Button) findViewById(R.id.btn_pengurus);
