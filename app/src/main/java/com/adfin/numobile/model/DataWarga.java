@@ -204,7 +204,9 @@ public class DataWarga {
         this.photo = photo;
     }
     public String getphoto() {
-        return "http://numobile.id/NUMobile/" + photo;
+        if( !photo.equals("null") )
+            return "http://numobile.id/NUMobile/" + photo;
+        return null;
     }
 
 

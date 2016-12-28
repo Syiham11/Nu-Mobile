@@ -1,10 +1,9 @@
 package com.adfin.numobile.activity.kegiatan;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,6 +17,7 @@ import com.adfin.numobile.model.DataWarga;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
@@ -26,6 +26,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 import java.util.List;
+
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
@@ -52,8 +53,6 @@ public class PeristiwaBoardcast extends AppCompatActivity {
         GPSTracker gps = new GPSTracker(this);
 
         latit = gps.getLatitude(); longit = gps.getLongitude();
-
-        Log.e("wwww " + String.valueOf(latit), String.valueOf(longit));
 
         setContentView(R.layout.activity_peristiwa_boardcast);
 
@@ -114,11 +113,21 @@ public class PeristiwaBoardcast extends AppCompatActivity {
     }
 
     private void plotMarkers(List<DataWarga> warga) {
+        MarkerOptions markerOption;
+        /*
+        * Set My Location
+        * */
+        markerOption = new MarkerOptions()
+                .position(new LatLng(latit, longit))
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+
+        mMap.addMarker(markerOption);
+
         if (warga.size() > 0) {
             for (int i = 0; i < warga.size(); i++) {
 
                 // Create user marker with custom icon and other options
-                MarkerOptions markerOption = new MarkerOptions().position(new LatLng(Double.parseDouble(warga.get(i).getlatitude()), Double.parseDouble(warga.get(i).getlongtitude())));
+                markerOption = new MarkerOptions().position(new LatLng(Double.parseDouble(warga.get(i).getlatitude()), Double.parseDouble(warga.get(i).getlongtitude())));
 
                 Marker currentMarker = mMap.addMarker(markerOption);
                 mMarkersHashMap.put(currentMarker, warga.get(i));
@@ -142,7 +151,9 @@ public class PeristiwaBoardcast extends AppCompatActivity {
                 mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                     @Override
                     public boolean onMarkerClick(com.google.android.gms.maps.model.Marker marker) {
-                        marker.showInfoWindow();
+                        if( !marker.getId().equals("m0") ){
+                            marker.showInfoWindow();
+                        }
                         return true;
                     }
                 });
@@ -162,10 +173,11 @@ public class PeristiwaBoardcast extends AppCompatActivity {
 
         @Override
         public View getInfoContents(Marker marker) {
+
             DataWarga myMarker = mMarkersHashMap.get(marker);
 
 
-            if ( myMarker.getphoto() != null && !myMarker.getphoto().equals("null") ) {
+            if ( myMarker != null && !myMarker.getphoto().equals("null") ) {
                 Picasso.with(getApplicationContext())
                         .load(myMarker.getphoto())
                         .resize(70, 70)
@@ -174,8 +186,11 @@ public class PeristiwaBoardcast extends AppCompatActivity {
                 markerIcon.setImageDrawable(getDrawable(R.drawable.numobile));
             }
 
-            markerLabel.setText(myMarker.getnama());
-            anotherLabel.setText(myMarker.getalamat());
+            if(myMarker != null && !myMarker.getnama().equals("null")) {
+                markerLabel.setText(myMarker.getnama());
+                anotherLabel.setText(myMarker.getalamat());
+            }
+
             return vmap;
         }
     }
