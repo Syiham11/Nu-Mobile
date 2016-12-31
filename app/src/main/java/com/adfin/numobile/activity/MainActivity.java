@@ -26,6 +26,7 @@ import com.adfin.numobile.activity.promosi.PromosiMenuActivity;
 import com.adfin.numobile.activity.warga.AnggotaLihatActivity;
 import com.adfin.numobile.activity.warung.WarungMenuActivity;
 import com.adfin.numobile.helper.Nengkene;
+import com.adfin.numobile.helper.Session;
 
 import java.util.List;
 
@@ -45,6 +46,10 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
         permissionExternal();
 
         location = Nengkene.with(getApplicationContext()).start().get();
+
+        Session.with(getApplicationContext()).load("user_nu").set("id", "1");
+        Session.with(getApplicationContext()).load("user_nu").set("nama", "Nedya Amrih Prakasa");
+        Session.with(getApplicationContext()).load("user_nu").set("email", "prakasa@devetek.com");
 
         //baris 1
         Button btnPengurus = (Button) findViewById(R.id.btn_pengurus);

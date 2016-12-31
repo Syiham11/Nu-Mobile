@@ -258,7 +258,11 @@
         <activity
             android:name=".activity.kearsipan.KearsipanChatting"
             android:label="@string/title_activity_kearsipan_chatting"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.kearsipan.KearsipanChattingContact"
+            android:label="@string/title_activity_kearsipan_chatting_contact"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
