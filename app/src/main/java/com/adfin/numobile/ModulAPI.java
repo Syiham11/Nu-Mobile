@@ -12,6 +12,7 @@ import com.adfin.numobile.model.CDataPeristiwa;
 import com.adfin.numobile.model.CDataPesantren;
 import com.adfin.numobile.model.CDataProvinsi;
 import com.adfin.numobile.model.CDataSDM;
+import com.adfin.numobile.model.CDataSuratMasuk;
 import com.adfin.numobile.model.CDataWarga;
 import com.adfin.numobile.model.DataNoTerkahir;
 import com.adfin.numobile.model.DataWarga;
@@ -176,6 +177,19 @@ public interface ModulAPI {
     void  getDataPeristiwa(
             @Query("type") String type,
             Callback<CDataPeristiwa> callback);
-}
 
+    @GET("/NUMobile/getsuratmasuk.php") // Sudah
+    void  getDataSuratMasuk(
+            @Query("id_warga") String idwarga,
+            Callback<CDataSuratMasuk> callback);
+
+    @FormUrlEncoded
+    @POST("/NUMobile/simpansurat.php") // Belum
+    void simpanSurat(
+            @Field("id_pengirim") String id_pengirim,
+            @Field("diteruskan_kepada") String diteruskan_kepada,
+            @Field("image") String image,
+            @Field("isi_surat") String isi_surat,
+            Callback<Response> callback);
+}
 

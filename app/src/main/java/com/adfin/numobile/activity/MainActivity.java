@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -27,7 +26,6 @@ import com.adfin.numobile.activity.promosi.PromosiMenuActivity;
 import com.adfin.numobile.activity.warga.AnggotaLihatActivity;
 import com.adfin.numobile.activity.warung.WarungMenuActivity;
 import com.adfin.numobile.helper.Nengkene;
-import com.adfin.numobile.helper.Session;
 
 import java.util.List;
 
@@ -47,11 +45,6 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
         permissionExternal();
 
         location = Nengkene.with(getApplicationContext()).start().get();
-
-        Log.e(
-                "Nama User Login",
-                Session.with(getApplicationContext()).load("user_nu").get("nama")
-        );
 
         //baris 1
         Button btnPengurus = (Button) findViewById(R.id.btn_pengurus);

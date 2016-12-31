@@ -148,7 +148,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void updateLocation() {
         RestAdapter adapter = new RestAdapter.Builder()
-                .setEndpoint(ROOT_URL)
+                .setEndpoint("http://numobile.id")
                 .build();
 
         //Creating object for our interface
