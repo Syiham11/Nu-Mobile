@@ -2,7 +2,6 @@ package com.adfin.numobile.helper;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -14,14 +13,11 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.widget.Toast;
 
 import java.util.List;
 
 import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
-
-import static com.google.android.gms.internal.zzid.runOnUiThread;
 
 // Created by prakasa on 17/12/16.
 

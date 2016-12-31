@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -47,9 +48,10 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
 
         location = Nengkene.with(getApplicationContext()).start().get();
 
-        Session.with(getApplicationContext()).load("user_nu").set("id", "1");
-        Session.with(getApplicationContext()).load("user_nu").set("nama", "Nedya Amrih Prakasa");
-        Session.with(getApplicationContext()).load("user_nu").set("email", "prakasa@devetek.com");
+        Log.e(
+                "Nama User Login",
+                Session.with(getApplicationContext()).load("user_nu").get("nama")
+        );
 
         //baris 1
         Button btnPengurus = (Button) findViewById(R.id.btn_pengurus);

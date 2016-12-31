@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import static com.google.android.gms.internal.zzid.runOnUiThread;
+import static com.google.android.gms.internal.zzir.runOnUiThread;
 
 public class Uploader {
     private String mUrl;
