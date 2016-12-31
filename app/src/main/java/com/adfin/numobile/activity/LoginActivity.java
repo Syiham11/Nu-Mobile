@@ -3,7 +3,6 @@ package com.adfin.numobile.activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -18,14 +17,6 @@ import com.adfin.numobile.R;
 import com.adfin.numobile.helper.Nengkene;
 import com.adfin.numobile.helper.Session;
 import com.adfin.numobile.model.DataWarga;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.appindexing.Thing;
-import com.google.android.gms.common.api.GoogleApiClient;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -42,13 +33,6 @@ public class LoginActivity extends AppCompatActivity {
     TextView textError;
 
     String username, password;
-
-    public static final String ROOT_URL = "http://ciptakarya.pu.go.id/setditjen/kkntematik/";
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,8 +84,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     private void ceksudahdaftar() {
@@ -145,7 +127,6 @@ public class LoginActivity extends AppCompatActivity {
         );
     }
 
-
     private void updateLocation() {
         RestAdapter adapter = new RestAdapter.Builder()
                 .setEndpoint("http://numobile.id")
@@ -168,19 +149,6 @@ public class LoginActivity extends AppCompatActivity {
                 new Callback<Response>() {
                     @Override
                     public void success(Response result, Response response) {
-                        BufferedReader reader = null;
-
-                        String output = "";
-
-                        try {
-                            //Initializing buffered reader
-                            reader = new BufferedReader(new InputStreamReader(result.getBody().in()));
-
-                            //Reading the output in the string
-                            output = reader.readLine();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
 
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
@@ -193,42 +161,6 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }
         );
-    }
-
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    public Action getIndexApiAction() {
-        Thing object = new Thing.Builder()
-                .setName("Login Page") // TODO: Define a title for the content shown.
-                // TODO: Make sure this auto-generated URL is correct.
-                .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
-                .build();
-        return new Action.Builder(Action.TYPE_VIEW)
-                .setObject(object)
-                .setActionStatus(Action.STATUS_TYPE_COMPLETED)
-                .build();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        AppIndex.AppIndexApi.start(client, getIndexApiAction());
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        AppIndex.AppIndexApi.end(client, getIndexApiAction());
-        client.disconnect();
     }
 }
 

@@ -182,14 +182,5 @@ public interface ModulAPI {
     void  getDataSuratMasuk(
             @Query("id_warga") String idwarga,
             Callback<CDataSuratMasuk> callback);
-
-    @FormUrlEncoded
-    @POST("/NUMobile/simpansurat.php") // Belum
-    void simpanSurat(
-            @Field("id_pengirim") String id_pengirim,
-            @Field("diteruskan_kepada") String diteruskan_kepada,
-            @Field("image") String image,
-            @Field("isi_surat") String isi_surat,
-            Callback<Response> callback);
 }
 

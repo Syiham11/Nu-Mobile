@@ -107,7 +107,7 @@
             android:parentActivityName=".activity.MainActivity" />
         <activity
             android:name=".activity.kearsipan.KearsipanSuratMasuk"
-            android:label="SURAT MASUK"
+            android:label="TULIS SURAT"
             android:parentActivityName=".activity.kearsipan.KearsipanMenuActivity" />
         <activity
             android:name=".activity.kearsipan.KearsipanSuratKeluar"

@@ -10,12 +10,12 @@
     <RelativeLayout
         android:layout_marginTop="@dimen/component_margin"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:paddingLeft="20dp"
         android:orientation="vertical">
 
-        <TextView
+        <!--<TextView
             android:layout_width="80dp"
             android:layout_height="40dp"
             android:hint="Dari"
@@ -38,7 +38,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginLeft="90dp" />
+            android:layout_marginLeft="90dp" />-->
 
 
         <TextView
@@ -49,7 +49,6 @@
             android:textColorHint="#000"
             android:textColor="@color/colorEditTextPrimary"
             android:id="@+id/textView2"
-            android:layout_below="@+id/textView"
             android:layout_alignParentLeft="true"
             android:layout_marginTop="20dp"
             android:layout_alignParentStart="true" />
@@ -60,7 +59,6 @@
             android:id="@+id/editKepada"
             android:textSize="20sp"
             android:textColorHint="#000"
-            android:layout_below="@+id/editDari"
             android:textColor="@color/colorEditTextPrimary"
             android:layout_alignParentLeft="true"
             android:layout_marginTop="10dp"

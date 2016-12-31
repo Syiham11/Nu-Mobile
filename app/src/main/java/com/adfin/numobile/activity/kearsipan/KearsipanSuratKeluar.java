@@ -93,15 +93,17 @@ public class KearsipanSuratKeluar extends AppCompatActivity {
                         listsuratmasuk = cdatasuratmasuk.getDataSuratMasuk();
 
                         final String[] tanggal = new String[listsuratmasuk.size()];
+                        final String[] isi_surat = new String[listsuratmasuk.size()];
                         final String[] thumb = new String[listsuratmasuk.size()];
 
                         for (int i = 0; i < listsuratmasuk.size(); i++) {
                             tanggal[i] = listsuratmasuk.get(i).gettanggal_surat();
+                            isi_surat[i] = listsuratmasuk.get(i).getisi_surat();
                             thumb[i] = listsuratmasuk.get(i).getimage();
                         }
 
                         recyclerView= (RecyclerView) findViewById(R.id.recycler_view);
-                        ListAdapterAll adapter=new ListAdapterAll(KearsipanSuratKeluar.this, thumb, tanggal, new String[0]);
+                        ListAdapterAll adapter=new ListAdapterAll(KearsipanSuratKeluar.this, thumb, tanggal, isi_surat);
                         recyclerView.setAdapter(adapter);
                         recyclerView.setHasFixedSize(true);
                         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
