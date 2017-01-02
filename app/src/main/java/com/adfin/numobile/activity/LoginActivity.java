@@ -115,6 +115,10 @@ public class LoginActivity extends AppCompatActivity {
                             Session.with(getApplicationContext()).load("user_nu").set("username", datawarga.getusername());
                             Session.with(getApplicationContext()).load("user_nu").set("nama", datawarga.getusername());
                             Session.with(getApplicationContext()).load("user_nu").set("email", datawarga.getemail());
+
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            finish();
                         }
                     }
 

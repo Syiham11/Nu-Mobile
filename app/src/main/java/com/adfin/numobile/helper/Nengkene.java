@@ -16,7 +16,6 @@ import android.os.IBinder;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.widget.Toast;
 
 import com.adfin.numobile.ModulAPI;
 
@@ -134,42 +133,39 @@ public class Nengkene extends Service implements LocationListener, EasyPermissio
         alert.show();
     }
 
-    private void __updateLocation(double mLat, double mLong) {
-        RestAdapter adapter = new RestAdapter.Builder()
-                .setEndpoint("http://numobile.id")
-                .build();
+    private void __updateLocation() {
+        if( Session.with(mContext).load("user_nu").get("username") != null ){
+            RestAdapter adapter = new RestAdapter.Builder()
+                    .setEndpoint("http://numobile.id")
+                    .build();
 
-        ModulAPI api = adapter.create(ModulAPI.class);
+            ModulAPI api = adapter.create(ModulAPI.class);
 
-        String latitude = String.valueOf(mLat);
-        String longitude = String.valueOf(mLong);
-        Session.with(mContext).load("user_nu").set("latitude", latitude);
-        Session.with(mContext).load("user_nu").set("longitude", longitude);
+            api.simpanLatLong(
+                    Session.with(mContext).load("user_nu").get("username"),
+                    Session.with(mContext).load("user_nu").get("latitude"),
+                    Session.with(mContext).load("user_nu").get("longitude"),
 
-        api.simpanLatLong(
-                Session.with(mContext).load("user_nu").get("username"),
-                Session.with(mContext).load("user_nu").get("latitude"),
-                Session.with(mContext).load("user_nu").get("longitude"),
+                    new Callback<Response>() {
+                        @Override
+                        public void success(Response result, Response response) {}
 
-                new Callback<Response>() {
-                    @Override
-                    public void success(Response result, Response response) {
-                        Toast.makeText(mContext, "Lokasi update",
-                                Toast.LENGTH_SHORT).show();
+                        @Override
+                        public void failure(RetrofitError error) {}
                     }
-
-                    @Override
-                    public void failure(RetrofitError error) {
-                        Toast.makeText(mContext, "Kesalahan Koneksi Data",
-                                Toast.LENGTH_LONG).show();
-                    }
-                }
-        );
+            );
+        }
     }
 
     @Override
     public void onLocationChanged(Location location) {
-        __updateLocation(location.getLatitude(), location.getLongitude());
+
+        String latitude = String.valueOf(location.getLatitude());
+        String longitude = String.valueOf(location.getLongitude());
+        Session.with(mContext).load("user_nu").set("latitude", latitude);
+        Session.with(mContext).load("user_nu").set("longitude", longitude);
+
+        __updateLocation();
     }
 
     @Override

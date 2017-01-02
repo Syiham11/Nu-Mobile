@@ -18,26 +18,40 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.adfin.numobile.ModulAPI;
 import com.adfin.numobile.R;
 import com.adfin.numobile.helper.Session;
 import com.adfin.numobile.helper.Uploader;
+import com.adfin.numobile.model.CDataWarga;
+import com.adfin.numobile.model.DataWarga;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class KearsipanSuratMasuk extends AppCompatActivity {
 
-    EditText kepada, subject;
+    EditText subject;
+    Spinner spTo;
     ImageView photo;
 
     static String pathImage;
@@ -48,6 +62,7 @@ public class KearsipanSuratMasuk extends AppCompatActivity {
     private static final int CAMERA_PICK_IMAGE_REQUEST_CODE = 200;
     private static final String IMAGE_DIRECTORY_NAME = "NU";
 
+    private List<DataWarga> lsdatawarga;
     HashMap data = new HashMap();
 
     @Override
@@ -55,16 +70,17 @@ public class KearsipanSuratMasuk extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kearsipan_surat_masuk);
 
-        kepada = (EditText) findViewById(R.id.editKepada);
+        spTo = (Spinner) findViewById(R.id.editDari);
         subject = (EditText) findViewById(R.id.editSubjek);
         photo = (ImageView)findViewById(R.id.gambar);
+
+        __spTo();
 
         Button buttonSave = (Button) findViewById(R.id.buttonSave);
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if ( (subject != null && !subject.getText().toString().equals("")) && (pathImage!= null && !pathImage.equals("")) ) {
-                    data.put("id_pengirim", kepada.getText().toString());
                     data.put("diteruskan_kepada", Session.with(getApplicationContext()).load("user_nu").get("id_warga"));
                     data.put("image", getStringImage(encImg));
                     data.put("isi_surat", subject.getText().toString());
@@ -158,7 +174,6 @@ public class KearsipanSuratMasuk extends AppCompatActivity {
 
             dialog.show();
         }
-
 
         return super.onOptionsItemSelected(item);
     }
@@ -262,5 +277,66 @@ public class KearsipanSuratMasuk extends AppCompatActivity {
         Intent returnIntent = new Intent();
         setResult(2, returnIntent);
         finish();
+    }
+
+    private void __spTo() {
+        RestAdapter adapter = new RestAdapter.Builder()
+                .setEndpoint("http://numobile.id") //Setting the Root URL
+                .build(); //Finally building the adapter
+
+        ModulAPI api = adapter.create(ModulAPI.class);
+
+        api.getDataWarga(
+                new Callback<CDataWarga>()
+                {
+                    @Override
+                    public void success(CDataWarga cdatawarga, Response response) {
+                        lsdatawarga = new ArrayList<>();
+
+                        lsdatawarga = cdatawarga.getDataWarga();
+                        final String[] idWarga = new String[lsdatawarga.size()];
+                        final String[] namaWarga = new String[lsdatawarga.size()];
+                        final String[] emailWarga = new String[lsdatawarga.size()];
+
+                        for (int i = 0; i < lsdatawarga.size(); i++) {
+                            idWarga[i] = lsdatawarga.get(i).getid_warga();
+                            namaWarga[i] = lsdatawarga.get(i).getnama();
+                            emailWarga[i] = lsdatawarga.get(i).getemail();
+
+                        }
+                        ArrayAdapter adapter = new ArrayAdapter<>(context, R.layout.support_simple_spinner_dropdown_item, namaWarga);
+                        spTo.setAdapter(adapter);
+
+                        int setSelect = 0;
+
+                        spTo.setSelection(setSelect);
+
+                        spTo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                data.put("id_pengirim", idWarga[position].toString());
+                            }
+
+                            public void onNothingSelected(AdapterView<?> parent) {
+
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+
+                        final String merror = error.getMessage();
+
+                        runOnUiThread(new Runnable() {
+                            public void run() {
+                                Toast.makeText(context, merror + " Terjadi Kesalahan Kooneksi ", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                }
+
+        );
+
+
     }
 }

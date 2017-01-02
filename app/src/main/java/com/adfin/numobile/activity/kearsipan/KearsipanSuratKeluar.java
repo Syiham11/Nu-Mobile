@@ -1,5 +1,6 @@
 package com.adfin.numobile.activity.kearsipan;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -31,6 +32,8 @@ public class KearsipanSuratKeluar extends AppCompatActivity {
     SwipeRefreshLayout mSwipeRefreshLayout;
 
     private List<DataSuratMasuk> listsuratmasuk;
+
+    final Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +106,7 @@ public class KearsipanSuratKeluar extends AppCompatActivity {
                         }
 
                         recyclerView= (RecyclerView) findViewById(R.id.recycler_view);
-                        ListAdapterAll adapter=new ListAdapterAll(KearsipanSuratKeluar.this, thumb, tanggal, isi_surat);
+                        ListAdapterAll adapter=new ListAdapterAll(context, thumb, tanggal, isi_surat);
                         recyclerView.setAdapter(adapter);
                         recyclerView.setHasFixedSize(true);
                         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -118,7 +121,7 @@ public class KearsipanSuratKeluar extends AppCompatActivity {
 
                         runOnUiThread(new Runnable() {
                             public void run() {
-                                Toast.makeText(KearsipanSuratKeluar.this, merror + " Terjadi Kesalahan Kooneksi ", Toast.LENGTH_LONG).show();
+                                Toast.makeText(context, merror + " Terjadi Kesalahan Kooneksi ", Toast.LENGTH_LONG).show();
                             }
                         });
                     }

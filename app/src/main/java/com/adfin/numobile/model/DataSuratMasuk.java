@@ -47,7 +47,9 @@ public class DataSuratMasuk {
     }
 
     public String getimage() {
-        return image;
+        if( !image.equals("null") && !image.equals("") && image != null )
+            return "http://numobile.id/NUMobile/" + image;
+        return null;
     }
 
     public void setisi_surat(String isi_surat) {
