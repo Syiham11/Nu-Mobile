@@ -124,20 +124,23 @@ public class PeristiwaBoardcast extends AppCompatActivity {
         * */
         markerOption = new MarkerOptions()
                 .position(new LatLng(latit, longit))
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
 
         mMap.addMarker(markerOption);
 
         if (warga.size() > 0) {
             for (int i = 0; i < warga.size(); i++) {
 
-                // Create user marker with custom icon and other options
-                markerOption = new MarkerOptions().position(new LatLng(Double.parseDouble(warga.get(i).getlatitude()), Double.parseDouble(warga.get(i).getlongtitude())));
+                if( ! Session.with(this).load("user_nu").get("id_warga").equals(warga.get(i).getid_warga()) ) {
 
-                Marker currentMarker = mMap.addMarker(markerOption);
-                mMarkersHashMap.put(currentMarker, warga.get(i));
+                    // Create user marker with custom icon and other options
+                    markerOption = new MarkerOptions().position(new LatLng(Double.parseDouble(warga.get(i).getlatitude()), Double.parseDouble(warga.get(i).getlongtitude())));
 
-                mMap.setInfoWindowAdapter(new MarkerInfoWindowAdapter());
+                    Marker currentMarker = mMap.addMarker(markerOption);
+                    mMarkersHashMap.put(currentMarker, warga.get(i));
+
+                    mMap.setInfoWindowAdapter(new MarkerInfoWindowAdapter());
+                }
             }
         }
     }
@@ -191,7 +194,7 @@ public class PeristiwaBoardcast extends AppCompatActivity {
                 markerIcon.setImageDrawable(getDrawable(R.drawable.numobile));
             }
 
-            if(myMarker != null && !myMarker.getnama().equals("null")) {
+            if(myMarker != null && myMarker.getnama() != null && !myMarker.getnama().equals("null")) {
                 markerLabel.setText(myMarker.getnama());
                 anotherLabel.setText(myMarker.getalamat());
             }

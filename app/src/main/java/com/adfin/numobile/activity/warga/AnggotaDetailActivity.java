@@ -78,7 +78,7 @@ public class AnggotaDetailActivity extends AppCompatActivity {
                         if(lstdatawarga.size() != 1)
                             Toast.makeText(context, "Gagal mengambil data", Toast.LENGTH_LONG).show();
                         else{
-                            Picasso.with(context).load(lstdatawarga.get(0).getphoto()).resize(100, 100).into(photo);
+                            Picasso.with(context).load(lstdatawarga.get(0).getphoto()).resize(200, 200).into(photo);
                             name.setText(lstdatawarga.get(0).getnama());
                             bio.setText(stripHtml(lstdatawarga.get(0).getkemampuan()));
                             addr.setText("Alamat : " + lstdatawarga.get(0).getalamat());
