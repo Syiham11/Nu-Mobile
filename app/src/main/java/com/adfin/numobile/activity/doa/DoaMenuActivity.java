@@ -1,19 +1,17 @@
 package com.adfin.numobile.activity.doa;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import com.adfin.numobile.ModulAPI;
 import com.adfin.numobile.R;
-import com.adfin.numobile.activity.pengurus.PengurusMenuActivity;
+import com.adfin.numobile.activity.MainActivity;
 import com.adfin.numobile.helper.ListAdapterAll;
 import com.adfin.numobile.model.CDataDoa;
-import com.adfin.numobile.model.CDataSDM;
 import com.adfin.numobile.model.DataDoa;
-import com.adfin.numobile.model.DataSDM;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,16 +65,22 @@ public class DoaMenuActivity extends AppCompatActivity {
 
                         lstdataDoa = cdatadoa.getDataDoa();
 
+                        // Helper
+                        String[] helper = {"doa","id_doa"};
+
+                        final String[] idDoa = new String[lstdataDoa.size()];
                         final String[] namaDoa = new String[lstdataDoa.size()];
                         final String[] headerDoa = new String[lstdataDoa.size()];;
 
                         for (int i = 0; i < lstdataDoa.size(); i++) {
+                            idDoa[i] = lstdataDoa.get(i).getnama_doa();
                             namaDoa[i] = lstdataDoa.get(i).getnama_doa();
                             headerDoa[i] = lstdataDoa.get(i).getimage_header();
 
                         }
 
-                        ListAdapterAll adapter=new ListAdapterAll(DoaMenuActivity.this, headerDoa, namaDoa, new String[0]);
+                        ListAdapterAll adapter=new ListAdapterAll(DoaMenuActivity.this, headerDoa, namaDoa, new String[0],
+                                idDoa, helper, MainActivity.class);
                         //membuat adapter baru untuk reyclerview
                         recyclerView.setAdapter(adapter);
                         //menset nilai dari adapter

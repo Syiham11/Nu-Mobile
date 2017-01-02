@@ -1,6 +1,7 @@
 package com.adfin.numobile;
 
 import com.adfin.numobile.model.CDataDesa;
+import com.adfin.numobile.model.CDataDetail;
 import com.adfin.numobile.model.CDataDoa;
 import com.adfin.numobile.model.CDataIndukOrganisasi;
 import com.adfin.numobile.model.CDataInstansi;
@@ -161,19 +162,6 @@ public interface ModulAPI {
             @Field("vslongtitude") String vslongtitude,
             Callback<Response> callback);
 
-    @FormUrlEncoded
-    @POST("/NUMobile/simpanperistiwa.php") // Belum
-    void simpanPeristiwa(
-            @Field("token") String token,
-            @Field("id_peristiwa") String idperistiwa,
-            @Field("id_warga") String idwarga,
-            @Field("deskripsi") String vslatitude,
-            @Field("path") String vslongtitude,
-            @Field("latitude") String latitude,
-            @Field("langitude") String langitude,
-            @Field("type") String type,
-            Callback<Response> callback);
-
     @GET("/NUMobile/getperistiwa.php") // Sudah
     void  getDataPeristiwa(
             @Query("type") String type,
@@ -183,5 +171,13 @@ public interface ModulAPI {
     void  getDataSuratMasuk(
             @Query("id_warga") String idwarga,
             Callback<CDataSuratMasuk> callback);
+
+
+    @GET("/NUMobile/getdetail.php")
+    void getDetail(
+            @Query("key") String key,
+            @Query("val") String idwarga,
+            @Query("id") String id,
+            Callback<CDataDetail> callback);
 }
 

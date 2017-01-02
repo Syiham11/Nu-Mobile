@@ -103,9 +103,7 @@ public class LoginActivity extends AppCompatActivity {
         api.ceksudahdaftar(
                 username,
                 password,
-                new Callback<DataWarga>()
-
-                {
+                new Callback<DataWarga>(){
                     @Override
                     public void success(DataWarga datawarga, Response response) {
                         if (datawarga.getusername() == null) {

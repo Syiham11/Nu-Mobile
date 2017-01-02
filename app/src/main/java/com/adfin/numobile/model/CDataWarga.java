@@ -7,7 +7,7 @@ import java.util.List;
  * Created by Siti on 11/4/2016.
  */
 public class CDataWarga {
-    private List<DataWarga> DataWarga = new ArrayList<DataWarga>();
+    private List<DataWarga> DataWarga = new ArrayList<>();
 
     public List<DataWarga> getDataWarga() {
         return DataWarga;

@@ -1,188 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="1dp"
-    >
+    android:layout_height="match_parent">
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:background="@drawable/background_min"
-            android:layout_height="1000dp">
+            android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/id_icon"
+                    android:id="@+id/header_cover_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/numobile" />
+
+                <ImageButton
+                    android:id="@+id/user_profile_photo"
                     android:layout_width="120dp"
                     android:layout_height="120dp"
-                    android:src="@mipmap/ic_launcher"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_below="@+id/header_cover_image"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="-60dp"
+                    android:background="@drawable/p_test"
+                    android:elevation="5dp"
+                    android:padding="20dp"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="" />
 
-                <TextView
-                    android:id="@+id/id_name"
+                <RelativeLayout
+                    android:id="@+id/profile_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Name 1 "
-                    android:textColor="#000000"
-                    android:textSize="18sp"
-                    android:layout_alignTop="@+id/id_icon"
-                    android:layout_marginTop="20dp"
-                    android:layout_toRightOf="@+id/id_icon"
-                    android:layout_toEndOf="@+id/id_icon" />
+                    android:layout_below="@+id/header_cover_image"
+                    android:background="#00832F"
+                    android:elevation="4dp"
+                    android:paddingBottom="24dp">
 
-                <TextView
-                    android:id="@+id/id_name2"
-                    android:layout_width="match_parent"
+
+                        <TextView
+                            android:id="@+id/user_profile_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="76dp"
+                            android:textColor="#fff"
+                            android:textSize="24sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/user_profile_short_bio"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/user_profile_name"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="12dp"
+                            android:textColor="#fff"
+                            android:textSize="14sp" />
+                </RelativeLayout>
+
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="Name 2"
-                    android:textColor="#000000"
-                    android:textSize="18sp"
-                    android:layout_marginTop="13dp"
-                    android:layout_below="@+id/id_name"
-                    android:layout_toRightOf="@+id/id_icon"
-                    android:layout_toEndOf="@+id/id_icon" />
+                    android:layout_below="@+id/profile_layout"
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/id_name3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Name 3"
-                    android:textColor="#000000"
-                    android:textSize="18sp"
-                    android:layout_marginTop="13dp"
-                    android:layout_below="@+id/id_name2"
-                    android:layout_toRightOf="@+id/id_icon"
-                    android:layout_toEndOf="@+id/id_icon" />
+                        <TextView
+                            android:id="@+id/user_profile_address"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:background="#fff"
+                            android:clickable="true"
+                            android:elevation="4dp"
+                            android:padding="20dp" />
 
-                <TextView
-                    android:id="@+id/id_name4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Name 4"
-                    android:textColor="#000000"
-                    android:textSize="18sp"
-                    android:layout_below="@+id/id_icon"
-                    android:layout_marginLeft="15dp" />
+                        <TextView
+                            android:id="@+id/user_profile_email"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_marginBottom="3dp"
+                            android:layout_marginTop="3dp"
+                            android:background="#fff"
+                            android:clickable="true"
+                            android:elevation="4dp"
+                            android:padding="20dp" />
 
-                <TextView
-                    android:id="@+id/id_name5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Name 5"
-                    android:textColor="#000000"
-                    android:textSize="18sp"
-                    android:layout_below="@+id/id_name4"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="14dp" />
+                        <TextView
+                            android:id="@+id/user_profile_telp"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:background="#fff"
+                            android:clickable="true"
+                            android:elevation="4dp"
+                            android:padding="20dp" />
 
-                <TextView
-                    android:id="@+id/id_name6"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Name 6"
-                    android:textColor="#000000"
-                    android:textSize="18sp"
-                    android:layout_below="@+id/id_name5"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="14dp" />
+                        <!--<TextView
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_marginBottom="3dp"
+                            android:layout_marginTop="3dp"
+                            android:background="#fff"
+                            android:clickable="true"
+                            android:elevation="4dp"
+                            android:padding="20dp"
+                            android:text="Android Profile XMl UI Design" />
 
-                <TextView
-                    android:id="@+id/id_name7"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Name 7"
-                    android:textColor="#000000"
-                    android:textSize="18sp"
-                    android:layout_below="@+id/id_name6"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="14dp" />
-
-                <TextView
-                    android:id="@+id/id_name8"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Name 8"
-                    android:textColor="#000000"
-                    android:textSize="18sp"
-                    android:layout_below="@+id/id_name7"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="14dp" />
-
-                <TextView
-                    android:id="@+id/id_name9"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Name 9"
-                    android:textColor="#000000"
-                    android:textSize="18sp"
-                    android:layout_below="@+id/id_name8"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="14dp" />
-
-                <TextView
-                    android:id="@+id/id_name10"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Name 10"
-                    android:textColor="#000000"
-                    android:textSize="18sp"
-                    android:layout_below="@+id/id_name9"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="14dp" />
-
-                <TextView
-                    android:id="@+id/id_name11"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Name 11"
-                    android:textColor="#000000"
-                    android:textSize="18sp"
-                    android:layout_below="@+id/id_name10"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="14dp" />
-
-                <TextView
-                    android:id="@+id/id_name12"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Name 12"
-                    android:textColor="#000000"
-                    android:textSize="18sp"
-                    android:layout_below="@+id/id_name11"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="14dp" />
-
-                <TextView
-                    android:id="@+id/id_name13"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Name 13"
-                    android:textColor="#000000"
-                    android:textSize="18sp"
-                    android:layout_below="@+id/id_name12"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="14dp" />
-
-                <TextView
-                    android:id="@+id/id_name14"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Name 14"
-                    android:textColor="#000000"
-                    android:textSize="18sp"
-                    android:layout_below="@+id/id_name13"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="14dp" />
-
-                <TextView
-                    android:id="@+id/id_name15"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Name 15"
-                    android:textColor="#000000"
-                    android:textSize="18sp"
-                    android:layout_below="@+id/id_name14"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="14dp" />
-
+                        <TextView
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:background="#fff"
+                            android:clickable="true"
+                            android:elevation="4dp"
+                            android:padding="20dp"
+                            android:text="Android Profile UI Design" />-->
+                </LinearLayout>
         </RelativeLayout>
-    </ScrollView>
+</ScrollView>

@@ -80,18 +80,27 @@ public class AnggotaLihatActivity extends AppCompatActivity {
 
                         lstdatawarga = cdatawarga.getDataWarga();
 
+                        // Helper
+                        String[] helper = {"warga","id_warga"};
+
+                        final String[] idWarga = new String[lstdatawarga.size()];
                         final String[] namaWarga = new String[lstdatawarga.size()];
                         final String[] alamatWarga = new String[lstdatawarga.size()];
                         final String[] imageWarga = new String[lstdatawarga.size()];
 
                         for (int i = 0; i < lstdatawarga.size(); i++) {
+                            idWarga[i] = lstdatawarga.get(i).getid_warga();
                             namaWarga[i] = lstdatawarga.get(i).getnama();
                             alamatWarga[i] = lstdatawarga.get(i).getalamat();
                             imageWarga[i] = lstdatawarga.get(i).getphoto();
                         }
 
                         recyclerView= (RecyclerView) findViewById(R.id.recycler_view);
-                        ListAdapterAll adapter=new ListAdapterAll(AnggotaLihatActivity.this, imageWarga, namaWarga, alamatWarga);
+
+                        ListAdapterAll adapter=new ListAdapterAll(AnggotaLihatActivity.this,
+                                imageWarga, namaWarga, alamatWarga, idWarga,
+                                helper, AnggotaDetailActivity.class);
+
                         recyclerView.setAdapter(adapter);
                         recyclerView.setHasFixedSize(true);
                         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));

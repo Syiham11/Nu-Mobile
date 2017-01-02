@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.adfin.numobile.ModulAPI;
 import com.adfin.numobile.R;
+import com.adfin.numobile.activity.MainActivity;
 import com.adfin.numobile.helper.ListAdapterAll;
 import com.adfin.numobile.model.CDataPeristiwa;
 import com.adfin.numobile.model.DataPeristiwa;
@@ -72,18 +73,24 @@ public class PeristiwaPhoto extends AppCompatActivity {
                     public void success(CDataPeristiwa cdataperistiwa, Response response) {
                         listDataPeristiwa = cdataperistiwa.getDataPeristiwa();
 
+                        // Helper
+                        String[] helper = {"peristiwa","id_peristiwa"};
+
+                        final String[] id = new String[listDataPeristiwa.size()];
                         final String[] name = new String[listDataPeristiwa.size()];
                         final String[] other = new String[listDataPeristiwa.size()];
                         final String[] thumb = new String[listDataPeristiwa.size()];
 
                         for (int i = 0; i < listDataPeristiwa.size(); i++) {
+                            id[i] = listDataPeristiwa.get(i).getid_peristiwa();
                             name[i] = listDataPeristiwa.get(i).getdeskripsi();
                             other[i] = listDataPeristiwa.get(i).getcreated_at();
                             thumb[i] = listDataPeristiwa.get(i).getpath();
                         }
 
                         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-                        ListAdapterAll adapter = new ListAdapterAll(PeristiwaPhoto.this, thumb, name, other);
+                        ListAdapterAll adapter = new ListAdapterAll(PeristiwaPhoto.this, thumb, name, other,
+                                id, helper, MainActivity.class);
                         recyclerView.setAdapter(adapter);
                         recyclerView.setHasFixedSize(true);
                         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));

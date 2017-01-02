@@ -1,20 +1,18 @@
 package com.adfin.numobile.activity.pengurus;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
-import android.widget.AdapterView;
 
 import com.adfin.numobile.ModulAPI;
 import com.adfin.numobile.R;
+import com.adfin.numobile.activity.MainActivity;
 import com.adfin.numobile.helper.ListAdapterAll;
 import com.adfin.numobile.model.CDataSDM;
 import com.adfin.numobile.model.DataSDM;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,18 +68,24 @@ public class PengurusMenuActivity extends AppCompatActivity {
 
                         lstdataSDM = cdatasdm.getDataSDM();
 
+                        // Helper
+                        String[] helper = {"pengurus","id_sdm"};
+
+                        final String[] idPejabat = new String[lstdataSDM.size()];
                         final String[] namaPejabat = new String[lstdataSDM.size()];
                         final String[] teleponPejabat = new String[lstdataSDM.size()];
                         final String[] imagePejabat = new String[lstdataSDM.size()];
 
                         for (int i = 0; i < lstdataSDM.size(); i++) {
+                            idPejabat[i] = lstdataSDM.get(i).getid_sdm();
                             namaPejabat[i] = lstdataSDM.get(i).getnama();
                             teleponPejabat[i] = lstdataSDM.get(i).gettelp();
                             imagePejabat[i] = lstdataSDM.get(i).getimage();
 
                         }
 
-                        ListAdapterAll adapter=new ListAdapterAll(PengurusMenuActivity.this, imagePejabat, namaPejabat, teleponPejabat);
+                        ListAdapterAll adapter=new ListAdapterAll(PengurusMenuActivity.this, imagePejabat, namaPejabat, teleponPejabat,
+                                idPejabat, helper, MainActivity.class);
                         //membuat adapter baru untuk reyclerview
                         recyclerView.setAdapter(adapter);
                         //menset nilai dari adapter

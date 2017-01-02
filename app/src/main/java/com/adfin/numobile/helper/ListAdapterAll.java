@@ -1,11 +1,11 @@
 package com.adfin.numobile.helper;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.adfin.numobile.R;
 import com.squareup.picasso.Picasso;
@@ -15,16 +15,29 @@ import com.squareup.picasso.Picasso;
 public class ListAdapterAll extends  RecyclerView.Adapter<ViewHolderAll>{
 
     private final Context context;
+    private final Class redirect;
 
+    // Helper
+    private final String mKey;
+    private final String mVal;
+    // Helper
+
+    private String [] id={};
     private String [] imag={};
     private String [] name={};
     private String [] lain={};
 
     private LayoutInflater inflater;
 
-    public ListAdapterAll(Context context, String[] imag, String[] name, String[] lain) {
+    public ListAdapterAll(Context context,
+                          String[] imag, String[] name, String[] lain,
+                          String[] id, String[] helper, Class redirect) {
         inflater = LayoutInflater.from(context);
         this.context=context;
+        this.redirect = redirect;
+        this.mKey = helper[0];
+        this.mVal = helper[1];
+        this.id = id;
         this.imag = imag;
         this.name = name;
         this.lain = lain;
@@ -38,6 +51,7 @@ public class ListAdapterAll extends  RecyclerView.Adapter<ViewHolderAll>{
 
     @Override
     public void onBindViewHolder(ViewHolderAll holder, int position) {
+        holder.tv0.setText(this.id[position]);
         holder.tv1.setText(this.name[position]);
         holder.tv1.setOnClickListener(clickListener);
         holder.tv1.setTag(holder);
@@ -60,12 +74,17 @@ public class ListAdapterAll extends  RecyclerView.Adapter<ViewHolderAll>{
         }
     }
 
-    private View.OnClickListener clickListener=new View.OnClickListener() {
+    private View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             ViewHolderAll vholder = (ViewHolderAll) v.getTag();
             int position = vholder.getAdapterPosition();
-            Toast.makeText(context, "Menu ini berada di posisi " + position, Toast.LENGTH_LONG).show();
+
+            Intent i = new Intent(context, redirect);
+            i.putExtra("key", mKey);
+            i.putExtra("val", mVal);
+            i.putExtra("id", id[position]);
+            context.startActivity(i);
         }
     };
 

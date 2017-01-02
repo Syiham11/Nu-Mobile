@@ -78,17 +78,15 @@
 
         <!-- MENU ANGGOTA -->
         <activity
-            android:name=".activity.warga.AnggotaMenuActivity"
-            android:label="MENU WARGA"
+            android:name=".activity.warga.AnggotaLihatActivity"
+            android:label="LIHAT WARGA" />
+        <activity
+            android:name=".activity.warga.AnggotaDetailActivity"
+            android:label="DETAIL WARGA"
             android:parentActivityName=".activity.MainActivity" />
         <activity
             android:name=".activity.warga.FormAnggota1Activity"
-            android:label="INPUT WARGA"
-            android:parentActivityName=".activity.warga.AnggotaMenuActivity" />
-        <activity
-            android:name=".activity.warga.AnggotaLihatActivity"
-            android:label="LIHAT WARGA"
-            android:parentActivityName=".activity.warga.AnggotaMenuActivity" />
+            android:label="INPUT WARGA" />
 
         <!-- SUB MENU ANGGOTA -->
         <activity

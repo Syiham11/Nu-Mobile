@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -555,7 +554,7 @@ public class FormAnggota1Activity extends AppCompatActivity {
 
                         runOnUiThread(new Runnable() {
                             public void run() {
-                                Toast.makeText(FormAnggota1Activity.this, merror.toString() + " Terjadi Kesalahan Kooneksi ", Toast.LENGTH_LONG).show();
+                                Toast.makeText(FormAnggota1Activity.this, merror + " Terjadi Kesalahan Kooneksi ", Toast.LENGTH_LONG).show();
 
                                 Context context = FormAnggota1Activity.this;
                                 Intent intent = new Intent(context, FormAnggota1Activity.class);
@@ -593,7 +592,7 @@ public class FormAnggota1Activity extends AppCompatActivity {
 
                         final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
 
-                        lstdataprovinsi = new ArrayList<DataProvinsi>();
+                        lstdataprovinsi = new ArrayList<>();
 
                         lstdataprovinsi = cdataprovinsi.getDataProvinsi();
                         final String[] tsidprovinsi = new String[lstdataprovinsi.size()];

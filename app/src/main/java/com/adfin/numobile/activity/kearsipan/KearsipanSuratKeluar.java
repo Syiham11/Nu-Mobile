@@ -95,6 +95,10 @@ public class KearsipanSuratKeluar extends AppCompatActivity {
 
                         listsuratmasuk = cdatasuratmasuk.getDataSuratMasuk();
 
+                        // Helper
+                        String[] helper = {"surat","id_surat_masuk"};
+
+                        final String[] idSurat = new String[listsuratmasuk.size()];
                         final String[] tanggal = new String[listsuratmasuk.size()];
                         final String[] isi_surat = new String[listsuratmasuk.size()];
                         final String[] thumb = new String[listsuratmasuk.size()];
@@ -106,7 +110,8 @@ public class KearsipanSuratKeluar extends AppCompatActivity {
                         }
 
                         recyclerView= (RecyclerView) findViewById(R.id.recycler_view);
-                        ListAdapterAll adapter=new ListAdapterAll(context, thumb, tanggal, isi_surat);
+                        ListAdapterAll adapter=new ListAdapterAll(context, thumb, tanggal, isi_surat,
+                                idSurat, helper, KearsipanChatting.class);
                         recyclerView.setAdapter(adapter);
                         recyclerView.setHasFixedSize(true);
                         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
