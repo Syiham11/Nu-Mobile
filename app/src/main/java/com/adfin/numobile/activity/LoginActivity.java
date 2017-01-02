@@ -37,6 +37,15 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if( Session.with(getApplicationContext()).load("user_nu").get("username") != null ){
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }else{
+            location = Nengkene.with(this).start().get();
+        }
+
         setContentView(R.layout.activity_login);
 
         buttonLogin = (Button) findViewById(R.id.buttonLogin);
@@ -46,9 +55,6 @@ public class LoginActivity extends AppCompatActivity {
         textError = (TextView) findViewById(R.id.errorinfo);
         progressBar.setVisibility(View.GONE);
         textError.setVisibility(View.GONE);
-
-
-        location = Nengkene.with(getApplicationContext()).start().get();
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,8 +115,6 @@ public class LoginActivity extends AppCompatActivity {
                             Session.with(getApplicationContext()).load("user_nu").set("username", datawarga.getusername());
                             Session.with(getApplicationContext()).load("user_nu").set("nama", datawarga.getusername());
                             Session.with(getApplicationContext()).load("user_nu").set("email", datawarga.getemail());
-
-                            updateLocation();
                         }
                     }
 
@@ -124,42 +128,6 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }
 
-        );
-    }
-
-    private void updateLocation() {
-        RestAdapter adapter = new RestAdapter.Builder()
-                .setEndpoint("http://numobile.id")
-                .build();
-
-        //Creating object for our interface
-        ModulAPI api = adapter.create(ModulAPI.class);
-
-        String latitude = String.valueOf(location.latitude());
-        String longitude = String.valueOf(location.longitude());
-
-        Session.with(getApplicationContext()).load("user_nu").set("latitude", latitude);
-        Session.with(getApplicationContext()).load("user_nu").set("longitude", longitude);
-
-        api.simpanLatLong(
-                Session.with(getApplicationContext()).load("user_nu").get("username"),
-                Session.with(getApplicationContext()).load("user_nu").get("latitude"),
-                Session.with(getApplicationContext()).load("user_nu").get("longitude"),
-
-                new Callback<Response>() {
-                    @Override
-                    public void success(Response result, Response response) {
-
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-
-                    @Override
-                    public void failure(RetrofitError error) {
-                        Toast.makeText(LoginActivity.this, "Kesalahan Koneksi Data", Toast.LENGTH_LONG).show();
-                    }
-                }
         );
     }
 }

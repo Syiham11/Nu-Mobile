@@ -2,8 +2,10 @@ package com.adfin.numobile.helper;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Service;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -11,13 +13,21 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.widget.Toast;
+
+import com.adfin.numobile.ModulAPI;
 
 import java.util.List;
 
 import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 // Created by prakasa on 17/12/16.
 
@@ -51,10 +61,11 @@ public class Nengkene extends Service implements LocationListener, EasyPermissio
     public Nengkene get() {
         if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             __isPermitted();
+        }else{
+            manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+            location = manager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            if (location != null) __setDataLocation();
         }
-        manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
-        location = manager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-        if (location != null) __setDataLocation();
         return this;
     }
 
@@ -68,7 +79,7 @@ public class Nengkene extends Service implements LocationListener, EasyPermissio
 
     private void __setDataLocation(){
         latitude = location.getLatitude();
-        longitude = location.getLatitude();
+        longitude = location.getLongitude();
     }
 
     private Boolean __isGpsEnable(){
@@ -85,17 +96,80 @@ public class Nengkene extends Service implements LocationListener, EasyPermissio
 
     private void __isPermitted(){
         if(__isGpsEnable() && __isNetEnable()){
-            String[] perms = { Manifest.permission.ACCESS_FINE_LOCATION };
+            String[] perms = {
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+            };
             if ( ! EasyPermissions.hasPermissions(mContext, perms) ) {
                 EasyPermissions.requestPermissions(mContext, "Aplikasi membutuhkan akses lokasi",
                         200, perms);
             }
+        }else{
+            __showSettingsAlert();
         }
+    }
+
+    private void __showSettingsAlert() {
+        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
+
+        alertDialog.setTitle("Gunakan Lokasi ?");
+
+        alertDialog.setMessage("Aplikasi ini ingin mengubah setting handphon anda:");
+
+        alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                mContext.startActivity(intent);
+            }
+        });
+
+        alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog alert = alertDialog.create();
+
+        alert.show();
+    }
+
+    private void __updateLocation(double mLat, double mLong) {
+        RestAdapter adapter = new RestAdapter.Builder()
+                .setEndpoint("http://numobile.id")
+                .build();
+
+        ModulAPI api = adapter.create(ModulAPI.class);
+
+        String latitude = String.valueOf(mLat);
+        String longitude = String.valueOf(mLong);
+        Session.with(mContext).load("user_nu").set("latitude", latitude);
+        Session.with(mContext).load("user_nu").set("longitude", longitude);
+
+        api.simpanLatLong(
+                Session.with(mContext).load("user_nu").get("username"),
+                Session.with(mContext).load("user_nu").get("latitude"),
+                Session.with(mContext).load("user_nu").get("longitude"),
+
+                new Callback<Response>() {
+                    @Override
+                    public void success(Response result, Response response) {
+                        Toast.makeText(mContext, "Lokasi update",
+                                Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        Toast.makeText(mContext, "Kesalahan Koneksi Data",
+                                Toast.LENGTH_LONG).show();
+                    }
+                }
+        );
     }
 
     @Override
     public void onLocationChanged(Location location) {
-        //mContext
+        __updateLocation(location.getLatitude(), location.getLongitude());
     }
 
     @Override
@@ -128,10 +202,10 @@ public class Nengkene extends Service implements LocationListener, EasyPermissio
     @Override
     public void onPermissionsDenied(int requestCode, List<String> perms) {
         if (EasyPermissions.somePermissionPermanentlyDenied(mContext, perms)) {
-            new AppSettingsDialog.Builder((Activity) mContext, "This app may not work correctly without the requested permissions. Open the app settings screen to modify app permissions.")
-                    .setTitle("Permissions Required")
-                    .setPositiveButton("Settings")
-                    .setNegativeButton("Settings dialog canceled", null)
+            new AppSettingsDialog.Builder((Activity) mContext, "Aplikasi tidak berjalan dengan baik tanpa GPS dan kamera.")
+                    .setTitle("Permintaan Izin")
+                    .setPositiveButton("Pengaturan")
+                    .setNegativeButton("Batal", null)
                     .setRequestCode(500)
                     .build()
                     .show();

@@ -1,9 +1,7 @@
 package com.adfin.numobile.activity;
 
-import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -26,25 +24,25 @@ import com.adfin.numobile.activity.promosi.PromosiMenuActivity;
 import com.adfin.numobile.activity.warga.AnggotaLihatActivity;
 import com.adfin.numobile.activity.warung.WarungMenuActivity;
 import com.adfin.numobile.helper.Nengkene;
+import com.adfin.numobile.helper.Session;
 
-import java.util.List;
-
-import pub.devrel.easypermissions.AfterPermissionGranted;
-import pub.devrel.easypermissions.AppSettingsDialog;
-import pub.devrel.easypermissions.EasyPermissions;
-
-public class MainActivity extends AppCompatActivity implements EasyPermissions.PermissionCallbacks {
+public class MainActivity extends AppCompatActivity {
 
     Nengkene location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if( Session.with(getApplicationContext()).load("user_nu").get("username") == null ){
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }else{
+            location = Nengkene.with(this).start().get();
+        }
+
         setContentView(R.layout.activity_main);
-
-        permissionExternal();
-
-        location = Nengkene.with(getApplicationContext()).start().get();
 
         //baris 1
         Button btnPengurus = (Button) findViewById(R.id.btn_pengurus);
@@ -66,7 +64,6 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
         Button btnPendidikan = (Button) findViewById(R.id.btn_pendidikan);
         Button btnPertanian = (Button) findViewById(R.id.btn_pertanian);
         Button btnKelautan = (Button) findViewById(R.id.btn_kelautan);
-
 
         //baris 1
         btnPengurus.setOnClickListener(new View.OnClickListener() {
@@ -217,44 +214,5 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
                 startActivity(intent);
             }
         });
-    }
-
-    @AfterPermissionGranted(200)
-    private void permissionExternal() {
-        String[] perms = {
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.ACCESS_FINE_LOCATION
-        };
-        if ( ! EasyPermissions.hasPermissions(this, perms) ) {
-            EasyPermissions.requestPermissions(this, "This app needs access to your camera so you can take pictures.",
-                    200, perms);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        // EasyPermissions handles the request result.
-        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
-    }
-
-    @Override
-    public void onPermissionsGranted(int requestCode, List<String> perms) {
-    }
-
-    @Override
-    public void onPermissionsDenied(int requestCode, List<String> perms) {
-
-        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
-            new AppSettingsDialog.Builder(this, "This app may not work correctly without the requested permissions. Open the app settings screen to modify app permissions.")
-                    .setTitle("Permissions Required")
-                    .setPositiveButton("Settings")
-                    .setNegativeButton("Settings dialog canceled", null)
-                    .setRequestCode(500)
-                    .build()
-                    .show();
-        }
-
     }
 }

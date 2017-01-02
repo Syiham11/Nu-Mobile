@@ -11,7 +11,8 @@ import android.widget.Toast;
 
 import com.adfin.numobile.ModulAPI;
 import com.adfin.numobile.R;
-import com.adfin.numobile.helper.GPSTracker;
+import com.adfin.numobile.helper.Nengkene;
+import com.adfin.numobile.helper.Session;
 import com.adfin.numobile.model.CDataWarga;
 import com.adfin.numobile.model.DataWarga;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -44,15 +45,16 @@ public class PeristiwaBoardcast extends AppCompatActivity {
 
     private GoogleMap mMap;
 
+    Nengkene location;
     private double latit, longit = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        GPSTracker gps = new GPSTracker(this);
+        location = Nengkene.with(this).start().get();
 
-        latit = gps.getLatitude(); longit = gps.getLongitude();
+        latit = location.latitude(); longit = location.longitude();
 
         setContentView(R.layout.activity_peristiwa_boardcast);
 
@@ -84,7 +86,10 @@ public class PeristiwaBoardcast extends AppCompatActivity {
                 .build(); //Finally building the adapter
 
         ModulAPI api = adapter.create(ModulAPI.class);
-        api.getDataWargaRadius(String.valueOf(latit), String.valueOf(longit),
+        api.getDataWargaRadius(
+                Session.with(getApplicationContext()).load("user_nu").get("id_warga"),
+                String.valueOf(latit),
+                String.valueOf(longit),
                 new Callback<CDataWarga>()
                 {
                     @Override
