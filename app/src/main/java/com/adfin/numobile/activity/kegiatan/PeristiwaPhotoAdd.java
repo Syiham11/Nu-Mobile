@@ -94,7 +94,7 @@ public class PeristiwaPhotoAdd extends AppCompatActivity {
                     data.put("type", "1");
 
                     Uploader.with(PeristiwaPhotoAdd.this, PeristiwaPhoto.class)
-                            .load("http://www.terpusat.com/NUMobile/simpanperistiwa.php")
+                            .load("http://numobile.id/NUMobile/simpanperistiwa.php")
                             .data(data)
                             .message("Mohon Tunggu ....")
                             .upload()

@@ -30,7 +30,7 @@ public class AnggotaDetailActivity extends AppCompatActivity {
     private String mKey, mVal, mId;
 
     ImageView photo;
-    TextView name, bio, addr, email, phone;
+    TextView name, bio, addr, email, phone, ttl, noktp, jabatan, status_perkawinan, status_keanggotaan, infak_warga;
 
     private List<DataWarga> lstdatawarga;
     @Override
@@ -45,6 +45,12 @@ public class AnggotaDetailActivity extends AppCompatActivity {
         addr = (TextView) findViewById(R.id.user_profile_address);
         email = (TextView) findViewById(R.id.user_profile_email);
         phone = (TextView) findViewById(R.id.user_profile_telp);
+        ttl = (TextView) findViewById(R.id.user_profile_ttl);
+        noktp = (TextView) findViewById(R.id.user_profile_ktp);
+        jabatan = (TextView) findViewById(R.id.user_profile_jabatan);
+        status_perkawinan = (TextView) findViewById(R.id.user_profile_status_perkawinan);
+        status_keanggotaan = (TextView) findViewById(R.id.user_profile_status_keanggotaan);
+        infak_warga = (TextView) findViewById(R.id.user_profile_infak_warga);
 
         mKey = getIntent().getStringExtra("key");
         mVal = getIntent().getStringExtra("val");
@@ -84,6 +90,12 @@ public class AnggotaDetailActivity extends AppCompatActivity {
                             addr.setText("Alamat : " + lstdatawarga.get(0).getalamat());
                             email.setText("Email : " + lstdatawarga.get(0).getemail());
                             phone.setText("Telp : " + lstdatawarga.get(0).gethp());
+                            ttl.setText("Tanggal Lahir : " + lstdatawarga.get(0).gettanggal_lahir());
+                            noktp.setText("No KTP : " + lstdatawarga.get(0).getnoktp());
+                            jabatan.setText("Jabatan : " + lstdatawarga.get(0).getjabatan());
+                            status_perkawinan.setText("Status Perkawinan : " + lstdatawarga.get(0).getstatus_perkawinan());
+                            status_keanggotaan.setText("Status Keanggotaan : " + lstdatawarga.get(0).getstatus_keanggotaan());
+                            infak_warga.setText("Infak Warga : " + lstdatawarga.get(0).getinfak_warga());
                         }
                     }
 

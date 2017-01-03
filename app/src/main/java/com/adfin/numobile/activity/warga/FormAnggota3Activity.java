@@ -328,7 +328,7 @@ public class FormAnggota3Activity extends AppCompatActivity {
         //Creating a RestAdapter
 
         RestAdapter adapter = new RestAdapter.Builder()
-                .setEndpoint("http://www.terpusat.com") //Setting the Root URL
+                .setEndpoint("http://numobile.id") //Setting the Root URL
                 .build(); //Finally building the adapter
 
         //Creating object for our interface
@@ -403,7 +403,7 @@ public class FormAnggota3Activity extends AppCompatActivity {
         //Creating a RestAdapter
 
         RestAdapter adapter = new RestAdapter.Builder()
-                .setEndpoint("http://www.terpusat.com") //Setting the Root URL
+                .setEndpoint("http://numobile.id") //Setting the Root URL
                 .build(); //Finally building the adapter
 
         //Creating object for our interface

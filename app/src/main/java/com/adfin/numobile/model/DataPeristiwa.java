@@ -27,7 +27,7 @@ public class DataPeristiwa {
     }
 
     public String getpath() {
-        return "http://www.terpusat.com/NUMobile/" + path;
+        return "http://numobile.id/NUMobile/" + path;
     }
 
     public String getlatitude() {

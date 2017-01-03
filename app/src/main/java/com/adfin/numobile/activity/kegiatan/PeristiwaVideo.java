@@ -60,7 +60,7 @@ public class PeristiwaVideo extends AppCompatActivity {
     private void getDataPeristiwa() {
 
         RestAdapter adapter = new RestAdapter.Builder()
-                .setEndpoint("http://www.terpusat.com") //Setting the Root URL
+                .setEndpoint("http://numobile.id") //Setting the Root URL
                 .build(); //Finally building the adapter
 
         ModulAPI api = adapter.create(ModulAPI.class);

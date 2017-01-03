@@ -27,6 +27,7 @@ public class DataWarga {
     private String twitter;
     private String instagram;
     private String photo;
+    private String jabatan;
     private String kemampuan;
     private String nama_induk_organisasi;
     private String nama_member;
@@ -43,6 +44,7 @@ public class DataWarga {
     private String latitude;
     private String longtitude;
     private String flag;
+    private String status_keanggotaan;
    
 
 
@@ -209,7 +211,12 @@ public class DataWarga {
         return null;
     }
 
-
+    public void setjabatan(String jabatan) {
+        this.jabatan = jabatan;
+    }
+    public String getjabatan() {
+        return jabatan;
+    }
 
     public void setkemampuan(String kemampuan) {
         this.kemampuan = kemampuan;
@@ -319,7 +326,12 @@ public class DataWarga {
         return longtitude;
     }
 
-
+    public void setstatus_keanggotaan(String status_keanggotaan) {
+        this.status_keanggotaan = status_keanggotaan;
+    }
+    public String getstatus_keanggotaan() {
+        return status_keanggotaan;
+    }
 
     public void setflag(String flag) {
         this.flag = flag;
