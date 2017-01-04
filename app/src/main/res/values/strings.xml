@@ -171,4 +171,6 @@
     <string name="title_activity_kearsipan_chatting_contact">Kontak</string>
     <string name="title_activity_kearsipan_chatting_add">Chat</string>
     <string name="google_maps_key">AIzaSyCo-uhd7KWVSTxP7dFozzDOW4m7O9MpjEw</string>
+    <string name="google_app_id">com.adfin.numobile</string>
+
 </resources>

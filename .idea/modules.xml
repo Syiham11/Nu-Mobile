@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Nu-Mobile.iml" filepath="$PROJECT_DIR$/Nu-Mobile.iml" />
+      <module fileurl="file://$PROJECT_DIR$/NuMobile.iml" filepath="$PROJECT_DIR$/NuMobile.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

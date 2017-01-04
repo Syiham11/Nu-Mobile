@@ -71,10 +71,6 @@
             android:name=".activity.pengurus.PengurusOrganisasi"
             android:label="PENGURUS ORGANISASI"
             android:parentActivityName=".activity.pengurus.PengurusMenuActivity" />
-        <activity
-            android:name=".activity.pengurus.PengurusBesarActivity"
-            android:label="PENGURUS BESAR"
-            android:parentActivityName=".activity.pengurus.PengurusMenuActivity" />
 
         <!-- MENU ANGGOTA -->
         <activity
@@ -132,6 +128,10 @@
         <activity
             android:name=".activity.kegiatan.PeristiwaPhotoAdd"
             android:label="TAMBAH FOTO PERISTIWA"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.kegiatan.PeristiwaPhotoDetail"
+            android:label="DETAIL FOTO PERISTIWA"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.kegiatan.PeristiwaVideo"

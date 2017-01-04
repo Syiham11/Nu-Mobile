@@ -1,5 +1,8 @@
 <?php
+	file_put_contents("kooooo", json_encode(@$_GET));
 
+	file_put_contents("aaaaaaa", json_encode(@$_GET));
+	
 	if(isset($_GET['key']) && isset($_GET['val']) && isset($_GET['id'])){
 		define('HOST','localhost');
 		define('USER','numobile');
@@ -11,12 +14,12 @@
 		$emparray = array();
 
 		if(!$con){
-			echo json_encode($akhir);
+			echo json_encode($emparray);
 			exit();
 		}
 
 		if (mysqli_connect_errno()) {
-			echo json_encode($akhir);
+			echo json_encode($emparray);
 			exit();
 		}
 
@@ -31,7 +34,16 @@
 					exit();
 				}
 
-				$row = mysqli_fetch_row($data);
+				while($row = mysqli_fetch_assoc($data))
+				{
+					$emparray[] = $row;
+				}
+
+				$result = array(
+					'DataWarga' => $emparray
+				);
+
+				/*$row = mysqli_fetch_row($data);
 		        $result = array(
 		        	'DataWarga' =>
 		        		array(
@@ -45,7 +57,7 @@
 					            'longtitude' => $row[42]
 					        )
 		        		)
-				    );
+				    );*/
 				break;
 			
 			default:
