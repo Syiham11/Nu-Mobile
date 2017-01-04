@@ -7,6 +7,11 @@ import java.util.List;
 public class CDataDetail {
     private List<DataWarga> DataWarga = new ArrayList<>();
     private List<DataSDM> DataSDM = new ArrayList<>();
+    private List<DataPeristiwa> DataPeristiwa = new ArrayList<>();
+
+    public List<DataPeristiwa> getDataPeristiwa() {
+        return DataPeristiwa;
+    }
 
     public List<DataWarga> getDataWarga() {
         return DataWarga;
