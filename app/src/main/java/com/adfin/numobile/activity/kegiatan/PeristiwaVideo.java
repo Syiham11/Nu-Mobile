@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import com.adfin.numobile.ModulAPI;
 import com.adfin.numobile.R;
-import com.adfin.numobile.activity.MainActivity;
 import com.adfin.numobile.helper.ListAdapterAll;
 import com.adfin.numobile.model.CDataPeristiwa;
 import com.adfin.numobile.model.DataPeristiwa;
@@ -89,7 +88,7 @@ public class PeristiwaVideo extends AppCompatActivity {
 
                         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
                         ListAdapterAll adapter = new ListAdapterAll(PeristiwaVideo.this, thumb, name, other,
-                                id, helper, MainActivity.class);
+                                id, helper, PeristiwaVideoDetail.class);
                         recyclerView.setAdapter(adapter);
                         recyclerView.setHasFixedSize(true);
                         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));

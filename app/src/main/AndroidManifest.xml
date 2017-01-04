@@ -141,6 +141,10 @@
             android:name=".activity.kegiatan.PeristiwaVideoAdd"
             android:label="TAMBAH VIDEO PERISTIWA"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.kegiatan.PeristiwaVideoDetail"
+            android:label="DETAIL VIDEO PERISTIWA"
+            android:theme="@style/AppTheme.NoActionBar" />
         />
 
         <!-- MENU PELAYANAN -->
