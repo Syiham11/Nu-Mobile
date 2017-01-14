@@ -22,7 +22,7 @@
             android:id="@+id/textKosong"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Bersediakah anda berinfak untuk organisasi?"
+            android:text=""
             android:textColor="#0e0f0e"
             android:textSize="20dp"
             android:textStyle="bold"/>
